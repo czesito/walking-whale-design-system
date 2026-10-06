@@ -1,6 +1,6 @@
 {
   "name": "walking-whale-design-system",
-  "version": "0.1.0-dev",
+  "version": "0.1.0",
   "description": "Walking Whale design system: tokens, components and page patterns for every Walking Whale digital output.",
   "license": "SEE LICENSE IN LICENSE",
   "private": true,

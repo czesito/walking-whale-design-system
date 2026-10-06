@@ -18,6 +18,7 @@ DR-016 的驗證器只檢查 class、style 屬性與 hex 色。驗收測試發�
 | 耳塞年層 | `aria-hidden="true"`；放在 `ww-index` 裡並有文字數字；不在 Hero 裡；最多 24 層；只有一層 `is-current`（DR-014） |
 | 按鈕 | 每個區塊最多一個 primary、一個 signal；topbar 不用 primary |
 | 誠實 | `ww-stat` 要有來源；`ww-pullquote` 要有出處 |
+| 動態 | 錯誤、警示、通知與 `role="alert"` 不加入場動態 |
 | 品牌 | kicker 編號寫成 `No. 01`；logo 的 `<img>` 不用 currentColor 檔；引線標註最多 5 個；中文標題不超過 20 字；一頁一個 `ww-hero` |
 
 元件與模式的範例都要通過，CI 會檢查。

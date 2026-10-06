@@ -24,7 +24,7 @@
 | `ww-layers--sm` | 16px 高 |
 | `ww-layers--lg` | 32px 高 |
 | `ww-layers--on-dark` | Abyss 底的顏色；在 `ww-on-dark` 內會自動套用 |
-| `ww-reveal` | 進入畫面時由左到右浮現一次（需要 js/ww.js） |
+| `ww-reveal` | 進入畫面時由左到右展開一次（見 motion 元件，需要 js/ww.js） |
 | `data-ww-progress="id"` | 依 #id 元素的閱讀進度自動填滿（需要 js/ww.js） |
 | `data-ww-progress-label="id"` | 同步更新百分比文字的元素 |
 | `ww-index` | 年層加文字的外框 |

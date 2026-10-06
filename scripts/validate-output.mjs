@@ -11,7 +11,8 @@
 //
 //   contracts  brand and accessibility rules on the parsed page (DR-017): alt text, labels, captions,
 //              growth layers with text, one primary per section, sourced stats, cited quotes,
-//              logo files, kicker numbers, Chinese headings within 20 characters, one hero
+//              logo files, kicker numbers, Chinese headings within 20 characters, one hero,
+//              no entrance motion on errors, warnings, toasts and alerts
 //
 // One exception: a <style data-ww-system> block whose content is exactly dist/ww.css, for pages that
 // cannot link the stylesheet (claude.ai artifacts). Any other <style> fails.

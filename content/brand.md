@@ -8,7 +8,7 @@
 |---|---|---|---|
 | 主張 | We work with people before we work on systems. | 先與人同行，再著手系統 | 品牌最核心的一句話：首頁主標、簡報封面、自我介紹的結尾 |
 | 定位 | Walking Whale is a selective systems partner. | 走路鯨魚是慎選合作對象的系統夥伴 | 自我介紹的第一句、提案開頭、公司簡介 |
-| 業務說明 | Custom AI and software systems for ambitious teams who think in years, not quarters. | 為以年為單位思考的團隊，打造客製化 AI 與軟體系統 | 說明我們做什麼：搜尋結果描述、社群簡介、名片背面 |
+| 業務說明 | Custom AI and software systems for ambitious teams who think in years, not quarters. | 為想走得長遠的團隊，打造客製化 AI 與軟體系統 | 說明我們做什麼：搜尋結果描述、社群簡介、名片背面 |
 | Tagline | Scientific in structure. Human in voice. Alive in motion. | 理性為骨，人性為聲，生命為動 | 品牌簽名：簡報結尾、頁尾、品牌相關文件 |
 | 工作原則 | Precise first. Warm second. | 精準為先，溫度隨後 | 內部判準：寫作與設計的取捨，見 [voice.md](voice.md) |
 
@@ -17,7 +17,6 @@
 1. 品牌語句當標題使用時不加句號；放進內文時，依句子加上句號。
 2. 中文與英文不逐字對譯。兩個版本各自是該語言裡最好的說法（DR-008）。
 3. 不改寫、不縮短這五句。需要其他說法時，用其他句子，不要改動這五句。
-4. 「業務說明」的中文是 v0.1 的草稿，正式使用前請 Czesio 確認。
 
 ## 名字的由來
 

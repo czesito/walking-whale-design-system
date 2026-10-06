@@ -1,0 +1,40 @@
+/* Motion: the five patterns of the brand. Each entrance plays once, when js/ww.js sees the element.
+   Without the script, or with reduced motion, everything is simply shown.
+
+   1 fade and rise     .ww-rise      hero and section entrances
+   2 horizontal reveal .ww-reveal    growth layers, lines, diagrams
+   3 staggered surface .ww-stagger   a group of cards, children rise one after another
+   4 instant response  (built in)    hover and press, motion.duration.instant
+   5 no motion         (rule)        errors, warnings, toasts and fast-read information never animate in
+
+   Hidden states use opacity, never a zero-size clip, so the IntersectionObserver can see them. */
+
+.ww-js .ww-rise:not(.is-revealed),
+.ww-js .ww-reveal:not(.is-revealed),
+.ww-js .ww-stagger:not(.is-revealed) > * { opacity: 0; }
+
+.ww-js .ww-rise.is-revealed { animation: ww-rise var(--ww-motion-duration-rise) var(--ww-motion-ease) both; }
+.ww-js .ww-reveal.is-revealed { animation: ww-reveal var(--ww-motion-duration-reveal) var(--ww-motion-ease) both; }
+.ww-js .ww-stagger.is-revealed > * { animation: ww-rise var(--ww-motion-duration-rise) var(--ww-motion-ease) both; }
+.ww-js .ww-stagger.is-revealed > :nth-child(2) { animation-delay: 80ms; }
+.ww-js .ww-stagger.is-revealed > :nth-child(3) { animation-delay: 160ms; }
+.ww-js .ww-stagger.is-revealed > :nth-child(4) { animation-delay: 240ms; }
+.ww-js .ww-stagger.is-revealed > :nth-child(5) { animation-delay: 320ms; }
+.ww-js .ww-stagger.is-revealed > :nth-child(n + 6) { animation-delay: 400ms; }
+
+@keyframes ww-rise {
+  from { opacity: 0; transform: translateY(var(--ww-motion-distance-rise)); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ww-reveal {
+  from { opacity: 1; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+/* Press: a 1px nudge on buttons and chips. */
+.ww-btn:active:not(:disabled), button.ww-chip:active { transform: translateY(1px); }
+
+/* Printing and full-page captures show everything, whether or not it has scrolled into view. */
+@media print {
+  .ww-js .ww-rise, .ww-js .ww-reveal, .ww-js .ww-stagger > * { opacity: 1 !important; animation: none !important; }
+}

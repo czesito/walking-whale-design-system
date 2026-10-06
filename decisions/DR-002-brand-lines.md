@@ -17,7 +17,7 @@
 | Tagline | Scientific in structure. Human in voice. Alive in motion. | 理性為骨，人性為聲，生命為動 | 品牌簽名 |
 | 工作原則 | Precise first. Warm second. | 精準為先，溫度隨後 | 同時管語氣與動態；寫作與設計取捨時的判準 |
 
-「業務說明」（Custom AI and software systems for ambitious teams who think in years, not quarters.）的中文版仍是草稿，見 [content/brand.md](../content/brand.md)。
+「業務說明」（Custom AI and software systems for ambitious teams who think in years, not quarters.）的中文版定為「為想走得長遠的團隊，打造客製化 AI 與軟體系統」（2026-10-07 修訂，Czesio 從六個提案中選定）。不採用的版本包括原本的草稿「為以年為單位思考的團隊……」，它讀起來像翻譯。
 
 ## 理由
 

@@ -17,4 +17,4 @@
 .ww-case__facts dt { font-family: var(--ww-font-family-mono); letter-spacing: 0; color: var(--ww-color-text-muted); }
 .ww-case__facts dd { margin: 0; font-family: var(--ww-font-family-ui); color: var(--ww-color-text-primary); }
 .ww-case .ww-plate { min-height: 10rem; }
-@media (max-width: 760px) { .ww-case { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 860px) { .ww-case { grid-template-columns: minmax(0, 1fr); } }

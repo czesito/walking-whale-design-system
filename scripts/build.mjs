@@ -240,7 +240,7 @@ for (const file of lintTargets) {
 // ---------------------------------------------------------------- copy lint (DR-008, DR-009)
 const copyTargets = [...walk(at("specimens/src")), ...walk(at("components")), ...walk(at("patterns")), ...walk(at("site"))].filter((f) => extname(f) === ".html");
 const docTargets = ["content", "foundations", "decisions", "specs", "components", "patterns"].flatMap((d) => walk(at(d)))
-  .filter((f) => extname(f) === ".md").concat([at("README.md"), at("SKILL.md")]);
+  .filter((f) => extname(f) === ".md").concat([at("README.md"), at("SKILL.md"), at("CHANGELOG.md")]);
 for (const [files, docs] of [[copyTargets, false], [docTargets, true]]) {
   for (const f of files) {
     for (const i of lintFile(f, { docs })) problems.push(`copy: ${relative(ROOT, f)}:${i.line} ${i.msg} [${i.rule}] …${i.excerpt}…`);

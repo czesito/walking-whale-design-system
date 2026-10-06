@@ -1,6 +1,6 @@
 ---
 name: walking-whale-design-system
-description: Walking Whale design system. Use for any Walking Whale output — web pages, artifacts, slides, documents, product UI, copy in zh-TW or English. Covers tokens, 29 components, 8 page patterns, the growth-layer signature element, logo use, voice and writing rules, and a validator for generated HTML. 走路鯨魚設計系統
+description: Walking Whale design system. Use for any Walking Whale output — web pages, artifacts, slides, documents, product UI, copy in zh-TW or English. Covers tokens, 30 components, 8 page patterns, the growth-layer signature element, logo use, voice and writing rules, and a validator for generated HTML. 走路鯨魚設計系統
 ---
 
 # Walking Whale Design System
@@ -86,7 +86,6 @@ node scripts/copy-lint.mjs page.html
 ### 文字
 
 - 品牌語句一字不改：主張「先與人同行，再著手系統」、定位、tagline「理性為骨，人性為聲，生命為動」、工作原則「精準為先，溫度隨後」。中英不逐字對譯（content/brand.md）。
-- 「業務說明」的中文仍是草稿，正式對外使用前要 Czesio 確認。
 - 中文：稱讀者為「您」、用「台」不用「臺」、中英文與數字之間加半形空格、全形標點、標題不加句號、引號用「」（content/zh-tw.md）。
 - 英文：Chicago 加上 content/en.md 的例外、美式拼字、標題句首大寫（DR-009）。
 - 不用驚嘆號、不用 emoji、不誇大、不製造急迫感（content/voice.md）。

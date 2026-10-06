@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>動態 · Walking Whale Design System</title>
+<link rel="stylesheet" href="../../css/fonts.css">
+<link rel="stylesheet" href="../../dist/ww.css">
+</head>
+<body>
+<main class="ww-container ww-section ww-stack ww-stack--xl">
+<section class="ww-stack" lang="zh-Hant">
+<p class="ww-lang-label">zh-Hant</p>
+<div class="ww-stack ww-stack--sm ww-rise">
+  <p class="ww-kicker">ww-rise</p>
+  <h3>區塊進入畫面時淡入並上升 14px</h3>
+</div>
+<div class="ww-stack ww-stack--sm">
+  <p class="ww-kicker">ww-stagger</p>
+  <ul class="ww-grid ww-grid--3 ww-stagger">
+    <li class="ww-card"><p class="ww-card__no">01</p><p class="ww-card__body">卡片依序浮現，間隔 80ms。</p></li>
+    <li class="ww-card"><p class="ww-card__no">02</p><p class="ww-card__body">第二張。</p></li>
+    <li class="ww-card"><p class="ww-card__no">03</p><p class="ww-card__body">第三張。</p></li>
+  </ul>
+</div>
+<div class="ww-stack ww-stack--sm">
+  <p class="ww-kicker">ww-reveal</p>
+  <p class="ww-index"><span class="ww-layers ww-reveal" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i><i></i><i></i></span><span class="ww-index__count">03 / 05</span></p>
+</div>
+<p class="ww-sm">錯誤、警示與通知一律直接出現，不加動態。使用者開啟減少動態時，所有內容直接顯示。</p>
+</section>
+<section class="ww-stack" lang="en">
+<p class="ww-lang-label">en</p>
+<div class="ww-stack ww-stack--sm ww-rise">
+  <p class="ww-kicker">ww-rise</p>
+  <h3>Sections fade in and rise 14px as they enter</h3>
+</div>
+<div class="ww-stack ww-stack--sm">
+  <p class="ww-kicker">ww-stagger</p>
+  <ul class="ww-grid ww-grid--3 ww-stagger">
+    <li class="ww-card"><p class="ww-card__no">01</p><p class="ww-card__body">Cards surface one after another, 80ms apart.</p></li>
+    <li class="ww-card"><p class="ww-card__no">02</p><p class="ww-card__body">The second.</p></li>
+    <li class="ww-card"><p class="ww-card__no">03</p><p class="ww-card__body">The third.</p></li>
+  </ul>
+</div>
+<div class="ww-stack ww-stack--sm">
+  <p class="ww-kicker">ww-reveal</p>
+  <p class="ww-index"><span class="ww-layers ww-reveal" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i><i></i><i></i></span><span class="ww-index__count">03 / 05</span></p>
+</div>
+<p class="ww-sm">Errors, warnings and toasts always appear without motion. With reduced motion on, everything is shown at once.</p>
+</section>
+</main>
+<script src="../../dist/ww.js"></script>
+</body>
+</html>

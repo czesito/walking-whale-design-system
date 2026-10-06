@@ -49,6 +49,8 @@
 
 /* A plain bulleted list outside articles. Inside .ww-prose lists are styled automatically. */
 .ww-list { display: grid; gap: var(--ww-space-2); margin: 0; padding-left: 1.25em; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); }
+ul.ww-list { list-style: disc; }
+ol.ww-list { list-style: decimal-leading-zero; }
 .ww-list li::marker { color: var(--ww-color-text-secondary); }
 ol.ww-list li::marker { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); }
 

@@ -1,7 +1,7 @@
 /* Walking Whale — optional behavior. Pages work without it; this adds motion and small interactions.
    Hooks are data attributes, so markup stays valid under the output validator (DR-016).
 
-   .ww-reveal                         reveals once when it first enters the viewport (DR-014)
+   .ww-rise .ww-reveal .ww-stagger     entrance plays once when the element first enters the viewport
    [data-ww-open="dialog-id"]         opens a <dialog> (Drawer); [data-ww-close] inside closes it;
                                       an in-page link inside closes it and focuses the target section
    [data-ww-toggle]                   toggles aria-pressed; inside [data-ww-single] only one stays pressed
@@ -15,8 +15,8 @@
 
   function all(sel, el) { return Array.prototype.slice.call((el || doc).querySelectorAll(sel)); }
 
-  // Reveal once
-  var reveals = all(".ww-reveal");
+  // Entrances play once: rise, reveal, stagger
+  var reveals = all(".ww-reveal, .ww-rise, .ww-stagger");
   if (reduce || !("IntersectionObserver" in window)) {
     reveals.forEach(function (el) { el.classList.add("is-revealed"); });
   } else {

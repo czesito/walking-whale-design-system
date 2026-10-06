@@ -436,6 +436,8 @@ code, kbd, samp, pre {
 
 /* A plain bulleted list outside articles. Inside .ww-prose lists are styled automatically. */
 .ww-list { display: grid; gap: var(--ww-space-2); margin: 0; padding-left: 1.25em; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); }
+ul.ww-list { list-style: disc; }
+ol.ww-list { list-style: decimal-leading-zero; }
 .ww-list li::marker { color: var(--ww-color-text-secondary); }
 ol.ww-list li::marker { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); }
 
@@ -511,6 +513,48 @@ ol.ww-list li::marker { font-family: var(--ww-font-family-mono); font-size: var(
   margin: 0;
 }
 
+/* ---- components/motion ---- */
+/* Motion: the five patterns of the brand. Each entrance plays once, when js/ww.js sees the element.
+   Without the script, or with reduced motion, everything is simply shown.
+
+   1 fade and rise     .ww-rise      hero and section entrances
+   2 horizontal reveal .ww-reveal    growth layers, lines, diagrams
+   3 staggered surface .ww-stagger   a group of cards, children rise one after another
+   4 instant response  (built in)    hover and press, motion.duration.instant
+   5 no motion         (rule)        errors, warnings, toasts and fast-read information never animate in
+
+   Hidden states use opacity, never a zero-size clip, so the IntersectionObserver can see them. */
+
+.ww-js .ww-rise:not(.is-revealed),
+.ww-js .ww-reveal:not(.is-revealed),
+.ww-js .ww-stagger:not(.is-revealed) > * { opacity: 0; }
+
+.ww-js .ww-rise.is-revealed { animation: ww-rise var(--ww-motion-duration-rise) var(--ww-motion-ease) both; }
+.ww-js .ww-reveal.is-revealed { animation: ww-reveal var(--ww-motion-duration-reveal) var(--ww-motion-ease) both; }
+.ww-js .ww-stagger.is-revealed > * { animation: ww-rise var(--ww-motion-duration-rise) var(--ww-motion-ease) both; }
+.ww-js .ww-stagger.is-revealed > :nth-child(2) { animation-delay: 80ms; }
+.ww-js .ww-stagger.is-revealed > :nth-child(3) { animation-delay: 160ms; }
+.ww-js .ww-stagger.is-revealed > :nth-child(4) { animation-delay: 240ms; }
+.ww-js .ww-stagger.is-revealed > :nth-child(5) { animation-delay: 320ms; }
+.ww-js .ww-stagger.is-revealed > :nth-child(n + 6) { animation-delay: 400ms; }
+
+@keyframes ww-rise {
+  from { opacity: 0; transform: translateY(var(--ww-motion-distance-rise)); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ww-reveal {
+  from { opacity: 1; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+/* Press: a 1px nudge on buttons and chips. */
+.ww-btn:active:not(:disabled), button.ww-chip:active { transform: translateY(1px); }
+
+/* Printing and full-page captures show everything, whether or not it has scrolled into view. */
+@media print {
+  .ww-js .ww-rise, .ww-js .ww-reveal, .ww-js .ww-stagger > * { opacity: 1 !important; animation: none !important; }
+}
+
 /* ---- components/layers ---- */
 /* Growth layers: the signature element (DR-014). Only where it carries information.
    Markup: <span class="ww-layers" aria-hidden="true"><i class="is-done"></i><i class="is-current"></i><i></i></span>
@@ -558,14 +602,7 @@ ol.ww-list li::marker { font-family: var(--ww-font-family-mono); font-size: var(
 .ww-layers > :nth-child(7n + 7) { width: calc(var(--_h) * 0.33); --_m: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2033%20100%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M2.2%200C2.2%204.2%202.3%2016.7%202%2025C1.7%2033.3%200%2041.7%200.5%2050C0.9%2058.3%204.5%2066.7%204.7%2075C4.9%2083.3%202.1%2095.8%201.6%20100L32.6%20100C32.1%2095.8%2030.9%2083.3%2030%2075C29.1%2066.7%2027%2058.3%2027.1%2050C27.3%2041.7%2030.1%2033.3%2030.8%2025C31.6%2016.7%2031.4%204.2%2031.5%200Z%27%2F%3E%3C%2Fsvg%3E"); }
 /* end generated */
 
-/* Reveal once, left to right, when js/ww.js is present (DR-014 §6).
-   Hidden with opacity, not a zero-width clip: a clipped element never reaches the observer's threshold. */
-.ww-js .ww-reveal:not(.is-revealed) { opacity: 0; }
-.ww-js .ww-reveal.is-revealed { animation: ww-reveal var(--ww-motion-duration-reveal) var(--ww-motion-ease) both; }
-@keyframes ww-reveal {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
+/* The left-to-right reveal (ww-reveal) lives in components/motion (DR-014 §6). */
 
 /* Index: layers plus the text that carries the same information. */
 .ww-index {
@@ -1692,7 +1729,7 @@ html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 .ww-case__facts dt { font-family: var(--ww-font-family-mono); letter-spacing: 0; color: var(--ww-color-text-muted); }
 .ww-case__facts dd { margin: 0; font-family: var(--ww-font-family-ui); color: var(--ww-color-text-primary); }
 .ww-case .ww-plate { min-height: 10rem; }
-@media (max-width: 760px) { .ww-case { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 860px) { .ww-case { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---- patterns/team ---- */
 /* Team: an initial on a Sediment plate (or a photo), name, role in mono, one line about the work. */
@@ -1761,7 +1798,7 @@ html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 </head>
 <body>
 <div class="g-page">
-  <nav class="g-nav" aria-label="元件目錄"><p class="g-nav-k">元件</p><ul><li><a href="#components-layout">版面</a></li><li><a href="#components-type">文字樣式</a></li><li><a href="#components-logo">標誌</a></li><li><a href="#components-kicker">區塊標籤</a></li><li><a href="#components-rule-accent">標題短線</a></li><li><a href="#components-layers">耳塞年層</a></li><li><a href="#components-button">按鈕與連結</a></li><li><a href="#components-card">卡片</a></li><li><a href="#components-chip">標籤</a></li><li><a href="#components-status-badge">狀態標記</a></li><li><a href="#components-pull-quote">引言</a></li><li><a href="#components-callout">提示框</a></li><li><a href="#components-tldr">重點摘要</a></li><li><a href="#components-stat">數據</a></li><li><a href="#components-table">表格</a></li><li><a href="#components-code">程式碼</a></li><li><a href="#components-figure">圖與引線標註</a></li><li><a href="#components-prose">文章排版</a></li><li><a href="#components-toc">目錄</a></li><li><a href="#components-article-list">文章列表</a></li><li><a href="#components-filter">標籤篩選</a></li><li><a href="#components-form">表單</a></li><li><a href="#components-loading">載入中</a></li><li><a href="#components-empty">空狀態</a></li><li><a href="#components-error">錯誤</a></li><li><a href="#components-toast">通知</a></li><li><a href="#components-topbar">頂部導覽</a></li><li><a href="#components-drawer">行動版選單</a></li><li><a href="#components-footer">頁尾</a></li></ul><p class="g-nav-k">頁面模式</p><ul><li><a href="#patterns-hero">主視覺</a></li><li><a href="#patterns-section-opener">區塊開頭</a></li><li><a href="#patterns-services">服務卡片區</a></li><li><a href="#patterns-steps">流程步驟</a></li><li><a href="#patterns-case-list">案例列表</a></li><li><a href="#patterns-team">團隊</a></li><li><a href="#patterns-cta">行動呼籲</a></li><li><a href="#patterns-contact">聯絡</a></li></ul></nav>
+  <nav class="g-nav" aria-label="元件目錄"><p class="g-nav-k">元件</p><ul><li><a href="#components-layout">版面</a></li><li><a href="#components-type">文字樣式</a></li><li><a href="#components-logo">標誌</a></li><li><a href="#components-kicker">區塊標籤</a></li><li><a href="#components-rule-accent">標題短線</a></li><li><a href="#components-motion">動態</a></li><li><a href="#components-layers">耳塞年層</a></li><li><a href="#components-button">按鈕與連結</a></li><li><a href="#components-card">卡片</a></li><li><a href="#components-chip">標籤</a></li><li><a href="#components-status-badge">狀態標記</a></li><li><a href="#components-pull-quote">引言</a></li><li><a href="#components-callout">提示框</a></li><li><a href="#components-tldr">重點摘要</a></li><li><a href="#components-stat">數據</a></li><li><a href="#components-table">表格</a></li><li><a href="#components-code">程式碼</a></li><li><a href="#components-figure">圖與引線標註</a></li><li><a href="#components-prose">文章排版</a></li><li><a href="#components-toc">目錄</a></li><li><a href="#components-article-list">文章列表</a></li><li><a href="#components-filter">標籤篩選</a></li><li><a href="#components-form">表單</a></li><li><a href="#components-loading">載入中</a></li><li><a href="#components-empty">空狀態</a></li><li><a href="#components-error">錯誤</a></li><li><a href="#components-toast">通知</a></li><li><a href="#components-topbar">頂部導覽</a></li><li><a href="#components-drawer">行動版選單</a></li><li><a href="#components-footer">頁尾</a></li></ul><p class="g-nav-k">頁面模式</p><ul><li><a href="#patterns-hero">主視覺</a></li><li><a href="#patterns-section-opener">區塊開頭</a></li><li><a href="#patterns-services">服務卡片區</a></li><li><a href="#patterns-steps">流程步驟</a></li><li><a href="#patterns-case-list">案例列表</a></li><li><a href="#patterns-team">團隊</a></li><li><a href="#patterns-cta">行動呼籲</a></li><li><a href="#patterns-contact">聯絡</a></li></ul></nav>
   <main class="g-main">
     <header class="g-intro">
       <p class="ww-kicker">Walking Whale Design System</p>
@@ -1922,6 +1959,51 @@ html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 </section>
 </div>
 </section>
+<section class="g-item" id="components-motion">
+<header class="g-head"><h2>動態<span lang="en">Motion</span></h2><code>components/motion</code><p class="g-use">五種動態模式：浮現上升、水平展開、依序浮現、即時回應、不動。一頁只在需要時使用</p></header>
+<div class="g-body">
+<section class="ww-stack" lang="zh-Hant">
+<p class="ww-lang-label">zh-Hant</p>
+<div class="ww-stack ww-stack--sm ww-rise">
+  <p class="ww-kicker">ww-rise</p>
+  <h3>區塊進入畫面時淡入並上升 14px</h3>
+</div>
+<div class="ww-stack ww-stack--sm">
+  <p class="ww-kicker">ww-stagger</p>
+  <ul class="ww-grid ww-grid--3 ww-stagger">
+    <li class="ww-card"><p class="ww-card__no">01</p><p class="ww-card__body">卡片依序浮現，間隔 80ms。</p></li>
+    <li class="ww-card"><p class="ww-card__no">02</p><p class="ww-card__body">第二張。</p></li>
+    <li class="ww-card"><p class="ww-card__no">03</p><p class="ww-card__body">第三張。</p></li>
+  </ul>
+</div>
+<div class="ww-stack ww-stack--sm">
+  <p class="ww-kicker">ww-reveal</p>
+  <p class="ww-index"><span class="ww-layers ww-reveal" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i><i></i><i></i></span><span class="ww-index__count">03 / 05</span></p>
+</div>
+<p class="ww-sm">錯誤、警示與通知一律直接出現，不加動態。使用者開啟減少動態時，所有內容直接顯示。</p>
+</section>
+<section class="ww-stack" lang="en">
+<p class="ww-lang-label">en</p>
+<div class="ww-stack ww-stack--sm ww-rise">
+  <p class="ww-kicker">ww-rise</p>
+  <h3>Sections fade in and rise 14px as they enter</h3>
+</div>
+<div class="ww-stack ww-stack--sm">
+  <p class="ww-kicker">ww-stagger</p>
+  <ul class="ww-grid ww-grid--3 ww-stagger">
+    <li class="ww-card"><p class="ww-card__no">01</p><p class="ww-card__body">Cards surface one after another, 80ms apart.</p></li>
+    <li class="ww-card"><p class="ww-card__no">02</p><p class="ww-card__body">The second.</p></li>
+    <li class="ww-card"><p class="ww-card__no">03</p><p class="ww-card__body">The third.</p></li>
+  </ul>
+</div>
+<div class="ww-stack ww-stack--sm">
+  <p class="ww-kicker">ww-reveal</p>
+  <p class="ww-index"><span class="ww-layers ww-reveal" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i><i></i><i></i></span><span class="ww-index__count">03 / 05</span></p>
+</div>
+<p class="ww-sm">Errors, warnings and toasts always appear without motion. With reduced motion on, everything is shown at once.</p>
+</section>
+</div>
+</section>
 <section class="g-item" id="components-layers">
 <header class="g-head"><h2>耳塞年層<span lang="en">Growth layers</span></h2><code>components/layers</code><p class="g-use">招牌元素。只用於步驟進度、頁碼、閱讀進度、時間軸，一定搭配文字</p></header>
 <div class="g-body">
@@ -2031,20 +2113,20 @@ html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 <div class="ww-grid ww-grid--3">
   <article class="ww-card">
     <p class="ww-card__no">01</p>
-    <h3 class="ww-card__title">品牌網站與內容管理</h3>
-    <p class="ww-card__body">有辨識度的網站與後台，流量大的時候也撐得住，團隊自己就能更新內容。</p>
-    <p class="ww-card__meta">網站 · CMS · SEO</p>
+    <h3 class="ww-card__title">對外的門面</h3>
+    <p class="ww-card__body">網站、電商與台灣金流、線上預約，以及 LINE 與 WhatsApp 上的客服代理。</p>
+    <p class="ww-card__meta">網站 · 金流 · 預約 · LINE</p>
   </article>
   <article class="ww-card">
     <p class="ww-card__no">02</p>
-    <h3 class="ww-card__title"><a class="ww-card__link" href="#">營運與內部系統</a></h3>
-    <p class="ww-card__body">預約、會員、排班、薪資結算。整張卡片都可以點。</p>
-    <p class="ww-card__meta">營運 · 內部系統</p>
+    <h3 class="ww-card__title"><a class="ww-card__link" href="#">對內的系統</a></h3>
+    <p class="ww-card__body">會員、薪資結算、審核流程與權限。整張卡片都可以點。</p>
+    <p class="ww-card__meta">會員 · 薪資 · 權限</p>
   </article>
   <article class="ww-card ww-card--wash">
     <p class="ww-card__no">03</p>
-    <h3 class="ww-card__title">AI 與資料</h3>
-    <p class="ww-card__body">在您自己的 GPU 上執行的辨識與檢索流程，資料不離開公司網路。</p>
+    <h3 class="ww-card__title">看不見的資料層</h3>
+    <p class="ww-card__body">在您自己的 GPU 上執行的辨識與檢索，資料不離開公司網路。</p>
     <p class="ww-card__meta">OCR · 語音 · 檢索</p>
   </article>
 </div>
@@ -2054,20 +2136,20 @@ html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 <div class="ww-grid ww-grid--3">
   <article class="ww-card">
     <p class="ww-card__no">01</p>
-    <h3 class="ww-card__title">Websites and content</h3>
-    <p class="ww-card__body">Distinctive sites with a back office your team can update, built to hold up under traffic.</p>
-    <p class="ww-card__meta">Web · CMS · SEO</p>
+    <h3 class="ww-card__title">The face you show</h3>
+    <p class="ww-card__body">Websites, e-commerce with Taiwanese payments, online booking, and service agents on LINE and WhatsApp.</p>
+    <p class="ww-card__meta">Web · Payments · Booking · LINE</p>
   </article>
   <article class="ww-card">
     <p class="ww-card__no">02</p>
-    <h3 class="ww-card__title"><a class="ww-card__link" href="#">Operations and internal systems</a></h3>
-    <p class="ww-card__body">Booking, membership, scheduling, and payroll. The whole card is clickable.</p>
-    <p class="ww-card__meta">Operations · Internal</p>
+    <h3 class="ww-card__title"><a class="ww-card__link" href="#">The systems you run on</a></h3>
+    <p class="ww-card__body">Membership, payroll, and review workflows with permissions. The whole card is clickable.</p>
+    <p class="ww-card__meta">Membership · Payroll · Permissions</p>
   </article>
   <article class="ww-card ww-card--wash">
     <p class="ww-card__no">03</p>
-    <h3 class="ww-card__title">AI and data</h3>
-    <p class="ww-card__body">Recognition and retrieval pipelines on your own GPUs. Your data stays on your network.</p>
+    <h3 class="ww-card__title">The data layer underneath</h3>
+    <p class="ww-card__body">Recognition and retrieval on your own GPUs. Your data stays on your network.</p>
     <p class="ww-card__meta">OCR · Speech · Retrieval</p>
   </article>
 </div>
@@ -2832,19 +2914,19 @@ html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 <p class="ww-lang-label">zh-Hant</p>
 <header class="ww-opener">
   <p class="ww-kicker"><span class="ww-kicker__no">No. 01</span>我們做什麼</p>
-  <h2>三種系統，同一套做法</h2>
+  <h2>從客人看得到的，到團隊看不到的</h2>
   <hr class="ww-rule">
 </header>
-<div class="ww-grid ww-grid--3"><article class="ww-card"><p class="ww-card__no">01</p><h3 class="ww-card__title">品牌網站與內容管理</h3><p class="ww-card__body">有辨識度的網站與後台，團隊自己就能更新內容。</p><p class="ww-card__meta">網站 · CMS · SEO</p></article><article class="ww-card"><p class="ww-card__no">02</p><h3 class="ww-card__title">營運與內部系統</h3><p class="ww-card__body">預約、會員、金流、排班與薪資結算，這些不起眼的核心決定了其他一切。</p><p class="ww-card__meta">營運 · 內部系統</p></article><article class="ww-card"><p class="ww-card__no">03</p><h3 class="ww-card__title">AI 與資料</h3><p class="ww-card__body">LINE 與 WhatsApp 上的客服代理，以及在您自己的 GPU 上執行的辨識與檢索。</p><p class="ww-card__meta">代理 · OCR · 檢索</p></article></div>
+<div class="ww-grid ww-grid--3"><article class="ww-card"><p class="ww-card__no">01</p><h3 class="ww-card__title">對外的門面</h3><p class="ww-card__body">網站、電商與台灣金流、線上預約，以及 LINE 與 WhatsApp 上的客服代理。</p><p class="ww-card__meta">網站 · 金流 · 預約 · LINE</p></article><article class="ww-card"><p class="ww-card__no">02</p><h3 class="ww-card__title">對內的系統</h3><p class="ww-card__body">會員、薪資結算、審核流程與權限、商業智慧儀表板。</p><p class="ww-card__meta">會員 · 薪資 · 權限 · 儀表板</p></article><article class="ww-card"><p class="ww-card__no">03</p><h3 class="ww-card__title">看不見的資料層</h3><p class="ww-card__body">在本地 GPU 上執行的 OCR、語音轉文字與檢索，內容審查，以及跨專案共用的訊息閘道。</p><p class="ww-card__meta">OCR · 語音 · 檢索 · 審查</p></article></div>
 </section>
 <section class="ww-stack" lang="en">
 <p class="ww-lang-label">en</p>
 <header class="ww-opener">
   <p class="ww-kicker"><span class="ww-kicker__no">No. 01</span>What we do</p>
-  <h2>Three kinds of systems, one way of working</h2>
+  <h2>From what your guests see to what your team never has to</h2>
   <hr class="ww-rule">
 </header>
-<div class="ww-grid ww-grid--3"><article class="ww-card"><p class="ww-card__no">01</p><h3 class="ww-card__title">Websites and content</h3><p class="ww-card__body">Distinctive sites with a back office your team can update.</p><p class="ww-card__meta">Web · CMS · SEO</p></article><article class="ww-card"><p class="ww-card__no">02</p><h3 class="ww-card__title">Operations and internal systems</h3><p class="ww-card__body">Booking, membership, payments, scheduling, and payroll: the quiet core everything else depends on.</p><p class="ww-card__meta">Operations · Internal</p></article><article class="ww-card"><p class="ww-card__no">03</p><h3 class="ww-card__title">AI and data</h3><p class="ww-card__body">Service agents on LINE and WhatsApp, and recognition and retrieval on your own GPUs.</p><p class="ww-card__meta">Agents · OCR · Retrieval</p></article></div>
+<div class="ww-grid ww-grid--3"><article class="ww-card"><p class="ww-card__no">01</p><h3 class="ww-card__title">The face you show</h3><p class="ww-card__body">Websites, e-commerce with Taiwanese payments, online booking, and service agents on LINE and WhatsApp.</p><p class="ww-card__meta">Web · Payments · Booking · LINE</p></article><article class="ww-card"><p class="ww-card__no">02</p><h3 class="ww-card__title">The systems you run on</h3><p class="ww-card__body">Membership, payroll, review workflows and permissions, and business intelligence dashboards.</p><p class="ww-card__meta">Membership · Payroll · Permissions · BI</p></article><article class="ww-card"><p class="ww-card__no">03</p><h3 class="ww-card__title">The data layer underneath</h3><p class="ww-card__body">OCR, speech transcription and retrieval on your own GPUs, content screening, and a shared messaging gateway.</p><p class="ww-card__meta">OCR · Speech · Retrieval · Screening</p></article></div>
 </section>
 </div>
 </section>
@@ -3007,7 +3089,7 @@ html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 /* Walking Whale — optional behavior. Pages work without it; this adds motion and small interactions.
    Hooks are data attributes, so markup stays valid under the output validator (DR-016).
 
-   .ww-reveal                         reveals once when it first enters the viewport (DR-014)
+   .ww-rise .ww-reveal .ww-stagger     entrance plays once when the element first enters the viewport
    [data-ww-open="dialog-id"]         opens a <dialog> (Drawer); [data-ww-close] inside closes it;
                                       an in-page link inside closes it and focuses the target section
    [data-ww-toggle]                   toggles aria-pressed; inside [data-ww-single] only one stays pressed
@@ -3021,8 +3103,8 @@ html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 
   function all(sel, el) { return Array.prototype.slice.call((el || doc).querySelectorAll(sel)); }
 
-  // Reveal once
-  var reveals = all(".ww-reveal");
+  // Entrances play once: rise, reveal, stagger
+  var reveals = all(".ww-reveal, .ww-rise, .ww-stagger");
   if (reduce || !("IntersectionObserver" in window)) {
     reveals.forEach(function (el) { el.classList.add("is-revealed"); });
   } else {

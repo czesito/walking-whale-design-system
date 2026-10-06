@@ -133,6 +133,12 @@ export function contracts(html) {
       if (langOf(n).startsWith("zh") && han && [...t.replace(/\s/g, "")].length > 20) add(n, "brand", `Chinese heading is ${[...t.replace(/\s/g, "")].length} characters; keep it within 20`);
     }
   }
+  // ---------- motion: errors, warnings, toasts and alerts never animate in
+  const STILL = (p) => ["ww-error", "ww-callout--warn", "ww-callout--danger", "ww-toast"].some((c) => has(p, c)) || p.attrs?.get("role") === "alert";
+  for (const n of all.filter((x) => ["ww-rise", "ww-reveal", "ww-stagger"].some((c) => has(x, c)))) {
+    if (STILL(n) || closest(n, STILL)) add(n, "motion", "errors, warnings, toasts and alerts appear without motion");
+  }
+
   const heroes = new Map();
   for (const n of all.filter((x) => has(x, "ww-hero"))) {
     const scope = closest(n, (p) => p.attrs.has("lang")) ?? root;
