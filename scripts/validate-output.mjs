@@ -9,6 +9,9 @@
 //   hex        no hex colors in any attribute
 //   paint      SVG fill/stroke/color/stop-color only as none, currentColor or transparent; color comes from classes
 //
+// One exception: a <style data-ww-system> block whose content is exactly dist/ww.css, for pages that
+// cannot link the stylesheet (claude.ai artifacts). Any other <style> fails.
+//
 // Exit code 1 when any rule fails. Use validate() from other scripts.
 
 import { readFileSync } from "node:fs";
@@ -34,11 +37,20 @@ export function definedClasses(css) {
 
 const lineOf = (text, index) => text.slice(0, index).split("\n").length;
 
-/** Returns a list of { line, rule, msg }. */
-export function validate(html, classes) {
+const norm = (css) => css.replace(/\r\n/g, "\n").trim();
+
+/** Returns a list of { line, rule, msg }. Pass systemCss (dist/ww.css) to allow an inlined copy of it. */
+export function validate(html, classes, systemCss = null) {
   const issues = [];
-  const body = html.replace(/<!--[\s\S]*?-->/g, (c) => c.replace(/[^\n]/g, " "));
-  const scriptless = body.replace(/<script\b[\s\S]*?<\/script>/gi, (c) => c.replace(/[^\n]/g, " "));
+  const blank = (c) => c.replace(/[^\n]/g, " ");
+  let body = html.replace(/<!--[\s\S]*?-->/g, blank);
+  body = body.replace(/<style\b[^>]*\bdata-ww-system\b[^>]*>([\s\S]*?)<\/style>/gi, (m, css, offset) => {
+    if (systemCss === null || norm(css) !== norm(systemCss)) {
+      issues.push({ line: lineOf(body, offset), rule: "style", msg: "<style data-ww-system> must contain dist/ww.css exactly, unchanged" });
+    }
+    return blank(m);
+  });
+  const scriptless = body.replace(/<script\b[\s\S]*?<\/script>/gi, blank);
 
   for (const m of scriptless.matchAll(/<style\b/gi)) {
     issues.push({ line: lineOf(scriptless, m.index), rule: "style", msg: "<style> block; use system classes" });
@@ -71,10 +83,11 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     console.error("usage: node scripts/validate-output.mjs file.html [...]");
     process.exit(2);
   }
-  const classes = definedClasses(readFileSync(join(ROOT, "dist/ww.css"), "utf8"));
+  const css = readFileSync(join(ROOT, "dist/ww.css"), "utf8");
+  const classes = definedClasses(css);
   let n = 0;
   for (const f of files) {
-    for (const i of validate(readFileSync(f, "utf8"), classes)) {
+    for (const i of validate(readFileSync(f, "utf8"), classes, css)) {
       console.log(`${f}:${i.line}  ${i.msg}  [${i.rule}]`);
       n++;
     }
