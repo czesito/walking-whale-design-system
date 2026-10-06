@@ -1,0 +1,123 @@
+/* ============================================================
+   Walking Whale — text styles
+   One class per typographic role. Every value is a token, and every
+   language-dependent value switches under :lang(zh) automatically.
+   ============================================================ */
+
+.ww-hero {
+  font-family: var(--ww-font-family-display);
+  font-size: var(--ww-font-size-hero);
+  font-weight: var(--ww-font-weight-display);
+  line-height: var(--ww-line-height-display);
+  letter-spacing: var(--ww-letter-spacing-display);
+  color: var(--ww-color-text-primary);
+  text-wrap: balance;
+  margin: 0;
+}
+
+/* Emphasised words inside a headline. */
+.ww-em {
+  font-style: var(--ww-font-style-emphasis);
+  font-weight: var(--ww-font-weight-emphasis);
+  color: var(--ww-color-text-emphasis);
+}
+
+.ww-lede {
+  font-family: var(--ww-font-family-body);
+  font-size: var(--ww-font-size-lede);
+  line-height: var(--ww-line-height-lede);
+  letter-spacing: var(--ww-letter-spacing-body);
+  color: var(--ww-color-text-muted);
+  max-width: var(--ww-layout-measure-body);
+  margin: 0;
+}
+
+.ww-body {
+  font-family: var(--ww-font-family-body);
+  font-size: var(--ww-font-size-body);
+  line-height: var(--ww-line-height-body);
+  letter-spacing: var(--ww-letter-spacing-body);
+  color: var(--ww-color-text-primary);
+}
+
+/* Running text: measure plus paragraph rhythm. */
+.ww-prose {
+  font-family: var(--ww-font-family-body);
+  font-size: var(--ww-font-size-body);
+  line-height: var(--ww-line-height-body);
+  letter-spacing: var(--ww-letter-spacing-body);
+  max-width: var(--ww-layout-measure-body);
+}
+.ww-prose > * + * {
+  margin-top: 1em;
+}
+
+.ww-ui {
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  line-height: var(--ww-line-height-ui);
+  letter-spacing: var(--ww-letter-spacing-ui);
+}
+
+.ww-sm {
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-sm);
+  line-height: var(--ww-line-height-ui);
+  letter-spacing: var(--ww-letter-spacing-ui);
+  color: var(--ww-color-text-muted);
+}
+
+/* Section kicker. en: mono uppercase. zh: UI face, no case change, 13px. */
+.ww-kicker {
+  font-family: var(--ww-font-family-kicker);
+  font-size: var(--ww-font-size-kicker);
+  font-weight: var(--ww-font-weight-medium);
+  letter-spacing: var(--ww-letter-spacing-kicker);
+  text-transform: var(--ww-font-transform-kicker);
+  line-height: var(--ww-line-height-ui);
+  color: var(--ww-color-text-secondary);
+  margin: 0;
+}
+.ww-on-dark .ww-kicker,
+.ww-kicker.ww-on-dark {
+  color: var(--ww-color-text-on-dark-label);
+}
+
+/* UI label: small caps-style label in en, plain in zh. */
+.ww-label {
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-sm);
+  font-weight: var(--ww-font-weight-medium);
+  letter-spacing: var(--ww-letter-spacing-label);
+  text-transform: var(--ww-font-transform-kicker);
+  color: var(--ww-color-text-secondary);
+}
+
+.ww-mono {
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+}
+
+/* 38 × 4 Bone rule that opens and closes sections. */
+.ww-rule {
+  width: 38px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ww-color-bone);
+  border: 0;
+  margin: 0;
+}
+
+/* Surfaces that flip text to the on-dark set. */
+.ww-on-dark {
+  background: var(--ww-color-background-deep);
+  color: var(--ww-color-text-on-dark);
+}
+.ww-on-dark h1, .ww-on-dark h2, .ww-on-dark h3, .ww-on-dark h4,
+.ww-on-dark .ww-hero, .ww-on-dark .ww-body {
+  color: var(--ww-color-text-on-dark);
+}
+.ww-on-dark .ww-lede, .ww-on-dark .ww-sm {
+  color: var(--ww-color-text-on-dark-secondary);
+}
