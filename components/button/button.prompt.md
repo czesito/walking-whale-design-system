@@ -2,7 +2,7 @@
 
 ## 何時使用
 
-- `ww-btn--primary`：一個畫面裡最主要的動作，最多一個。
+- `ww-btn--primary`：一個畫面裡最主要的動作，最多一個。Topbar 的按鈕不用 primary
 - `ww-btn--secondary`：次要動作。
 - `ww-btn--ghost`：低強調的動作、工具列與圖示按鈕。
 - `ww-btn--signal`：Biolum 的強調動作，一頁最多一次。

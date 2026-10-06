@@ -20,6 +20,8 @@
 
 ## 規則
 
+- 放在 `ww-container` 裡，不要再包 `ww-section`，`ww-masthead` 自己有上下留白。
 - 首頁主標用品牌主張原句「先與人同行，再著手系統」，不加句號（content/brand.md）。
+- 學名用 `<i>`，例如 `<i>Pakicetus</i>`。英文顯示斜體，中文自動轉正（DR-007）。
 - 標題中要強調的詞用 `ww-em`。
 - 不要在 Hero 放耳塞年層（DR-014）。

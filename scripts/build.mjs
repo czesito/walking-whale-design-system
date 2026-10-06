@@ -188,7 +188,7 @@ const gallery = libs.map(({ dir, list }) => list.map((i) => {
   const html = readFileSync(at(`${dir}/${i.name}/${i.name}.html`), "utf8");
   return `<section class="g-item" id="${dir}-${i.name}">\n` +
     `<header class="g-head"><h2>${esc(i.zh)}<span lang="en">${esc(i.en)}</span></h2>` +
-    `<code>${dir}/${i.name}</code></header>\n<div class="g-body">${mainOf(html).replaceAll("../../assets/", "../assets/")}</div>\n</section>`;
+    `<code>${dir}/${i.name}</code><p class="g-use">${esc(i.use ?? "")}</p></header>\n<div class="g-body">${mainOf(html).replaceAll("../../assets/", "../assets/")}</div>\n</section>`;
 }).join("\n")).join("\n");
 const galleryNav = libs.map(({ dir, list }) =>
   `<p class="g-nav-k">${dir === "components" ? "元件" : "頁面模式"}</p><ul>` +

@@ -21,7 +21,7 @@
 
 ## 名字的由來
 
-Walking Whale 取自 *Pakicetus*，一種會走路的鯨魚祖先。所有大型系統都從一個早期的形態開始；我們陪團隊從那個早期形態走起，走成能長期使用的系統。
+Walking Whale 取自 Pakicetus，一種會走路的鯨魚祖先。學名在中文裡不用斜體（DR-007）。所有大型系統都從一個早期的形態開始；我們陪團隊從那個早期形態走起，走成能長期使用的系統。
 
 英文：Walking Whale is named after *Pakicetus*, the walking ancestor of whales. Every large system begins as an early form, and we walk with teams from that early form to a system they can live with for years.
 

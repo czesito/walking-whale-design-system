@@ -2,7 +2,8 @@
    Hooks are data attributes, so markup stays valid under the output validator (DR-016).
 
    .ww-reveal                         reveals once when it first enters the viewport (DR-014)
-   [data-ww-open="dialog-id"]         opens a <dialog> (Drawer); [data-ww-close] inside closes it
+   [data-ww-open="dialog-id"]         opens a <dialog> (Drawer); [data-ww-close] inside closes it;
+                                      an in-page link inside closes it and focuses the target section
    [data-ww-toggle]                   toggles aria-pressed; inside [data-ww-single] only one stays pressed
    .ww-layers[data-ww-progress="id"]  fills layers with the reading progress of element #id
    [data-ww-toast="toast-id"]         shows a .ww-toast for 4 seconds
@@ -38,10 +39,25 @@
     var close = ev.target.closest("[data-ww-close]");
     var dlg = ev.target.closest("dialog");
     if (close && dlg) { dlg.close(); return; }
+    var anchor = ev.target.closest('a[href^="#"]');
+    if (anchor && dlg && anchor.getAttribute("href").length > 1) {
+      // In-page link inside the drawer: close it and hand focus to the section, not back to the menu button.
+      var target = doc.getElementById(decodeURIComponent(anchor.getAttribute("href").slice(1)));
+      if (target) { dlg._wwFocusTarget = target; dlg.close(); }
+      return;
+    }
     if (ev.target.tagName === "DIALOG") ev.target.close(); // click on the backdrop
   });
   all("dialog").forEach(function (d) {
-    d.addEventListener("close", function () { if (d._wwOpener) { d._wwOpener.setAttribute("aria-expanded", "false"); d._wwOpener.focus(); } });
+    d.addEventListener("close", function () {
+      if (d._wwOpener) d._wwOpener.setAttribute("aria-expanded", "false");
+      var t = d._wwFocusTarget; d._wwFocusTarget = null;
+      if (t) {
+        if (!t.hasAttribute("tabindex")) t.setAttribute("tabindex", "-1");
+        t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        t.focus({ preventScroll: true });
+      } else if (d._wwOpener) d._wwOpener.focus();
+    });
   });
 
   // Toggles (filter chips)

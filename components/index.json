@@ -1,145 +1,179 @@
 {
-  "$description": "Order of components in dist/ww.css, the gallery and SKILL.md: primitives first, page frame last, so composites can override primitives. Every directory under components/ must be listed.",
+  "$description": "Order of components in dist/ww.css, the gallery and SKILL.md: primitives first, page frame last, so composites can override primitives. 'use' says when to reach for each one. Every directory under components/ must be listed.",
   "items": [
     {
       "name": "layout",
       "zh": "版面",
-      "en": "Layout"
+      "en": "Layout",
+      "use": "排版骨架：容器、區塊、垂直與水平排列、格線、兩欄。每一頁都會用到"
+    },
+    {
+      "name": "type",
+      "zh": "文字樣式",
+      "en": "Type",
+      "use": "文字角色：hero 標題、導言、內文、介面文字、說明、等寬字，以及 Abyss 底的反白"
     },
     {
       "name": "logo",
       "zh": "標誌",
-      "en": "Logo"
+      "en": "Logo",
+      "use": "放標誌：topbar、頁尾、封面"
     },
     {
       "name": "kicker",
       "zh": "區塊標籤",
-      "en": "Kicker"
+      "en": "Kicker",
+      "use": "區塊標題上方的短標籤，可加 No. 01 編號"
     },
     {
       "name": "rule-accent",
       "zh": "標題短線",
-      "en": "Rule accent"
+      "en": "Rule accent",
+      "use": "標題與導言之間的 38×4 短線"
     },
     {
       "name": "layers",
       "zh": "耳塞年層",
-      "en": "Growth layers"
+      "en": "Growth layers",
+      "use": "招牌元素。只用於步驟進度、頁碼、閱讀進度、時間軸，一定搭配文字"
     },
     {
       "name": "button",
       "zh": "按鈕與連結",
-      "en": "Button and link"
+      "en": "Button and link",
+      "use": "動作與導覽：四種按鈕、文字連結、圖示"
     },
     {
       "name": "card",
       "zh": "卡片",
-      "en": "Card"
+      "en": "Card",
+      "use": "可引用的單位：服務、功能、文章，放在格線裡"
     },
     {
       "name": "chip",
       "zh": "標籤",
-      "en": "Chip"
+      "en": "Chip",
+      "use": "分類短標籤；按鈕型可當篩選條件"
     },
     {
       "name": "status-badge",
       "zh": "狀態標記",
-      "en": "Status badge"
+      "en": "Status badge",
+      "use": "狀態：上線、進行中、等待、暫停、草稿"
     },
     {
       "name": "pull-quote",
       "zh": "引言",
-      "en": "Pull quote"
+      "en": "Pull quote",
+      "use": "從文章或案例中拉出一句真實的話"
     },
     {
       "name": "callout",
       "zh": "提示框",
-      "en": "Callout"
+      "en": "Callout",
+      "use": "補充、注意、無法復原的後果"
     },
     {
       "name": "tldr",
       "zh": "重點摘要",
-      "en": "TL;DR"
+      "en": "TL;DR",
+      "use": "長文開頭的三個重點"
     },
     {
       "name": "stat",
       "zh": "數據",
-      "en": "Stat"
+      "en": "Stat",
+      "use": "一個有來源的數字"
     },
     {
       "name": "table",
       "zh": "表格",
-      "en": "Table"
+      "en": "Table",
+      "use": "需要比較的結構化資料"
     },
     {
       "name": "code",
       "zh": "程式碼",
-      "en": "Code"
+      "en": "Code",
+      "use": "程式碼區塊與內文中的程式碼"
     },
     {
       "name": "figure",
       "zh": "圖與引線標註",
-      "en": "Figure and annotation"
+      "en": "Figure and annotation",
+      "use": "有圖說的圖；需要指出局部時用引線標註"
     },
     {
       "name": "prose",
       "zh": "文章排版",
-      "en": "Article typography"
+      "en": "Article typography",
+      "use": "文章正文與文章開頭"
     },
     {
       "name": "toc",
       "zh": "目錄",
-      "en": "Table of contents"
+      "en": "Table of contents",
+      "use": "長文的目錄"
     },
     {
       "name": "article-list",
       "zh": "文章列表",
-      "en": "Article list"
+      "en": "Article list",
+      "use": "文章與筆記的索引"
     },
     {
       "name": "filter",
       "zh": "標籤篩選",
-      "en": "Tag filter"
+      "en": "Tag filter",
+      "use": "列表上方的標籤篩選"
     },
     {
       "name": "form",
       "zh": "表單",
-      "en": "Form controls"
+      "en": "Form controls",
+      "use": "聯絡、問卷、報名的表單控制項"
     },
     {
       "name": "loading",
       "zh": "載入中",
-      "en": "Loading"
+      "en": "Loading",
+      "use": "無法預估時間的載入"
     },
     {
       "name": "empty",
       "zh": "空狀態",
-      "en": "Empty state"
+      "en": "Empty state",
+      "use": "還沒有內容時，說明原因並給下一步"
     },
     {
       "name": "error",
       "zh": "錯誤",
-      "en": "Error state"
+      "en": "Error state",
+      "use": "載入或送出失敗"
     },
     {
       "name": "toast",
       "zh": "通知",
-      "en": "Toast"
+      "en": "Toast",
+      "use": "動作完成後的短暫確認"
     },
     {
       "name": "topbar",
       "zh": "頂部導覽",
-      "en": "Topbar"
+      "en": "Topbar",
+      "use": "公開頁面最上方的導覽"
     },
     {
       "name": "drawer",
       "zh": "行動版選單",
-      "en": "Drawer"
+      "en": "Drawer",
+      "use": "860px 以下的行動版選單"
     },
     {
       "name": "footer",
       "zh": "頁尾",
-      "en": "Footer"
+      "en": "Footer",
+      "use": "公開頁面最下方的頁尾"
     }
   ]
 }

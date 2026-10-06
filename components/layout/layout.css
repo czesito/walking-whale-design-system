@@ -44,6 +44,14 @@
   .ww-split, .ww-split--start, .ww-split--aside { grid-template-columns: minmax(0, 1fr); gap: var(--ww-space-6); }
 }
 
+/* Lists used as layout (a grid of cards, a row of chips) lose their bullets and indent. */
+:is(ol, ul):is(.ww-stack, .ww-grid, .ww-cluster, .ww-split) { list-style: none; margin: 0; padding: 0; }
+
+/* A plain bulleted list outside articles. Inside .ww-prose lists are styled automatically. */
+.ww-list { display: grid; gap: var(--ww-space-2); margin: 0; padding-left: 1.25em; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); }
+.ww-list li::marker { color: var(--ww-color-text-secondary); }
+ol.ww-list li::marker { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); }
+
 .ww-measure { max-width: var(--ww-layout-measure-body); }
 
 .ww-divider { border: 0; border-top: 1px solid var(--ww-color-border-decorative); margin: 0; }

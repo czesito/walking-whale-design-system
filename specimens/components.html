@@ -431,6 +431,14 @@ code, kbd, samp, pre {
   .ww-split, .ww-split--start, .ww-split--aside { grid-template-columns: minmax(0, 1fr); gap: var(--ww-space-6); }
 }
 
+/* Lists used as layout (a grid of cards, a row of chips) lose their bullets and indent. */
+:is(ol, ul):is(.ww-stack, .ww-grid, .ww-cluster, .ww-split) { list-style: none; margin: 0; padding: 0; }
+
+/* A plain bulleted list outside articles. Inside .ww-prose lists are styled automatically. */
+.ww-list { display: grid; gap: var(--ww-space-2); margin: 0; padding-left: 1.25em; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); }
+.ww-list li::marker { color: var(--ww-color-text-secondary); }
+ol.ww-list li::marker { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); }
+
 .ww-measure { max-width: var(--ww-layout-measure-body); }
 
 .ww-divider { border: 0; border-top: 1px solid var(--ww-color-border-decorative); margin: 0; }
@@ -550,8 +558,9 @@ code, kbd, samp, pre {
 .ww-layers > :nth-child(7n + 7) { width: calc(var(--_h) * 0.33); --_m: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2033%20100%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M2.2%200C2.2%204.2%202.3%2016.7%202%2025C1.7%2033.3%200%2041.7%200.5%2050C0.9%2058.3%204.5%2066.7%204.7%2075C4.9%2083.3%202.1%2095.8%201.6%20100L32.6%20100C32.1%2095.8%2030.9%2083.3%2030%2075C29.1%2066.7%2027%2058.3%2027.1%2050C27.3%2041.7%2030.1%2033.3%2030.8%2025C31.6%2016.7%2031.4%204.2%2031.5%200Z%27%2F%3E%3C%2Fsvg%3E"); }
 /* end generated */
 
-/* Reveal once, left to right, when js/ww.js is present (DR-014 §6). */
-.ww-js .ww-reveal:not(.is-revealed) { clip-path: inset(0 100% 0 0); }
+/* Reveal once, left to right, when js/ww.js is present (DR-014 §6).
+   Hidden with opacity, not a zero-width clip: a clipped element never reaches the observer's threshold. */
+.ww-js .ww-reveal:not(.is-revealed) { opacity: 0; }
 .ww-js .ww-reveal.is-revealed { animation: ww-reveal var(--ww-motion-duration-reveal) var(--ww-motion-ease) both; }
 @keyframes ww-reveal {
   from { clip-path: inset(0 100% 0 0); }
@@ -1440,6 +1449,8 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 
 /* ---- components/topbar ---- */
 /* Topbar: logo, navigation, language toggle, one action. Below 860px the nav moves into the Drawer. */
+/* Keep in-page anchor targets clear of the sticky bar. */
+html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 .ww-topbar {
   position: sticky;
   top: 0;
@@ -1630,6 +1641,37 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 .ww-opener .ww-rule { margin-block: var(--ww-space-1); }
 .ww-opener--center { justify-items: center; text-align: center; margin-inline: auto; }
 
+/* ---- patterns/steps ---- */
+/* Steps: a static, numbered process (how an engagement begins). Not a progress indicator, so no growth layers (DR-014). */
+.ww-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--ww-space-6) var(--ww-space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ww-steps;
+}
+.ww-steps__item {
+  display: grid;
+  gap: var(--ww-space-2);
+  align-content: start;
+  padding-top: var(--ww-space-3);
+  border-top: 1px solid var(--ww-color-abyss);
+  counter-increment: ww-steps;
+}
+.ww-steps__item::before {
+  content: counter(ww-steps, decimal-leading-zero);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-steps__title { margin: 0; font-size: var(--ww-font-size-h4); }
+.ww-steps__body { margin: 0; font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); color: var(--ww-color-text-secondary); }
+.ww-on-dark .ww-steps__item { border-top-color: var(--ww-color-text-on-dark-label); }
+.ww-on-dark .ww-steps__item::before, .ww-on-dark .ww-steps__body { color: var(--ww-color-text-on-dark-secondary); }
+
 /* ---- patterns/case-list ---- */
 /* Case card: specimen plate on the left, facts on the right. */
 .ww-case {
@@ -1707,6 +1749,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 .g-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--ww-space-4); flex-wrap: wrap; padding-bottom: var(--ww-space-3); border-bottom: 1px solid var(--ww-color-abyss); }
 .g-head h2 { font-size: var(--ww-font-size-h3); display: flex; gap: var(--ww-space-3); align-items: baseline; }
 .g-head h2 span { font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-sm); font-weight: var(--ww-font-weight-regular); color: var(--ww-color-text-muted); letter-spacing: 0; }
+.g-use { flex-basis: 100%; margin: 0; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-sm); color: var(--ww-color-text-secondary); }
 .g-head code { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); color: var(--ww-color-text-muted); }
 .g-body { display: grid; gap: var(--ww-space-8); min-width: 0; }
 @media (max-width: 960px) {
@@ -1718,7 +1761,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </head>
 <body>
 <div class="g-page">
-  <nav class="g-nav" aria-label="元件目錄"><p class="g-nav-k">元件</p><ul><li><a href="#components-layout">版面</a></li><li><a href="#components-logo">標誌</a></li><li><a href="#components-kicker">區塊標籤</a></li><li><a href="#components-rule-accent">標題短線</a></li><li><a href="#components-layers">耳塞年層</a></li><li><a href="#components-button">按鈕與連結</a></li><li><a href="#components-card">卡片</a></li><li><a href="#components-chip">標籤</a></li><li><a href="#components-status-badge">狀態標記</a></li><li><a href="#components-pull-quote">引言</a></li><li><a href="#components-callout">提示框</a></li><li><a href="#components-tldr">重點摘要</a></li><li><a href="#components-stat">數據</a></li><li><a href="#components-table">表格</a></li><li><a href="#components-code">程式碼</a></li><li><a href="#components-figure">圖與引線標註</a></li><li><a href="#components-prose">文章排版</a></li><li><a href="#components-toc">目錄</a></li><li><a href="#components-article-list">文章列表</a></li><li><a href="#components-filter">標籤篩選</a></li><li><a href="#components-form">表單</a></li><li><a href="#components-loading">載入中</a></li><li><a href="#components-empty">空狀態</a></li><li><a href="#components-error">錯誤</a></li><li><a href="#components-toast">通知</a></li><li><a href="#components-topbar">頂部導覽</a></li><li><a href="#components-drawer">行動版選單</a></li><li><a href="#components-footer">頁尾</a></li></ul><p class="g-nav-k">頁面模式</p><ul><li><a href="#patterns-hero">主視覺</a></li><li><a href="#patterns-section-opener">區塊開頭</a></li><li><a href="#patterns-services">服務卡片區</a></li><li><a href="#patterns-case-list">案例列表</a></li><li><a href="#patterns-team">團隊</a></li><li><a href="#patterns-cta">行動呼籲</a></li><li><a href="#patterns-contact">聯絡</a></li></ul></nav>
+  <nav class="g-nav" aria-label="元件目錄"><p class="g-nav-k">元件</p><ul><li><a href="#components-layout">版面</a></li><li><a href="#components-type">文字樣式</a></li><li><a href="#components-logo">標誌</a></li><li><a href="#components-kicker">區塊標籤</a></li><li><a href="#components-rule-accent">標題短線</a></li><li><a href="#components-layers">耳塞年層</a></li><li><a href="#components-button">按鈕與連結</a></li><li><a href="#components-card">卡片</a></li><li><a href="#components-chip">標籤</a></li><li><a href="#components-status-badge">狀態標記</a></li><li><a href="#components-pull-quote">引言</a></li><li><a href="#components-callout">提示框</a></li><li><a href="#components-tldr">重點摘要</a></li><li><a href="#components-stat">數據</a></li><li><a href="#components-table">表格</a></li><li><a href="#components-code">程式碼</a></li><li><a href="#components-figure">圖與引線標註</a></li><li><a href="#components-prose">文章排版</a></li><li><a href="#components-toc">目錄</a></li><li><a href="#components-article-list">文章列表</a></li><li><a href="#components-filter">標籤篩選</a></li><li><a href="#components-form">表單</a></li><li><a href="#components-loading">載入中</a></li><li><a href="#components-empty">空狀態</a></li><li><a href="#components-error">錯誤</a></li><li><a href="#components-toast">通知</a></li><li><a href="#components-topbar">頂部導覽</a></li><li><a href="#components-drawer">行動版選單</a></li><li><a href="#components-footer">頁尾</a></li></ul><p class="g-nav-k">頁面模式</p><ul><li><a href="#patterns-hero">主視覺</a></li><li><a href="#patterns-section-opener">區塊開頭</a></li><li><a href="#patterns-services">服務卡片區</a></li><li><a href="#patterns-steps">流程步驟</a></li><li><a href="#patterns-case-list">案例列表</a></li><li><a href="#patterns-team">團隊</a></li><li><a href="#patterns-cta">行動呼籲</a></li><li><a href="#patterns-contact">聯絡</a></li></ul></nav>
   <main class="g-main">
     <header class="g-intro">
       <p class="ww-kicker">Walking Whale Design System</p>
@@ -1727,7 +1770,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
       <p class="ww-lede">每個元件都從 components 與 patterns 目錄裡的範例檔直接渲染，中英並排。範例本身通過輸出驗證器：只用系統的 class，沒有 style 屬性，也沒有自訂顏色。</p>
     </header>
 <section class="g-item" id="components-layout">
-<header class="g-head"><h2>版面<span lang="en">Layout</span></h2><code>components/layout</code></header>
+<header class="g-head"><h2>版面<span lang="en">Layout</span></h2><code>components/layout</code><p class="g-use">排版骨架：容器、區塊、垂直與水平排列、格線、兩欄。每一頁都會用到</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -1775,8 +1818,45 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </section>
 </div>
 </section>
+<section class="g-item" id="components-type">
+<header class="g-head"><h2>文字樣式<span lang="en">Type</span></h2><code>components/type</code><p class="g-use">文字角色：hero 標題、導言、內文、介面文字、說明、等寬字，以及 Abyss 底的反白</p></header>
+<div class="g-body">
+<section class="ww-stack" lang="zh-Hant">
+<p class="ww-lang-label">zh-Hant</p>
+<p class="ww-kicker">區塊標籤</p>
+<p class="ww-hero">先與人<span class="ww-em">同行</span>，再著手系統</p>
+<p class="ww-lede">ww-lede：標題下方的導言，一到兩句。</p>
+<p class="ww-body">ww-body：一般內文，Source Serif 4 與思源宋體。</p>
+<p class="ww-ui">ww-ui：介面文字，Inter 與思源黑體。</p>
+<p class="ww-sm">ww-sm：說明與中繼資料。</p>
+<p class="ww-label">ww-label：表單與表格的標籤</p>
+<p class="ww-mono">ww-mono: No. 01 · 2026-10-07 · 03 / 07</p>
+<div class="ww-on-dark ww-section"><div class="ww-container ww-stack ww-stack--sm">
+  <p class="ww-kicker">Abyss 底</p>
+  <h2>ww-on-dark 會把文字換成淺色</h2>
+  <p class="ww-lede">導言與說明文字使用 Surface 色。</p>
+</div></div>
+</section>
+<section class="ww-stack" lang="en">
+<p class="ww-lang-label">en</p>
+<p class="ww-kicker">Kicker</p>
+<p class="ww-hero">We work with <span class="ww-em">people</span> before we work on systems</p>
+<p class="ww-lede">ww-lede: the standfirst under a headline, one or two sentences.</p>
+<p class="ww-body">ww-body: running text in Source Serif 4.</p>
+<p class="ww-ui">ww-ui: interface text in Inter.</p>
+<p class="ww-sm">ww-sm: captions and metadata.</p>
+<p class="ww-label">ww-label: form and table labels</p>
+<p class="ww-mono">ww-mono: No. 01 · 2026-10-07 · 03 / 07</p>
+<div class="ww-on-dark ww-section"><div class="ww-container ww-stack ww-stack--sm">
+  <p class="ww-kicker">On Abyss</p>
+  <h2>ww-on-dark flips text to the light set</h2>
+  <p class="ww-lede">Ledes and captions use Surface.</p>
+</div></div>
+</section>
+</div>
+</section>
 <section class="g-item" id="components-logo">
-<header class="g-head"><h2>標誌<span lang="en">Logo</span></h2><code>components/logo</code></header>
+<header class="g-head"><h2>標誌<span lang="en">Logo</span></h2><code>components/logo</code><p class="g-use">放標誌：topbar、頁尾、封面</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -1803,7 +1883,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-kicker">
-<header class="g-head"><h2>區塊標籤<span lang="en">Kicker</span></h2><code>components/kicker</code></header>
+<header class="g-head"><h2>區塊標籤<span lang="en">Kicker</span></h2><code>components/kicker</code><p class="g-use">區塊標題上方的短標籤，可加 No. 01 編號</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -1820,7 +1900,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-rule-accent">
-<header class="g-head"><h2>標題短線<span lang="en">Rule accent</span></h2><code>components/rule-accent</code></header>
+<header class="g-head"><h2>標題短線<span lang="en">Rule accent</span></h2><code>components/rule-accent</code><p class="g-use">標題與導言之間的 38×4 短線</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -1843,7 +1923,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-layers">
-<header class="g-head"><h2>耳塞年層<span lang="en">Growth layers</span></h2><code>components/layers</code></header>
+<header class="g-head"><h2>耳塞年層<span lang="en">Growth layers</span></h2><code>components/layers</code><p class="g-use">招牌元素。只用於步驟進度、頁碼、閱讀進度、時間軸，一定搭配文字</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -1900,7 +1980,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-button">
-<header class="g-head"><h2>按鈕與連結<span lang="en">Button and link</span></h2><code>components/button</code></header>
+<header class="g-head"><h2>按鈕與連結<span lang="en">Button and link</span></h2><code>components/button</code><p class="g-use">動作與導覽：四種按鈕、文字連結、圖示</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -1944,7 +2024,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-card">
-<header class="g-head"><h2>卡片<span lang="en">Card</span></h2><code>components/card</code></header>
+<header class="g-head"><h2>卡片<span lang="en">Card</span></h2><code>components/card</code><p class="g-use">可引用的單位：服務、功能、文章，放在格線裡</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -1981,7 +2061,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
   <article class="ww-card">
     <p class="ww-card__no">02</p>
     <h3 class="ww-card__title"><a class="ww-card__link" href="#">Operations and internal systems</a></h3>
-    <p class="ww-card__body">Booking, membership, scheduling and payroll. The whole card is clickable.</p>
+    <p class="ww-card__body">Booking, membership, scheduling, and payroll. The whole card is clickable.</p>
     <p class="ww-card__meta">Operations · Internal</p>
   </article>
   <article class="ww-card ww-card--wash">
@@ -1995,7 +2075,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-chip">
-<header class="g-head"><h2>標籤<span lang="en">Chip</span></h2><code>components/chip</code></header>
+<header class="g-head"><h2>標籤<span lang="en">Chip</span></h2><code>components/chip</code><p class="g-use">分類短標籤；按鈕型可當篩選條件</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2022,7 +2102,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-status-badge">
-<header class="g-head"><h2>狀態標記<span lang="en">Status badge</span></h2><code>components/status-badge</code></header>
+<header class="g-head"><h2>狀態標記<span lang="en">Status badge</span></h2><code>components/status-badge</code><p class="g-use">狀態：上線、進行中、等待、暫停、草稿</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2047,7 +2127,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-pull-quote">
-<header class="g-head"><h2>引言<span lang="en">Pull quote</span></h2><code>components/pull-quote</code></header>
+<header class="g-head"><h2>引言<span lang="en">Pull quote</span></h2><code>components/pull-quote</code><p class="g-use">從文章或案例中拉出一句真實的話</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2066,7 +2146,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-callout">
-<header class="g-head"><h2>提示框<span lang="en">Callout</span></h2><code>components/callout</code></header>
+<header class="g-head"><h2>提示框<span lang="en">Callout</span></h2><code>components/callout</code><p class="g-use">補充、注意、無法復原的後果</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2101,7 +2181,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-tldr">
-<header class="g-head"><h2>重點摘要<span lang="en">TL;DR</span></h2><code>components/tldr</code></header>
+<header class="g-head"><h2>重點摘要<span lang="en">TL;DR</span></h2><code>components/tldr</code><p class="g-use">長文開頭的三個重點</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2128,7 +2208,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-stat">
-<header class="g-head"><h2>數據<span lang="en">Stat</span></h2><code>components/stat</code></header>
+<header class="g-head"><h2>數據<span lang="en">Stat</span></h2><code>components/stat</code><p class="g-use">一個有來源的數字</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2149,7 +2229,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-table">
-<header class="g-head"><h2>表格<span lang="en">Table</span></h2><code>components/table</code></header>
+<header class="g-head"><h2>表格<span lang="en">Table</span></h2><code>components/table</code><p class="g-use">需要比較的結構化資料</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2184,7 +2264,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-code">
-<header class="g-head"><h2>程式碼<span lang="en">Code</span></h2><code>components/code</code></header>
+<header class="g-head"><h2>程式碼<span lang="en">Code</span></h2><code>components/code</code><p class="g-use">程式碼區塊與內文中的程式碼</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2205,7 +2285,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-figure">
-<header class="g-head"><h2>圖與引線標註<span lang="en">Figure and annotation</span></h2><code>components/figure</code></header>
+<header class="g-head"><h2>圖與引線標註<span lang="en">Figure and annotation</span></h2><code>components/figure</code><p class="g-use">有圖說的圖；需要指出局部時用引線標註</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2276,7 +2356,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-prose">
-<header class="g-head"><h2>文章排版<span lang="en">Article typography</span></h2><code>components/prose</code></header>
+<header class="g-head"><h2>文章排版<span lang="en">Article typography</span></h2><code>components/prose</code><p class="g-use">文章正文與文章開頭</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2323,7 +2403,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-toc">
-<header class="g-head"><h2>目錄<span lang="en">Table of contents</span></h2><code>components/toc</code></header>
+<header class="g-head"><h2>目錄<span lang="en">Table of contents</span></h2><code>components/toc</code><p class="g-use">長文的目錄</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2356,7 +2436,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-article-list">
-<header class="g-head"><h2>文章列表<span lang="en">Article list</span></h2><code>components/article-list</code></header>
+<header class="g-head"><h2>文章列表<span lang="en">Article list</span></h2><code>components/article-list</code><p class="g-use">文章與筆記的索引</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2364,12 +2444,12 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </section>
 <section class="ww-stack" lang="en">
 <p class="ww-lang-label">en</p>
-<ol class="ww-article-list"><li class="ww-article-item"><p class="ww-article-item__date">Oct 7, 2026</p><div class="ww-article-item__main"><h3 class="ww-article-item__title"><a href="#">Why we talk about process before technology</a></h3><p class="ww-article-item__excerpt">At a first meeting, we barely talk about technology. We ask what your team should stop doing a year from now.</p><ul class="ww-article-item__tags"><li><span class="ww-chip">Notes</span></li></ul></div></li><li class="ww-article-item"><p class="ww-article-item__date">Sep 22, 2026</p><div class="ww-article-item__main"><h3 class="ww-article-item__title"><a href="#">What OCR on local GPUs actually costs</a></h3><p class="ww-article-item__excerpt">Hardware, power and human review: the real cost of one document from scan to archive.</p><ul class="ww-article-item__tags"><li><span class="ww-chip">Engineering</span></li><li><span class="ww-chip">AI</span></li></ul></div></li><li class="ww-article-item"><p class="ww-article-item__date">Sep 3, 2026</p><div class="ww-article-item__main"><h3 class="ww-article-item__title"><a href="#">One gateway for LINE and WhatsApp</a></h3><p class="ww-article-item__excerpt">How projects for different teams share a single messaging infrastructure.</p><ul class="ww-article-item__tags"><li><span class="ww-chip">Engineering</span></li></ul></div></li></ol>
+<ol class="ww-article-list"><li class="ww-article-item"><p class="ww-article-item__date">Oct 7, 2026</p><div class="ww-article-item__main"><h3 class="ww-article-item__title"><a href="#">Why we talk about process before technology</a></h3><p class="ww-article-item__excerpt">At a first meeting, we barely talk about technology. We ask what your team should stop doing a year from now.</p><ul class="ww-article-item__tags"><li><span class="ww-chip">Notes</span></li></ul></div></li><li class="ww-article-item"><p class="ww-article-item__date">Sep 22, 2026</p><div class="ww-article-item__main"><h3 class="ww-article-item__title"><a href="#">What OCR on local GPUs actually costs</a></h3><p class="ww-article-item__excerpt">Hardware, power, and human review: the real cost of one document from scan to archive.</p><ul class="ww-article-item__tags"><li><span class="ww-chip">Engineering</span></li><li><span class="ww-chip">AI</span></li></ul></div></li><li class="ww-article-item"><p class="ww-article-item__date">Sep 3, 2026</p><div class="ww-article-item__main"><h3 class="ww-article-item__title"><a href="#">One gateway for LINE and WhatsApp</a></h3><p class="ww-article-item__excerpt">How projects for different teams share a single messaging infrastructure.</p><ul class="ww-article-item__tags"><li><span class="ww-chip">Engineering</span></li></ul></div></li></ol>
 </section>
 </div>
 </section>
 <section class="g-item" id="components-filter">
-<header class="g-head"><h2>標籤篩選<span lang="en">Tag filter</span></h2><code>components/filter</code></header>
+<header class="g-head"><h2>標籤篩選<span lang="en">Tag filter</span></h2><code>components/filter</code><p class="g-use">列表上方的標籤篩選</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2400,7 +2480,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-form">
-<header class="g-head"><h2>表單<span lang="en">Form controls</span></h2><code>components/form</code></header>
+<header class="g-head"><h2>表單<span lang="en">Form controls</span></h2><code>components/form</code><p class="g-use">聯絡、問卷、報名的表單控制項</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2481,7 +2561,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-loading">
-<header class="g-head"><h2>載入中<span lang="en">Loading</span></h2><code>components/loading</code></header>
+<header class="g-head"><h2>載入中<span lang="en">Loading</span></h2><code>components/loading</code><p class="g-use">無法預估時間的載入</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2504,7 +2584,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-empty">
-<header class="g-head"><h2>空狀態<span lang="en">Empty state</span></h2><code>components/empty</code></header>
+<header class="g-head"><h2>空狀態<span lang="en">Empty state</span></h2><code>components/empty</code><p class="g-use">還沒有內容時，說明原因並給下一步</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2527,7 +2607,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-error">
-<header class="g-head"><h2>錯誤<span lang="en">Error state</span></h2><code>components/error</code></header>
+<header class="g-head"><h2>錯誤<span lang="en">Error state</span></h2><code>components/error</code><p class="g-use">載入或送出失敗</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2550,7 +2630,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-toast">
-<header class="g-head"><h2>通知<span lang="en">Toast</span></h2><code>components/toast</code></header>
+<header class="g-head"><h2>通知<span lang="en">Toast</span></h2><code>components/toast</code><p class="g-use">動作完成後的短暫確認</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2567,7 +2647,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-topbar">
-<header class="g-head"><h2>頂部導覽<span lang="en">Topbar</span></h2><code>components/topbar</code></header>
+<header class="g-head"><h2>頂部導覽<span lang="en">Topbar</span></h2><code>components/topbar</code><p class="g-use">公開頁面最上方的導覽</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2577,7 +2657,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
     <nav class="ww-topbar__nav" aria-label="主要導覽"><a class="ww-topbar__link" href="#" aria-current="page">作品</a><a class="ww-topbar__link" href="#">團隊</a><a class="ww-topbar__link" href="#">文章</a></nav>
     <div class="ww-topbar__actions">
       <div class="ww-lang"><a href="#" aria-current="true" lang="zh-Hant" aria-label="中文">中</a><a href="#" aria-current="false" lang="en" aria-label="English">EN</a></div>
-      <a class="ww-btn ww-btn--primary ww-btn--sm ww-topbar__cta" href="#">聯絡我們</a>
+      <a class="ww-btn ww-btn--secondary ww-btn--sm ww-topbar__cta" href="#">聯絡我們</a>
       <button class="ww-btn ww-btn--ghost ww-btn--icon ww-topbar__menu" type="button" data-ww-open="topbar-drawer-zh" aria-expanded="false" aria-label="開啟選單"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
     </div>
   </div>
@@ -2596,7 +2676,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
     <nav class="ww-topbar__nav" aria-label="Main"><a class="ww-topbar__link" href="#" aria-current="page">Work</a><a class="ww-topbar__link" href="#">Team</a><a class="ww-topbar__link" href="#">Articles</a></nav>
     <div class="ww-topbar__actions">
       <div class="ww-lang"><a href="#" aria-current="false" lang="zh-Hant" aria-label="中文">中</a><a href="#" aria-current="true" lang="en" aria-label="English">EN</a></div>
-      <a class="ww-btn ww-btn--primary ww-btn--sm ww-topbar__cta" href="#">Contact us</a>
+      <a class="ww-btn ww-btn--secondary ww-btn--sm ww-topbar__cta" href="#">Contact us</a>
       <button class="ww-btn ww-btn--ghost ww-btn--icon ww-topbar__menu" type="button" data-ww-open="topbar-drawer-en" aria-expanded="false" aria-label="Open menu"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
     </div>
   </div>
@@ -2610,7 +2690,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-drawer">
-<header class="g-head"><h2>行動版選單<span lang="en">Drawer</span></h2><code>components/drawer</code></header>
+<header class="g-head"><h2>行動版選單<span lang="en">Drawer</span></h2><code>components/drawer</code><p class="g-use">860px 以下的行動版選單</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2643,7 +2723,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="components-footer">
-<header class="g-head"><h2>頁尾<span lang="en">Footer</span></h2><code>components/footer</code></header>
+<header class="g-head"><h2>頁尾<span lang="en">Footer</span></h2><code>components/footer</code><p class="g-use">公開頁面最下方的頁尾</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2676,7 +2756,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="patterns-hero">
-<header class="g-head"><h2>主視覺<span lang="en">Hero</span></h2><code>patterns/hero</code></header>
+<header class="g-head"><h2>主視覺<span lang="en">Hero</span></h2><code>patterns/hero</code><p class="g-use">首頁與重要頁面的開頭，放在 ww-container 裡，不包 ww-section</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2690,7 +2770,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
   </div>
   <figure class="ww-plate">
     <img src="../assets/mark/walking-whale-mark-abyss.svg" alt="">
-    <figcaption class="ww-plate__caption"><span>Fig. 01</span><span>Pakicetus，會走路的鯨魚祖先</span></figcaption>
+    <figcaption class="ww-plate__caption"><span>Fig. 01</span><span><i>Pakicetus</i>，會走路的鯨魚祖先</span></figcaption>
   </figure>
 </section>
 </section>
@@ -2706,14 +2786,14 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
   </div>
   <figure class="ww-plate">
     <img src="../assets/mark/walking-whale-mark-abyss.svg" alt="">
-    <figcaption class="ww-plate__caption"><span>Fig. 01</span><span>Pakicetus, the walking ancestor of whales</span></figcaption>
+    <figcaption class="ww-plate__caption"><span>Fig. 01</span><span><i>Pakicetus</i>, the walking ancestor of whales</span></figcaption>
   </figure>
 </section>
 </section>
 </div>
 </section>
 <section class="g-item" id="patterns-section-opener">
-<header class="g-head"><h2>區塊開頭<span lang="en">Section opener</span></h2><code>patterns/section-opener</code></header>
+<header class="g-head"><h2>區塊開頭<span lang="en">Section opener</span></h2><code>patterns/section-opener</code><p class="g-use">每個主要區塊的開頭</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2746,7 +2826,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="patterns-services">
-<header class="g-head"><h2>服務卡片區<span lang="en">Services</span></h2><code>patterns/services</code></header>
+<header class="g-head"><h2>服務卡片區<span lang="en">Services</span></h2><code>patterns/services</code><p class="g-use">三到四項服務或能力</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2764,12 +2844,35 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
   <h2>Three kinds of systems, one way of working</h2>
   <hr class="ww-rule">
 </header>
-<div class="ww-grid ww-grid--3"><article class="ww-card"><p class="ww-card__no">01</p><h3 class="ww-card__title">Websites and content</h3><p class="ww-card__body">Distinctive sites with a back office your team can update.</p><p class="ww-card__meta">Web · CMS · SEO</p></article><article class="ww-card"><p class="ww-card__no">02</p><h3 class="ww-card__title">Operations and internal systems</h3><p class="ww-card__body">Booking, membership, payments, scheduling and payroll: the quiet core everything else depends on.</p><p class="ww-card__meta">Operations · Internal</p></article><article class="ww-card"><p class="ww-card__no">03</p><h3 class="ww-card__title">AI and data</h3><p class="ww-card__body">Service agents on LINE and WhatsApp, and recognition and retrieval on your own GPUs.</p><p class="ww-card__meta">Agents · OCR · Retrieval</p></article></div>
+<div class="ww-grid ww-grid--3"><article class="ww-card"><p class="ww-card__no">01</p><h3 class="ww-card__title">Websites and content</h3><p class="ww-card__body">Distinctive sites with a back office your team can update.</p><p class="ww-card__meta">Web · CMS · SEO</p></article><article class="ww-card"><p class="ww-card__no">02</p><h3 class="ww-card__title">Operations and internal systems</h3><p class="ww-card__body">Booking, membership, payments, scheduling, and payroll: the quiet core everything else depends on.</p><p class="ww-card__meta">Operations · Internal</p></article><article class="ww-card"><p class="ww-card__no">03</p><h3 class="ww-card__title">AI and data</h3><p class="ww-card__body">Service agents on LINE and WhatsApp, and recognition and retrieval on your own GPUs.</p><p class="ww-card__meta">Agents · OCR · Retrieval</p></article></div>
+</section>
+</div>
+</section>
+<section class="g-item" id="patterns-steps">
+<header class="g-head"><h2>流程步驟<span lang="en">Steps</span></h2><code>patterns/steps</code><p class="g-use">靜態的流程說明，例如合作的三個階段。不是進度，不用年層</p></header>
+<div class="g-body">
+<section class="ww-stack" lang="zh-Hant">
+<p class="ww-lang-label">zh-Hant</p>
+<header class="ww-opener">
+  <p class="ww-kicker"><span class="ww-kicker__no">No. 02</span>我們怎麼開始</p>
+  <h2>相識、理解、成形</h2>
+  <hr class="ww-rule">
+</header>
+<ol class="ww-steps"><li class="ww-steps__item"><h3 class="ww-steps__title">相識</h3><p class="ww-steps__body">認識人、背景與企圖心。</p></li><li class="ww-steps__item"><h3 class="ww-steps__title">理解</h3><p class="ww-steps__body">確認信任、節奏、技術理解與決策方式是否一致。</p></li><li class="ww-steps__item"><h3 class="ww-steps__title">成形</h3><p class="ww-steps__body">關係與問題都清楚了，才定義系統、範圍、合作模式與長期架構。</p></li></ol>
+</section>
+<section class="ww-stack" lang="en">
+<p class="ww-lang-label">en</p>
+<header class="ww-opener">
+  <p class="ww-kicker"><span class="ww-kicker__no">No. 02</span>How we begin</p>
+  <h2>Meet, understand, shape</h2>
+  <hr class="ww-rule">
+</header>
+<ol class="ww-steps"><li class="ww-steps__item"><h3 class="ww-steps__title">Meet</h3><p class="ww-steps__body">Get to know the people, their context and their ambition.</p></li><li class="ww-steps__item"><h3 class="ww-steps__title">Understand</h3><p class="ww-steps__body">Check that trust, pace, technical understanding, and decision-making line up.</p></li><li class="ww-steps__item"><h3 class="ww-steps__title">Shape</h3><p class="ww-steps__body">Once the relationship and the problem are clear, define the system, scope, way of working and long-term architecture.</p></li></ol>
 </section>
 </div>
 </section>
 <section class="g-item" id="patterns-case-list">
-<header class="g-head"><h2>案例列表<span lang="en">Case list</span></h2><code>patterns/case-list</code></header>
+<header class="g-head"><h2>案例列表<span lang="en">Case list</span></h2><code>patterns/case-list</code><p class="g-use">已公開的案例</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2786,17 +2889,17 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 <p class="ww-lang-label">en</p>
 <article class="ww-case">
   <figure class="ww-plate"><img src="../assets/mark/walking-whale-mark-abyss.svg" alt=""><figcaption class="ww-plate__caption"><span>Fig. 04</span><span>Sports</span></figcaption></figure>
-  <div class="ww-case__body"><span class="ww-chip">Sports</span><h3 class="ww-case__title">Booking and membership for swim lessons</h3><p class="ww-case__text">Membership, lesson booking, pool scheduling and payments, with separate views for coaches and parents.</p><dl class="ww-case__facts"><dt>Scope</dt><dd>Web, back office, LINE alerts</dd><dt>Status</dt><dd>Example</dd></dl><a class="ww-link--arrow" href="#">Read the case<svg class="ww-icon ww-icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <div class="ww-case__body"><span class="ww-chip">Sports</span><h3 class="ww-case__title">Booking and membership for swim lessons</h3><p class="ww-case__text">Membership, lesson booking, pool scheduling, and payments, with separate views for coaches and parents.</p><dl class="ww-case__facts"><dt>Scope</dt><dd>Web, back office, LINE alerts</dd><dt>Status</dt><dd>Example</dd></dl><a class="ww-link--arrow" href="#">Read the case<svg class="ww-icon ww-icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
 </article>
 <article class="ww-case">
   <figure class="ww-plate"><img src="../assets/mark/walking-whale-mark-abyss.svg" alt=""><figcaption class="ww-plate__caption"><span>Fig. 05</span><span>Heritage</span></figcaption></figure>
-  <div class="ww-case__body"><span class="ww-chip">Heritage</span><h3 class="ww-case__title">Genealogy and events for a clan association</h3><p class="ww-case__text">Family trees, member directory, event registration and check-in, with role-based review.</p><dl class="ww-case__facts"><dt>Scope</dt><dd>Web, review back office</dd><dt>Status</dt><dd>Example</dd></dl><a class="ww-link--arrow" href="#">Read the case<svg class="ww-icon ww-icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <div class="ww-case__body"><span class="ww-chip">Heritage</span><h3 class="ww-case__title">Genealogy and events for a clan association</h3><p class="ww-case__text">Family trees, member directory, event registration, and check-in, with role-based review.</p><dl class="ww-case__facts"><dt>Scope</dt><dd>Web, review back office</dd><dt>Status</dt><dd>Example</dd></dl><a class="ww-link--arrow" href="#">Read the case<svg class="ww-icon ww-icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
 </article>
 </section>
 </div>
 </section>
 <section class="g-item" id="patterns-team">
-<header class="g-head"><h2>團隊<span lang="en">Team</span></h2><code>patterns/team</code></header>
+<header class="g-head"><h2>團隊<span lang="en">Team</span></h2><code>patterns/team</code><p class="g-use">團隊成員</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2814,12 +2917,12 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
   <h2>A small team that goes deep</h2>
   <hr class="ww-rule">
 </header>
-<div class="ww-team"><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">C</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Czesio</h3><p class="ww-person__role">Founder</p><p class="ww-person__bio">Owns system architecture and machine learning calls such as search and recommendation.</p></figcaption></figure><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">J</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Jeff</h3><p class="ww-person__role">Customer success</p><p class="ww-person__bio">Keeps every engagement on course, from the first meeting to well after launch.</p></figcaption></figure><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">C</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Charlene</h3><p class="ww-person__role">Design and brand</p><p class="ww-person__bio">Turns what a product does into interfaces and brands people actually feel.</p></figcaption></figure><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">E</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Evan</h3><p class="ww-person__role">Full stack and interaction</p><p class="ww-person__bio">Front end, back end and interaction detail, with performance and feel treated as one.</p></figcaption></figure><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">L</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Leo</h3><p class="ww-person__role">Research</p><p class="ww-person__bio">Causal inference, robustness and data quality, so we stay honest about our models.</p></figcaption></figure></div>
+<div class="ww-team"><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">C</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Czesio</h3><p class="ww-person__role">Founder</p><p class="ww-person__bio">Owns system architecture and machine learning calls such as search and recommendation.</p></figcaption></figure><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">J</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Jeff</h3><p class="ww-person__role">Customer success</p><p class="ww-person__bio">Keeps every engagement on course, from the first meeting to well after launch.</p></figcaption></figure><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">C</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Charlene</h3><p class="ww-person__role">Design and brand</p><p class="ww-person__bio">Turns what a product does into interfaces and brands people actually feel.</p></figcaption></figure><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">E</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Evan</h3><p class="ww-person__role">Full stack and interaction</p><p class="ww-person__bio">Front end, back end, and interaction detail, with performance and feel treated as one.</p></figcaption></figure><figure class="ww-person"><div class="ww-person__portrait" aria-hidden="true">L</div><figcaption class="ww-stack ww-stack--xs"><h3 class="ww-person__name">Leo</h3><p class="ww-person__role">Research</p><p class="ww-person__bio">Causal inference, robustness, and data quality, so we stay honest about our models.</p></figcaption></figure></div>
 </section>
 </div>
 </section>
 <section class="g-item" id="patterns-cta">
-<header class="g-head"><h2>行動呼籲<span lang="en">Call to action</span></h2><code>patterns/cta</code></header>
+<header class="g-head"><h2>行動呼籲<span lang="en">Call to action</span></h2><code>patterns/cta</code><p class="g-use">頁面結尾的行動呼籲，一頁一次</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2850,7 +2953,7 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 </div>
 </section>
 <section class="g-item" id="patterns-contact">
-<header class="g-head"><h2>聯絡<span lang="en">Contact</span></h2><code>patterns/contact</code></header>
+<header class="g-head"><h2>聯絡<span lang="en">Contact</span></h2><code>patterns/contact</code><p class="g-use">聯絡表單與公司資訊</p></header>
 <div class="g-body">
 <section class="ww-stack" lang="zh-Hant">
 <p class="ww-lang-label">zh-Hant</p>
@@ -2903,7 +3006,8 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
    Hooks are data attributes, so markup stays valid under the output validator (DR-016).
 
    .ww-reveal                         reveals once when it first enters the viewport (DR-014)
-   [data-ww-open="dialog-id"]         opens a <dialog> (Drawer); [data-ww-close] inside closes it
+   [data-ww-open="dialog-id"]         opens a <dialog> (Drawer); [data-ww-close] inside closes it;
+                                      an in-page link inside closes it and focuses the target section
    [data-ww-toggle]                   toggles aria-pressed; inside [data-ww-single] only one stays pressed
    .ww-layers[data-ww-progress="id"]  fills layers with the reading progress of element #id
    [data-ww-toast="toast-id"]         shows a .ww-toast for 4 seconds
@@ -2939,10 +3043,25 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
     var close = ev.target.closest("[data-ww-close]");
     var dlg = ev.target.closest("dialog");
     if (close && dlg) { dlg.close(); return; }
+    var anchor = ev.target.closest('a[href^="#"]');
+    if (anchor && dlg && anchor.getAttribute("href").length > 1) {
+      // In-page link inside the drawer: close it and hand focus to the section, not back to the menu button.
+      var target = doc.getElementById(decodeURIComponent(anchor.getAttribute("href").slice(1)));
+      if (target) { dlg._wwFocusTarget = target; dlg.close(); }
+      return;
+    }
     if (ev.target.tagName === "DIALOG") ev.target.close(); // click on the backdrop
   });
   all("dialog").forEach(function (d) {
-    d.addEventListener("close", function () { if (d._wwOpener) { d._wwOpener.setAttribute("aria-expanded", "false"); d._wwOpener.focus(); } });
+    d.addEventListener("close", function () {
+      if (d._wwOpener) d._wwOpener.setAttribute("aria-expanded", "false");
+      var t = d._wwFocusTarget; d._wwFocusTarget = null;
+      if (t) {
+        if (!t.hasAttribute("tabindex")) t.setAttribute("tabindex", "-1");
+        t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        t.focus({ preventScroll: true });
+      } else if (d._wwOpener) d._wwOpener.focus();
+    });
   });
 
   // Toggles (filter chips)

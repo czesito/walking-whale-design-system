@@ -1,6 +1,6 @@
 ---
 name: walking-whale-design-system
-description: Walking Whale design system. Use for any Walking Whale output — web pages, artifacts, slides, documents, product UI, copy in zh-TW or English. Covers tokens, 28 components, 7 page patterns, the growth-layer signature element, logo use, voice and writing rules, and a validator for generated HTML. 走路鯨魚設計系統
+description: Walking Whale design system. Use for any Walking Whale output — web pages, artifacts, slides, documents, product UI, copy in zh-TW or English. Covers tokens, 29 components, 8 page patterns, the growth-layer signature element, logo use, voice and writing rules, and a validator for generated HTML. 走路鯨魚設計系統
 ---
 
 # Walking Whale Design System
@@ -15,7 +15,7 @@ description: Walking Whale design system. Use for any Walking Whale output — w
 
 | 任務 | 讀這些 |
 |---|---|
-| 做頁面或 artifact | 本檔 → [components/index.json](components/index.json) 與 [patterns/index.json](patterns/index.json) → 用到的元件 `*.prompt.md` → 需要時看同目錄的 `*.html` 範例 |
+| 做頁面或 artifact | 本檔 → [components/index.json](components/index.json) 與 [patterns/index.json](patterns/index.json)（`use` 欄說明何時用）→ 用到的元件 `*.prompt.md` → 需要時看同目錄的 `*.html` 範例 |
 | 寫文案 | [content/brand.md](content/brand.md) → [content/voice.md](content/voice.md) → [content/zh-tw.md](content/zh-tw.md) 或 [content/en.md](content/en.md) → [content/glossary.csv](content/glossary.csv) |
 | 放 logo | [foundations/logo.md](foundations/logo.md) |
 | 選顏色或字體 | [foundations/color.md](foundations/color.md)、[foundations/typography.md](foundations/typography.md)。只能用 token，不能自己調色 |
@@ -41,7 +41,8 @@ description: Walking Whale design system. Use for any Walking Whale output — w
 <a class="ww-skip-link" href="#main">跳到主要內容</a>
 <!-- components/topbar -->
 <main id="main">
-  <!-- patterns/hero, 然後每個區塊：<section class="ww-section"><div class="ww-container">…</div></section> -->
+  <div class="ww-container"><!-- patterns/hero：直接放在容器裡，不包 ww-section --></div>
+  <section class="ww-section" id="services"><div class="ww-container"><!-- 每個區塊：section-opener 加內容 --></div></section>
 </main>
 <!-- components/footer -->
 <script src="dist/ww.js"></script>
@@ -49,7 +50,7 @@ description: Walking Whale design system. Use for any Walking Whale output — w
 </html>
 ```
 
-英文頁把 `lang` 改成 `en`。同一頁混用兩種語言時，在換語言的元素上設定 `lang`，字體、行高、字距會自動切換（DR-006）。
+字體也可以改成連結 `css/fonts.css`，內容相同。英文頁把 `lang` 改成 `en`。同一頁混用兩種語言時，在換語言的元素上設定 `lang`，字體、行高、字距會自動切換（DR-006）。
 
 ### 在 claude.ai artifact 裡
 
@@ -75,9 +76,9 @@ node scripts/copy-lint.mjs page.html
 ### 視覺
 
 - 視覺語言是 B1 標本卡：1px 細線、2px 圓角、可引用的單位加 2px Abyss 頂邊、編號與中繼資料用等寬字（DR-013）。卡片不用陰影。
-- 招牌元素是**耳塞年層**（`ww-layers`），只在承載資訊時出現：步驟（最多 7 步）、頁碼、閱讀進度、時間軸。不可以當裝飾，狀態一定同時寫成文字（DR-014）。
+- 招牌元素是**耳塞年層**（`ww-layers`），只在承載資訊時出現：讀者正在進行的步驟（最多 7 步）、頁碼、閱讀進度、時間軸。不可以當裝飾，狀態一定同時寫成文字（DR-014）。介紹一個固定流程（例如合作的三個階段）不算進度，用 `steps` 模式。
 - 標題下方用 38×4 的 Bone 短線 `ww-rule`，它不是招牌元素（DR-014）。
-- 一個畫面最多一個 `ww-btn--primary`；`ww-btn--signal` 一頁最多一次。
+- 一個畫面最多一個 `ww-btn--primary`，第一個畫面的 primary 屬於 Hero，所以 topbar 的按鈕用 secondary。`ww-btn--signal` 一頁最多一次。
 - 引線標註用 L2 斜引線加托線，寫成一個 viewBox 寬 1200 的 SVG（DR-015）。
 - Logo 不重排、不拉伸、不改色、不加效果。淺色底用 `-abyss`，Abyss 底用 `-pearl`（foundations/logo.md）。
 - 中文強調用字重加 Tidal 色，絕不用斜體（DR-007）。`<em>` 與 `ww-em` 會自動處理。
@@ -89,7 +90,9 @@ node scripts/copy-lint.mjs page.html
 - 中文：稱讀者為「您」、用「台」不用「臺」、中英文與數字之間加半形空格、全形標點、標題不加句號、引號用「」（content/zh-tw.md）。
 - 英文：Chicago 加上 content/en.md 的例外、美式拼字、標題句首大寫（DR-009）。
 - 不用驚嘆號、不用 emoji、不誇大、不製造急迫感（content/voice.md）。
-- 不捏造事實：數字要有來源，案例要已公開，承諾（例如回覆時間）要已確認。示意內容標成「範例」。官方聯絡信箱尚未定案，不要自己編一個。
+- 不捏造事實：數字要有來源，案例要已公開，承諾（例如回覆時間）要已確認。示意內容標成「範例」。
+- 官方聯絡信箱與聯絡頁網址尚未定案，不要自己編一個。在定案前，行動按鈕連到同一頁的聯絡區（`#contact`）。
+- 服務內容以 [content/services.md](content/services.md) 為準。
 
 ### 無障礙
 
@@ -107,7 +110,7 @@ node scripts/copy-lint.mjs page.html
 
 | 類別 | 元件 |
 |---|---|
-| 版面 | `layout` |
+| 版面與文字 | `layout`（含清單）、`type`（文字角色） |
 | 品牌 | `logo`、`kicker`、`rule-accent`、`layers`（耳塞年層） |
 | 動作 | `button`（含文字連結與圖示） |
 | 內容 | `card`、`chip`、`status-badge`、`pull-quote`、`callout`、`tldr`、`stat`、`table`、`code`、`figure`（含引線標註） |
@@ -115,7 +118,7 @@ node scripts/copy-lint.mjs page.html
 | 表單 | `form`（input、textarea、select、checkbox、radio、switch、驗證狀態） |
 | 狀態 | `loading`、`empty`、`error`、`toast` |
 | 頁框 | `topbar`、`drawer`、`footer` |
-| 頁面模式 | `hero`、`section-opener`、`services`、`case-list`、`team`、`cta`、`contact` |
+| 頁面模式 | `hero`、`section-opener`、`services`、`steps`、`case-list`、`team`、`cta`、`contact` |
 
 所有元件與模式的中英渲染：`specimens/components.html`。
 

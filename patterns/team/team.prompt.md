@@ -12,7 +12,6 @@
 
 | Class 或屬性 | 用途 |
 |---|---|
-| `ww-team` | 團隊格線，每人最窄 9.5rem，手機兩欄 |
 | `ww-person` | 加在 `<figure>` 上 |
 | `ww-person__portrait` | 字首或照片，4:5，Abyss 頂邊 |
 | `ww-person__name` | 名字 |

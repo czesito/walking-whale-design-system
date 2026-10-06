@@ -27,6 +27,8 @@
 ## 規則
 
 - 淺色底用 `-abyss`，Abyss 底用 `-pearl`。檔案與最小尺寸見 foundations/logo.md。
+- 頁尾與 topbar 用該頁語言的橫式 wordmark。直式目前只有英文，用於封面與名片。
+- 在 claude.ai artifact 裡，把 currentColor 版本的 SVG 直接寫進頁面並加上 `ww-logo`，顏色跟著文字色。
 
 ## 最小範例
 

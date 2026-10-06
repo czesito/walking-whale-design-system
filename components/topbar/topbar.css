@@ -1,4 +1,6 @@
 /* Topbar: logo, navigation, language toggle, one action. Below 860px the nav moves into the Drawer. */
+/* Keep in-page anchor targets clear of the sticky bar. */
+html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 .ww-topbar {
   position: sticky;
   top: 0;

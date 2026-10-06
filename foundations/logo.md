@@ -7,7 +7,7 @@
 
 | 版本 | 檔案 | 長寬比 | 用途 |
 |---|---|---|---|
-| 直式 wordmark | `assets/wordmark/walking-whale-wordmark-stacked*.svg` | 2.44 : 1 | 主要版本：封面、名片、提案首頁、頁尾 |
+| 直式 wordmark | `assets/wordmark/walking-whale-wordmark-stacked*.svg` | 2.44 : 1 | 主要版本：封面、名片、提案首頁。v0.1 只有英文，所以網頁頁尾改用該頁語言的橫式 |
 | 橫式英文 | `assets/wordmark/walking-whale-wordmark-horizontal-en*.svg` | 8.43 : 1 | 英文頁面的導覽列、頁首、簡報頁角 |
 | 橫式中文 | `assets/wordmark/walking-whale-wordmark-horizontal-zh*.svg` | 5.55 : 1 | 中文頁面的導覽列、頁首、簡報頁角 |
 | 骨架標誌 | `assets/mark/walking-whale-mark*.svg` | 2.70 : 1 | 不需要名稱的場合，或名稱已經以文字出現在旁邊 |

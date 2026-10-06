@@ -1,40 +1,53 @@
 {
-  "$description": "Order of page patterns. Every directory under patterns/ must be listed.",
+  "$description": "Order of page patterns. 'use' says when to reach for each one. Every directory under patterns/ must be listed.",
   "items": [
     {
       "name": "hero",
       "zh": "主視覺",
-      "en": "Hero"
+      "en": "Hero",
+      "use": "首頁與重要頁面的開頭，放在 ww-container 裡，不包 ww-section"
     },
     {
       "name": "section-opener",
       "zh": "區塊開頭",
-      "en": "Section opener"
+      "en": "Section opener",
+      "use": "每個主要區塊的開頭"
     },
     {
       "name": "services",
       "zh": "服務卡片區",
-      "en": "Services"
+      "en": "Services",
+      "use": "三到四項服務或能力"
+    },
+    {
+      "name": "steps",
+      "zh": "流程步驟",
+      "en": "Steps",
+      "use": "靜態的流程說明，例如合作的三個階段。不是進度，不用年層"
     },
     {
       "name": "case-list",
       "zh": "案例列表",
-      "en": "Case list"
+      "en": "Case list",
+      "use": "已公開的案例"
     },
     {
       "name": "team",
       "zh": "團隊",
-      "en": "Team"
+      "en": "Team",
+      "use": "團隊成員"
     },
     {
       "name": "cta",
       "zh": "行動呼籲",
-      "en": "Call to action"
+      "en": "Call to action",
+      "use": "頁面結尾的行動呼籲，一頁一次"
     },
     {
       "name": "contact",
       "zh": "聯絡",
-      "en": "Contact"
+      "en": "Contact",
+      "use": "聯絡表單與公司資訊"
     }
   ]
 }

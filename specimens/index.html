@@ -431,6 +431,14 @@ code, kbd, samp, pre {
   .ww-split, .ww-split--start, .ww-split--aside { grid-template-columns: minmax(0, 1fr); gap: var(--ww-space-6); }
 }
 
+/* Lists used as layout (a grid of cards, a row of chips) lose their bullets and indent. */
+:is(ol, ul):is(.ww-stack, .ww-grid, .ww-cluster, .ww-split) { list-style: none; margin: 0; padding: 0; }
+
+/* A plain bulleted list outside articles. Inside .ww-prose lists are styled automatically. */
+.ww-list { display: grid; gap: var(--ww-space-2); margin: 0; padding-left: 1.25em; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); }
+.ww-list li::marker { color: var(--ww-color-text-secondary); }
+ol.ww-list li::marker { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); }
+
 .ww-measure { max-width: var(--ww-layout-measure-body); }
 
 .ww-divider { border: 0; border-top: 1px solid var(--ww-color-border-decorative); margin: 0; }
@@ -550,8 +558,9 @@ code, kbd, samp, pre {
 .ww-layers > :nth-child(7n + 7) { width: calc(var(--_h) * 0.33); --_m: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2033%20100%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M2.2%200C2.2%204.2%202.3%2016.7%202%2025C1.7%2033.3%200%2041.7%200.5%2050C0.9%2058.3%204.5%2066.7%204.7%2075C4.9%2083.3%202.1%2095.8%201.6%20100L32.6%20100C32.1%2095.8%2030.9%2083.3%2030%2075C29.1%2066.7%2027%2058.3%2027.1%2050C27.3%2041.7%2030.1%2033.3%2030.8%2025C31.6%2016.7%2031.4%204.2%2031.5%200Z%27%2F%3E%3C%2Fsvg%3E"); }
 /* end generated */
 
-/* Reveal once, left to right, when js/ww.js is present (DR-014 §6). */
-.ww-js .ww-reveal:not(.is-revealed) { clip-path: inset(0 100% 0 0); }
+/* Reveal once, left to right, when js/ww.js is present (DR-014 §6).
+   Hidden with opacity, not a zero-width clip: a clipped element never reaches the observer's threshold. */
+.ww-js .ww-reveal:not(.is-revealed) { opacity: 0; }
 .ww-js .ww-reveal.is-revealed { animation: ww-reveal var(--ww-motion-duration-reveal) var(--ww-motion-ease) both; }
 @keyframes ww-reveal {
   from { clip-path: inset(0 100% 0 0); }
@@ -1440,6 +1449,8 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 
 /* ---- components/topbar ---- */
 /* Topbar: logo, navigation, language toggle, one action. Below 860px the nav moves into the Drawer. */
+/* Keep in-page anchor targets clear of the sticky bar. */
+html:has(.ww-topbar) { scroll-padding-top: calc(64px + var(--ww-space-4)); }
 .ww-topbar {
   position: sticky;
   top: 0;
@@ -1629,6 +1640,37 @@ button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-cont
 .ww-opener { display: grid; gap: var(--ww-space-3); max-width: 46rem; margin-bottom: var(--ww-space-7); }
 .ww-opener .ww-rule { margin-block: var(--ww-space-1); }
 .ww-opener--center { justify-items: center; text-align: center; margin-inline: auto; }
+
+/* ---- patterns/steps ---- */
+/* Steps: a static, numbered process (how an engagement begins). Not a progress indicator, so no growth layers (DR-014). */
+.ww-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--ww-space-6) var(--ww-space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ww-steps;
+}
+.ww-steps__item {
+  display: grid;
+  gap: var(--ww-space-2);
+  align-content: start;
+  padding-top: var(--ww-space-3);
+  border-top: 1px solid var(--ww-color-abyss);
+  counter-increment: ww-steps;
+}
+.ww-steps__item::before {
+  content: counter(ww-steps, decimal-leading-zero);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-steps__title { margin: 0; font-size: var(--ww-font-size-h4); }
+.ww-steps__body { margin: 0; font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); color: var(--ww-color-text-secondary); }
+.ww-on-dark .ww-steps__item { border-top-color: var(--ww-color-text-on-dark-label); }
+.ww-on-dark .ww-steps__item::before, .ww-on-dark .ww-steps__body { color: var(--ww-color-text-on-dark-secondary); }
 
 /* ---- patterns/case-list ---- */
 /* Case card: specimen plate on the left, facts on the right. */

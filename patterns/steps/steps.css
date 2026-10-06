@@ -1,0 +1,29 @@
+/* Steps: a static, numbered process (how an engagement begins). Not a progress indicator, so no growth layers (DR-014). */
+.ww-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--ww-space-6) var(--ww-space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ww-steps;
+}
+.ww-steps__item {
+  display: grid;
+  gap: var(--ww-space-2);
+  align-content: start;
+  padding-top: var(--ww-space-3);
+  border-top: 1px solid var(--ww-color-abyss);
+  counter-increment: ww-steps;
+}
+.ww-steps__item::before {
+  content: counter(ww-steps, decimal-leading-zero);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-steps__title { margin: 0; font-size: var(--ww-font-size-h4); }
+.ww-steps__body { margin: 0; font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); color: var(--ww-color-text-secondary); }
+.ww-on-dark .ww-steps__item { border-top-color: var(--ww-color-text-on-dark-label); }
+.ww-on-dark .ww-steps__item::before, .ww-on-dark .ww-steps__body { color: var(--ww-color-text-on-dark-secondary); }

@@ -2,7 +2,7 @@
 
 走路鯨魚的設計系統，是 Walking Whale 所有數位輸出的唯一源頭：官網、數位服務與產品、簡報、文件。
 
-> 狀態：v0.1 建置中。色彩、字體、logo、品牌語句、中英寫作規範、28 個元件與 7 個頁面模式已完成；SKILL.md 與發版進行中。
+> 狀態：v0.1 建置中。色彩、字體、logo、品牌語句、中英寫作規範、29 個元件與 8 個頁面模式已完成；SKILL.md 與發版進行中。
 
 ## 內容
 
@@ -12,7 +12,7 @@
 | [`css/`](css/) | 手寫的基礎樣式、文字樣式、字體載入，只使用 token |
 | [`dist/`](dist/) | 產生物，不要手改：`tokens.css`、`ww.css`（tokens、基礎樣式、所有元件與模式）、`tokens.ts`、`ww.js` |
 | [`components/`](components/) | 元件：每個目錄有 `.css`、中英範例 `.html`、給 Claude 的 `.prompt.md`；順序見 `index.json` |
-| [`patterns/`](patterns/) | 頁面模式：Hero、區塊開頭、服務、案例、團隊、CTA、聯絡 |
+| [`patterns/`](patterns/) | 頁面模式：Hero、區塊開頭、服務、流程步驟、案例、團隊、CTA、聯絡 |
 | [`js/`](js/) | 選用的小型互動：浮現動畫、Drawer、篩選、閱讀進度、通知。沒有它頁面也能正常使用 |
 | [`assets/`](assets/) | Logo：直式與橫式 wordmark、骨架標誌、icon，各有 currentColor、Abyss、Pearl、Bone 版本；規格見 [foundations/logo.md](foundations/logo.md) |
 | [`foundations/`](foundations/) | 色彩、字體、logo 等規格說明 |
