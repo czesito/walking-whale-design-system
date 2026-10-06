@@ -9,6 +9,7 @@
 //   - every allowed color pairing meets WCAG 2.2 AA                    (DR-011)
 //   - no CJK font size below 13px                                      (DR-005)
 //   - no literal hex colors in css/, components/, specimens/src/       (spec §5)
+//   - copy lint on specimens, components and docs                      (DR-008, DR-009)
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, relative, extname } from "node:path";
@@ -16,6 +17,7 @@ import { fileURLToPath } from "node:url";
 import {
   readJSON, flatten, resolve, dependents, varName, toCss, hexToRgba, over, contrast, THRESHOLDS,
 } from "./lib.mjs";
+import { lintFile } from "./copy-lint.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const at = (p) => join(ROOT, p);
@@ -192,6 +194,16 @@ for (const file of lintTargets) {
   for (const m of text.matchAll(HEX)) problems.push(`literal hex ${m[0]} in ${relative(ROOT, file)}; use a token`);
   for (const m of text.matchAll(/var\((--ww-[a-z0-9-]+)/g)) {
     if (!knownVars.has(m[1])) problems.push(`unknown token ${m[1]} in ${relative(ROOT, file)}`);
+  }
+}
+
+// ---------------------------------------------------------------- copy lint (DR-008, DR-009)
+const copyTargets = [...walk(at("specimens/src")), ...walk(at("components"))].filter((f) => extname(f) === ".html");
+const docTargets = ["content", "foundations", "decisions", "specs"].flatMap((d) => walk(at(d)))
+  .filter((f) => extname(f) === ".md").concat([at("README.md")]);
+for (const [files, docs] of [[copyTargets, false], [docTargets, true]]) {
+  for (const f of files) {
+    for (const i of lintFile(f, { docs })) problems.push(`copy: ${relative(ROOT, f)}:${i.line} ${i.msg} [${i.rule}] …${i.excerpt}…`);
   }
 }
 

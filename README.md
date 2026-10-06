@@ -2,7 +2,7 @@
 
 走路鯨魚的設計系統，是 Walking Whale 所有數位輸出的唯一源頭：官網、數位服務與產品、簡報、文件。
 
-> 狀態：v0.1 建置中。色彩、字體與 logo 已完成，編輯規範、元件與頁面模式進行中。
+> 狀態：v0.1 建置中。色彩、字體、logo、品牌語句與中英寫作規範已完成，元件與頁面模式進行中。
 
 ## 內容
 
@@ -13,6 +13,7 @@
 | [`dist/`](dist/) | 產生物，不要手改：`tokens.css`、`ww.css`、`tokens.ts` |
 | [`assets/`](assets/) | Logo：直式與橫式 wordmark、骨架標誌、icon，各有 currentColor、Abyss、Pearl、Bone 版本；規格見 [foundations/logo.md](foundations/logo.md) |
 | [`foundations/`](foundations/) | 色彩、字體、logo 等規格說明 |
+| [`content/`](content/) | 品牌語句與命名、語氣、中英寫作規範、用字表 `glossary.csv` |
 | [`tools/`](tools/) | 不在 CI 裡執行的產生工具，例如 logo |
 | [`specimens/`](specimens/) | 中英並排的驗證頁，直接用瀏覽器開啟 `specimens/index.html` |
 | [`decisions/`](decisions/README.md) | 決策紀錄 DR-001 起 |
@@ -48,6 +49,7 @@ npm i github:czesito/walking-whale-design-system#v0.1.0
    - 色彩組合對比是否符合 WCAG 2.2 AA
    - 中文字級是否都在 13px 以上
    - `css/` 與 `specimens/src/` 裡有沒有寫死的 hex 色或不存在的 token
+   - 文案 lint：中英空格、全形標點、中文標題句號、用字表的避用詞
    - 產生物是否已更新
 4. 推進 `main`（DR-003）。需要負責人判斷的設計決定，先提案、決定後再推送。
 
