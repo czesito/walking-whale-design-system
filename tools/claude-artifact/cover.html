@@ -1,0 +1,43 @@
+<!-- @dsCard height=340 -->
+<div class="ww-cover">
+<style>
+  .ww-cover { position: relative; width: 960px; height: 340px; overflow: hidden; background: var(--ww-color-background-page); }
+  .ww-cover svg { position: absolute; inset: 0; width: 960px; height: 340px; }
+  .ww-cover .abyss { fill: var(--ww-color-abyss); }
+  .ww-cover .sediment { fill: var(--ww-color-sediment); }
+  .ww-cover .tidal { fill: var(--ww-color-tidal); }
+  .ww-cover .bone { fill: var(--ww-color-bone); }
+  .ww-cover .biolum { fill: var(--ww-color-biolum); }
+  .ww-cover .done { fill: var(--ww-color-index-on-dark-done); }
+  .ww-cover .now { fill: var(--ww-color-index-on-dark-current); }
+  .ww-cover .todo { fill: var(--ww-color-index-on-dark-todo); }
+  .ww-cover .r { rx: var(--ww-radius-xs); ry: var(--ww-radius-xs); }
+  .ww-cover .text { position: absolute; left: 40px; bottom: 36px; width: 440px; margin: 0; }
+  .ww-cover .name { margin: 0; font-family: var(--ww-font-family-display); font-weight: 500; font-size: 112px; line-height: 0.92; letter-spacing: -0.02em; color: var(--ww-color-text-primary); }
+  .ww-cover .tag { margin: 12px 0 0; font-family: var(--ww-font-family-ui); font-size: 14px; color: var(--ww-color-text-muted); }
+</style>
+<svg viewBox="0 0 960 340" aria-hidden="true">
+  <!-- blocks: abyss 360×218 (ww-space steps: gap 22 = ww-space-5), sediment 98×230, tidal 220×100, bone 118×48, biolum 48×30; corners ww-radius-xs (2px)
+       arrangement: one tall Abyss slab bleeding off the top and right, satellites on a 22px gutter, sediment and tidal bleeding off the bottom
+       pattern: literal motif, the growth layers (DR-014): seven bands in the index on-dark tokens, 3 of 7, because the system's one signature shape is the whale earplug's layers
+       scales: band height 64 = ww-space-9, band widths 0.36/0.22/0.46/0.30/0.25/0.41/0.33 × 64, gap 0.073 × 64; radius ww-radius-xs -->
+  <rect class="abyss r" x="600" y="-4" width="364" height="222"/>
+  <rect class="sediment r" x="480" y="110" width="98" height="234"/>
+  <rect class="tidal r" x="600" y="240" width="220" height="104"/>
+  <rect class="bone r" x="842" y="240" width="122" height="48"/>
+  <rect class="biolum r" x="842" y="310" width="48" height="34"/>
+  <g transform="translate(628 126)">
+    <rect class="done r" x="0" y="0" width="23" height="64"/>
+    <rect class="done r" x="27.7" y="0" width="14.1" height="64"/>
+    <rect class="now r" x="46.5" y="0" width="29.4" height="64"/>
+    <rect class="todo r" x="80.6" y="0" width="19.2" height="64"/>
+    <rect class="todo r" x="104.5" y="0" width="16" height="64"/>
+    <rect class="todo r" x="125.2" y="0" width="26.2" height="64"/>
+    <rect class="todo r" x="156.1" y="0" width="21.1" height="64"/>
+  </g>
+</svg>
+<div class="text">
+  <p class="name">Walking<br>Whale</p>
+  <p class="tag">Scientific in structure. Human in voice. Alive in motion.</p>
+</div>
+</div>
