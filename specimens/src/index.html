@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WW 色彩與字體</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<!-- @ww:css -->
+<style>
+/* Specimen layout only. Every color and type value comes from tokens. */
+.page {
+  max-width: var(--ww-layout-container);
+  margin: 0 auto;
+  padding-inline: clamp(var(--ww-space-4), 4vw, var(--ww-space-8));
+  padding-block: var(--ww-space-9);
+  display: grid;
+  gap: var(--ww-space-10);
+}
+header.top { display: grid; gap: var(--ww-space-4); }
+section { display: grid; gap: var(--ww-space-6); }
+.section-head { display: grid; gap: var(--ww-space-3); max-width: 46rem; }
+
+.palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: var(--ww-space-4);
+}
+.swatch { margin: 0; display: grid; gap: var(--ww-space-2); align-content: start; }
+.swatch .chip {
+  height: 72px;
+  border-radius: var(--ww-radius-md);
+  border: 1px solid var(--ww-color-border-decorative-soft);
+}
+.swatch figcaption { display: grid; gap: 2px; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-sm); line-height: var(--ww-line-height-ui); }
+.swatch figcaption strong { font-weight: var(--ww-font-weight-semibold); }
+.swatch figcaption code { font-family: var(--ww-font-family-mono); color: var(--ww-color-text-secondary); }
+.swatch figcaption span { color: var(--ww-color-text-muted); }
+
+.table-wrap { overflow-x: auto; border-top: 1px solid var(--ww-color-border-decorative); }
+table { border-collapse: collapse; width: 100%; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-sm); line-height: var(--ww-line-height-ui); }
+th, td { text-align: left; padding: var(--ww-space-2) var(--ww-space-3) var(--ww-space-2) 0; border-bottom: 1px solid var(--ww-color-border-decorative-soft); vertical-align: middle; }
+th { font-weight: var(--ww-font-weight-medium); color: var(--ww-color-text-secondary); }
+td code { font-family: var(--ww-font-family-mono); white-space: nowrap; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.diff { color: var(--ww-color-text-accent); font-weight: var(--ww-font-weight-medium); }
+table.contrast { min-width: 640px; }
+table.tokens { min-width: 560px; }
+.sample { display: inline-block; padding: var(--ww-space-1) var(--ww-space-3); border-radius: var(--ww-radius-xs); border: 1px solid var(--ww-color-border-decorative-soft); font-family: var(--ww-font-family-ui); font-weight: var(--ww-font-weight-medium); white-space: nowrap; }
+
+.rules { margin: 0; padding-left: 1.2em; display: grid; gap: var(--ww-space-2); max-width: 46rem; }
+
+/* Side-by-side language columns. Each column sets lang, so tokens switch. */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ww-space-8); }
+@media (max-width: 760px) { .pair { grid-template-columns: minmax(0, 1fr); gap: var(--ww-space-6); } }
+.col { display: grid; gap: var(--ww-space-6); align-content: start; min-width: 0; }
+.role { display: grid; gap: var(--ww-space-2); padding-top: var(--ww-space-4); border-top: 1px solid var(--ww-color-border-decorative-soft); }
+.role > .tag { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); color: var(--ww-color-text-muted); letter-spacing: 0; }
+.col-head { font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); font-weight: var(--ww-font-weight-semibold); color: var(--ww-color-text-secondary); }
+
+.btns { display: flex; flex-wrap: wrap; gap: var(--ww-space-3); }
+.btn { font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); font-weight: var(--ww-font-weight-medium); letter-spacing: var(--ww-letter-spacing-ui); padding: var(--ww-space-2) var(--ww-space-5); border-radius: var(--ww-radius-pill); border: 1px solid var(--ww-color-abyss); cursor: pointer; }
+.btn.primary { background: var(--ww-color-abyss); color: var(--ww-color-text-on-dark); }
+.btn.signal { background: var(--ww-color-background-signal); color: var(--ww-color-text-on-signal); border-color: var(--ww-color-background-signal); }
+.btn:focus-visible { outline: 2px solid var(--ww-color-focus); outline-offset: 2px; }
+
+.dark-panel { border-radius: var(--ww-radius-lg); padding: var(--ww-space-7) var(--ww-space-6); display: grid; gap: var(--ww-space-3); }
+
+.checks { display: grid; gap: var(--ww-space-4); }
+.check { display: grid; gap: var(--ww-space-1); padding: var(--ww-space-4) var(--ww-space-5); background: var(--ww-color-background-card); border: 1px solid var(--ww-color-border-decorative-soft); border-radius: var(--ww-radius-md); }
+.check .what { font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-sm); color: var(--ww-color-text-muted); }
+.check .line { font-family: var(--ww-font-family-body); font-size: var(--ww-font-size-h4); line-height: var(--ww-line-height-body); }
+.check .line.display { font-family: var(--ww-font-family-display); font-size: var(--ww-font-size-h2); line-height: var(--ww-line-height-heading); letter-spacing: var(--ww-letter-spacing-heading); }
+</style>
+</head>
+<body>
+<main class="page" lang="zh-Hant">
+
+  <header class="top">
+    <p class="ww-kicker">Walking Whale Design System　v0.1</p>
+    <h1 class="ww-hero">色彩與字體</h1>
+    <hr class="ww-rule">
+    <p class="ww-lede">這一頁直接使用 dist/ww.css 渲染，所有數值都來自 tokens。中英欄位各自標上 lang，排版 token 會依語言自動切換。</p>
+  </header>
+
+  <section aria-labelledby="palette">
+    <div class="section-head">
+      <p class="ww-kicker">色彩</p>
+      <h2 id="palette">色盤</h2>
+    </div>
+    <div class="palette">
+<!-- @ww:palette -->
+    </div>
+    <ul class="rules ww-body">
+      <li>Abyss 搭配 Pearl 或 White 是預設組合；Abyss 搭配 Sediment 是較溫暖的編輯感組合。</li>
+      <li>Bone、Surface、Biolum 在淺色背景上都不能當文字，Biolum 也不能當唯一的狀態指示。</li>
+      <li>Biolum 只用在兩個地方：Abyss 文字底下的填色，或深色背景上的強調。每個畫面最多一個 Biolum 行動按鈕。</li>
+      <li>需要綠色文字或 focus ring 時用 biolum-ink；需要次要文字時用 slate。</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="contrast">
+    <div class="section-head">
+      <p class="ww-kicker">無障礙</p>
+      <h2 id="contrast">允許的色彩組合</h2>
+      <p class="ww-body">以下是系統允許的全部組合，CI 會逐一檢查。不在表上的組合不允許使用。</p>
+    </div>
+<!-- @ww:contrast -->
+  </section>
+
+  <section aria-labelledby="type">
+    <div class="section-head">
+      <p class="ww-kicker">字體</p>
+      <h2 id="type">中英並排</h2>
+      <p class="ww-body">左欄 lang="en"，右欄 lang="zh-Hant"。兩欄使用同一組 class，差異全部來自 tokens。</p>
+    </div>
+
+    <div class="pair">
+      <div class="col" lang="en">
+        <p class="col-head">English</p>
+        <div class="role"><span class="tag">.ww-hero + .ww-em</span>
+          <p class="ww-hero">We work with people before we work on <em class="ww-em">systems.</em></p></div>
+        <div class="role"><span class="tag">h1</span><h1>Custom AI and software systems</h1></div>
+        <div class="role"><span class="tag">h2</span><h2>Structure. Voice. Motion.</h2></div>
+        <div class="role"><span class="tag">h3</span><h3>How we begin</h3></div>
+        <div class="role"><span class="tag">h4</span><h4>Meet, sense, shape</h4></div>
+        <div class="role"><span class="tag">.ww-lede</span>
+          <p class="ww-lede">Custom AI and software systems for ambitious teams who think in years, not quarters.</p></div>
+        <div class="role"><span class="tag">.ww-prose</span>
+          <div class="ww-prose">
+            <p>Walking Whale is named after <em>Pakicetus</em>, the walking ancestor of whales. Every large system begins as an early form, and we start with the people who will live with it.</p>
+            <p>Founded in Taipei in September 2025, we build booking, membership, payments and AI agents that teams use every day.</p>
+          </div></div>
+        <div class="role"><span class="tag">.ww-kicker</span><p class="ww-kicker">What we do</p></div>
+        <div class="role"><span class="tag">.ww-ui · .ww-label · .ww-sm</span>
+          <div class="btns"><button class="btn primary" type="button">Start a conversation</button><button class="btn signal" type="button">Book an intro</button></div>
+          <span class="ww-label">Company name</span>
+          <span class="ww-sm">Used for contracts and invoices.</span></div>
+        <div class="role"><span class="tag">.ww-mono</span><code class="ww-mono">--ww-color-text-primary</code></div>
+        <div class="role"><span class="tag">.ww-on-dark</span>
+          <div class="dark-panel ww-on-dark">
+            <p class="ww-kicker">Precise first</p>
+            <h2>Quietly confident</h2>
+            <p class="ww-lede">Calm, declarative, never loud.</p>
+          </div></div>
+      </div>
+
+      <div class="col" lang="zh-Hant">
+        <p class="col-head">繁體中文</p>
+        <div class="role"><span class="tag">.ww-hero + .ww-em</span>
+          <p class="ww-hero">先認識人，再打造<em class="ww-em">系統</em></p></div>
+        <div class="role"><span class="tag">h1</span><h1>客製化 AI 與軟體系統</h1></div>
+        <div class="role"><span class="tag">h2</span><h2>結構、語氣、動態</h2></div>
+        <div class="role"><span class="tag">h3</span><h3>我們如何開始</h3></div>
+        <div class="role"><span class="tag">h4</span><h4>相識、理解、成形</h4></div>
+        <div class="role"><span class="tag">.ww-lede</span>
+          <p class="ww-lede">我們為以年為單位思考的團隊，打造客製化 AI 與軟體系統。</p></div>
+        <div class="role"><span class="tag">.ww-prose</span>
+          <div class="ww-prose">
+            <p>走路鯨魚的名字來自 <em>Pakicetus</em>，一種會走路的鯨魚祖先。所有大型系統都從一個早期的形態開始，所以我們先從會使用它的人開始。</p>
+            <p>我們 2025 年 9 月在台北成立，打造預約、會員、金流與 AI 客服，讓團隊每天都用得上。</p>
+          </div></div>
+        <div class="role"><span class="tag">.ww-kicker</span><p class="ww-kicker">我們做什麼</p></div>
+        <div class="role"><span class="tag">.ww-ui · .ww-label · .ww-sm</span>
+          <div class="btns"><button class="btn primary" type="button">開始對話</button><button class="btn signal" type="button">預約初次會談</button></div>
+          <span class="ww-label">公司名稱</span>
+          <span class="ww-sm">用於合約與發票抬頭。</span></div>
+        <div class="role"><span class="tag">.ww-mono</span><code class="ww-mono">--ww-color-text-primary</code></div>
+        <div class="role"><span class="tag">.ww-on-dark</span>
+          <div class="dark-panel ww-on-dark">
+            <p class="ww-kicker">精準為先</p>
+            <h2>安靜的自信</h2>
+            <p class="ww-lede">冷靜、明確，從不張揚。</p>
+          </div></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="checks">
+    <div class="section-head">
+      <p class="ww-kicker">驗收</p>
+      <h2 id="checks">中文排版檢查項目</h2>
+      <p class="ww-body">對應範圍規格的驗收情境 2。請在 macOS Safari、iOS Safari、Windows Edge 各看一次。</p>
+    </div>
+    <div class="checks">
+      <div class="check"><span class="what">破折號要連成一條，不能中間斷開</span><p class="line">系統從一個早期形態開始——然後慢慢長大</p></div>
+      <div class="check"><span class="what">刪節號要六點、置中，不能貼底</span><p class="line">預約、會員、金流……都是同一套系統</p></div>
+      <div class="check"><span class="what">引號先單後雙，全形標點不擠壓</span><p class="line">她說：「這就是我們要的『安靜的自信』。」</p></div>
+      <div class="check"><span class="what">中英混排時，英文與數字不能明顯縮小</span><p class="line display">走路鯨魚 Walking Whale 2025</p></div>
+      <div class="check"><span class="what">兩行中文標題的行距不能重疊</span><p class="line display">為以年為單位思考的團隊，打造客製化 AI 與軟體系統</p></div>
+      <div class="check"><span class="what">中文強調是粗體加顏色，不能被斜切</span><p class="line">我們重視<em>長期的合作關係</em>，而不是一次性的交付。</p></div>
+      <div class="check"><span class="what">中文段落裡的英文區塊（lang="en"）要換回西文字體</span>
+        <blockquote class="line" lang="en" style="margin: 0; font-family: var(--ww-font-family-body);">Scientific in structure. Human in voice. Alive in motion.</blockquote></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="tokens">
+    <div class="section-head">
+      <p class="ww-kicker">Tokens</p>
+      <h2 id="tokens">字體 token 對照</h2>
+      <p class="ww-body">右欄是 :lang(zh) 底下的值，與左欄相同時標示「同左」。</p>
+    </div>
+<!-- @ww:type-tokens -->
+  </section>
+
+</main>
+</body>
+</html>

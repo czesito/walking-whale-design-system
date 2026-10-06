@@ -2,12 +2,56 @@
 
 走路鯨魚的設計系統，是 Walking Whale 所有數位輸出的唯一源頭：官網、數位服務與產品、簡報、文件。
 
-> 狀態：v0.1 建置中。目前只有範圍規格與決策紀錄。
+> 狀態：v0.1 建置中。色彩與字體已完成，元件與頁面模式進行中。
 
-- 範圍規格：[specs/2026-10-07-v0.1-scope-spec.md](specs/2026-10-07-v0.1-scope-spec.md)
-- 決策紀錄：[decisions/](decisions/README.md)
+## 內容
 
-負責人：Czesio。所有變更經 PR，由負責人核准。
+| 位置 | 內容 |
+|---|---|
+| [`tokens/`](tokens/) | 唯一的 token 源頭：`tokens.json`（預設）、`lang-zh.json`（中文覆寫）、`contrast-pairs.json`（允許的色彩組合） |
+| [`css/`](css/) | 手寫的基礎樣式、文字樣式、字體載入，只使用 token |
+| [`dist/`](dist/) | 產生物，不要手改：`tokens.css`、`ww.css`、`tokens.ts` |
+| [`foundations/`](foundations/) | 色彩、字體等規格說明 |
+| [`specimens/`](specimens/) | 中英並排的驗證頁，直接用瀏覽器開啟 `specimens/index.html` |
+| [`decisions/`](decisions/README.md) | 決策紀錄 DR-001 起 |
+| [`specs/`](specs/) | 範圍與功能規格 |
+
+## 使用
+
+在頁面上載入字體（見 [foundations/typography.md](foundations/typography.md#載入)）與 `dist/ww.css`，並在 `<html>` 標上語言：
+
+```html
+<html lang="zh-Hant">
+<head>
+  <!-- Google Fonts <link>，見 foundations/typography.md -->
+  <link rel="stylesheet" href="dist/ww.css">
+</head>
+```
+
+專案中安裝：
+
+```sh
+npm i github:czesito/walking-whale-design-system#v0.1.0
+```
+
+```css
+@import "walking-whale-design-system/ww.css";
+```
+
+## 修改
+
+1. 只改 `tokens/*.json` 或 `css/*.css`。
+2. 執行 `npm run build`，重新產生 `dist/`、`specimens/index.html` 與 `foundations/color-contrast.md`。
+3. 執行 `npm run check`。CI 會跑同一個檢查：
+   - 色彩組合對比是否符合 WCAG 2.2 AA
+   - 中文字級是否都在 13px 以上
+   - `css/` 與 `specimens/src/` 裡有沒有寫死的 hex 色或不存在的 token
+   - 產生物是否已更新
+4. 開 PR，由負責人核准。
+
+需要 Node 20 以上，沒有其他相依套件。
+
+負責人：Czesio。
 
 ## 授權
 

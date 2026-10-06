@@ -1,0 +1,24 @@
+{
+  "$description": "Every foreground/background pairing the system allows. CI fails if any pair misses its WCAG 2.2 AA threshold (DR-011). text = 4.5:1, large = 3:1 (24px+, or 18.66px+ bold), ui = 3:1 (control boundaries, focus rings, meaningful graphics). A pairing not listed here is not allowed.",
+  "pairs": [
+    { "fg": "color.text.primary", "bg": ["color.background.page", "color.background.card", "color.background.wash", "color.background.warm"], "level": "text" },
+    { "fg": "color.text.secondary", "bg": ["color.background.page", "color.background.card", "color.background.wash", "color.background.warm"], "level": "text" },
+    { "fg": "color.text.muted", "bg": ["color.background.page", "color.background.card", "color.background.wash", "color.background.warm"], "level": "text" },
+    { "fg": "color.text.accent", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "text" },
+    { "fg": "color.text.emphasis", "bg": ["color.background.page", "color.background.card", "color.background.wash", "color.background.warm"], "level": "text" },
+    { "fg": "color.status.warning", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "text" },
+    { "fg": "color.status.danger", "bg": ["color.background.page", "color.background.card", "color.background.wash", "color.background.warm"], "level": "text" },
+    { "fg": "color.text.on-dark", "bg": ["color.background.deep", "color.background.deep-raised"], "level": "text" },
+    { "fg": "color.text.on-dark-secondary", "bg": ["color.background.deep"], "level": "text" },
+    { "fg": "color.text.on-dark-label", "bg": ["color.background.deep"], "level": "text" },
+    { "fg": "color.text.on-signal", "bg": ["color.background.signal"], "level": "text" },
+    { "fg": "color.border.control", "bg": ["color.background.page", "color.background.card"], "level": "ui" },
+    { "fg": "color.focus", "bg": ["color.background.page", "color.background.card", "color.background.wash", "color.background.deep"], "level": "ui" },
+    { "fg": "color.chart.1", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
+    { "fg": "color.chart.2", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
+    { "fg": "color.chart.3", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
+    { "fg": "color.chart.4", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
+    { "fg": "color.chart.other", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
+    { "fg": "color.chart.label", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "text" }
+  ]
+}

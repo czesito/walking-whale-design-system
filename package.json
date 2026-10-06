@@ -1,0 +1,26 @@
+{
+  "name": "walking-whale-design-system",
+  "version": "0.1.0-dev",
+  "description": "Walking Whale design system: tokens, base styles and text styles for every Walking Whale digital output.",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist/",
+    "css/",
+    "tokens/"
+  ],
+  "exports": {
+    "./ww.css": "./dist/ww.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./fonts.css": "./css/fonts.css",
+    "./tokens": "./dist/tokens.ts"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check"
+  }
+}

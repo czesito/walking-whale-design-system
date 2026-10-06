@@ -1,0 +1,81 @@
+/* ============================================================
+   Walking Whale — base styles
+   Element defaults built from tokens only. No literal colors or sizes.
+   Language-dependent values come from :lang(zh) overrides in tokens.css,
+   so set lang on the element that changes language (DR-006).
+   ============================================================ */
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--ww-color-background-page);
+  color: var(--ww-color-text-primary);
+  font-family: var(--ww-font-family-body);
+  font-size: var(--ww-font-size-body);
+  line-height: var(--ww-line-height-body);
+  letter-spacing: var(--ww-letter-spacing-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--ww-color-text-primary);
+  font-family: var(--ww-font-family-display);
+  text-wrap: balance;
+}
+h1, h2 {
+  font-weight: var(--ww-font-weight-display);
+  line-height: var(--ww-line-height-heading);
+  letter-spacing: var(--ww-letter-spacing-heading);
+}
+h3, h4 {
+  font-weight: var(--ww-font-weight-heading);
+  line-height: var(--ww-line-height-heading);
+  letter-spacing: var(--ww-letter-spacing-heading);
+}
+h1 { font-size: var(--ww-font-size-h1); }
+h2 { font-size: var(--ww-font-size-h2); }
+h3 { font-size: var(--ww-font-size-h3); }
+h4 { font-size: var(--ww-font-size-h4); }
+
+a {
+  color: var(--ww-color-text-accent);
+  text-underline-offset: 0.2em;
+}
+
+code, kbd, samp, pre {
+  font-family: var(--ww-font-family-mono);
+}
+
+/* Emphasis (DR-007). en: italic cut. zh: weight, never a sheared glyph. */
+:lang(zh) em,
+:lang(zh) i,
+:lang(zh) cite,
+:lang(zh) blockquote {
+  font-style: normal;
+}
+:lang(zh) em {
+  font-weight: var(--ww-font-weight-bold);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ww-color-focus);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--ww-color-status-success-wash);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

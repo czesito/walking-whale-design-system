@@ -24,7 +24,7 @@
 ## 影響
 
 - 源頭格式以 md 與 JSON 為主，HTML 只作為渲染結果（見 DR-003）。
-- 每份 foundations 與 content 文件都要中英並列。
+- 每份 foundations 與 content 文件都要同時規範中文與英文內容。文件本身以 zh-TW 撰寫，token、class 與檔案名稱用英文。
 - 單一負責人是瓶頸，建議另設視覺備援 reviewer（待確認）。
 
 ## 不採用的選項

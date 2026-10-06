@@ -1,0 +1,47 @@
+{
+  "$description": "Overrides applied under :lang(zh). Same paths as tokens.json; only values that differ for Traditional Chinese. See DR-005, DR-006, DR-007.",
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "display": { "$value": ["Noto Serif TC", "Songti TC", "PMingLiU", "serif"], "$description": "CJK face first in a zh context (DR-006)." },
+      "body": { "$value": ["Noto Serif TC", "Songti TC", "PMingLiU", "serif"] },
+      "ui": { "$value": ["Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "system-ui", "sans-serif"] },
+      "kicker": { "$value": "{font.family.ui}", "$description": "zh kickers use the UI face, not mono." }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "emphasis": { "$value": 700, "$description": "zh emphasis is weight plus color, never italic (DR-007)." }
+    },
+    "style": {
+      "emphasis": { "$value": "normal" }
+    },
+    "size": {
+      "$type": "dimension",
+      "kicker": { "$value": "0.8125rem", "$description": "13px. No CJK text below 13px." }
+    },
+    "transform": {
+      "kicker": { "$value": "none" }
+    }
+  },
+  "line-height": {
+    "$type": "number",
+    "display": { "$value": 1.25 },
+    "heading": { "$value": 1.35 },
+    "lede": { "$value": 1.6 },
+    "body": { "$value": 1.85 },
+    "ui": { "$value": 1.6 }
+  },
+  "letter-spacing": {
+    "$type": "dimension",
+    "display": { "$value": "0.04em" },
+    "heading": { "$value": "0.04em" },
+    "body": { "$value": "0.02em" },
+    "ui": { "$value": "0.02em" },
+    "kicker": { "$value": "0.12em" },
+    "label": { "$value": "0.04em" }
+  },
+  "layout": {
+    "$type": "dimension",
+    "measure-body": { "$value": "34em", "$description": "About 34 characters per line for CJK running text." }
+  }
+}
