@@ -40,7 +40,7 @@ walking-whale-design-system/
 1. Token 只在 `tokens/tokens.json` 修改，CSS 與 TS 由一支小型 Node 腳本產生，暫不引入 Style Dictionary。
 2. CI 執行對比檢查（DR-011）與 dist 同步檢查，未通過不能合併。
 3. 版本以 git tag 管理（semver），每次發版更新 `CHANGELOG.md`。
-4. 所有 PR 由 Czesio 核准。
+4. 變更直接推進 `main`，不另開 PR（2026-10-07 修訂，Czesio 決定）。CI 仍在每次推送時執行，失敗時立即修正。需要 Czesio 判斷的設計決定，先以渲染頁面提案，決定後再推送。
 5. 現有 walking-whale-html、walking-whale-slides 兩個 skill 改為指向本 repo，不再各自維護規格。
 
 ### 公開 repo 的規則

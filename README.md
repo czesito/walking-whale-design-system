@@ -47,7 +47,7 @@ npm i github:czesito/walking-whale-design-system#v0.1.0
    - 中文字級是否都在 13px 以上
    - `css/` 與 `specimens/src/` 裡有沒有寫死的 hex 色或不存在的 token
    - 產生物是否已更新
-4. 開 PR，由負責人核准。
+4. 推進 `main`（DR-003）。需要負責人判斷的設計決定，先提案、決定後再推送。
 
 需要 Node 20 以上，沒有其他相依套件。
 
