@@ -64,7 +64,7 @@ Artifact 無法連到 repo 的檔案：
 
 1. 先選頁面模式（patterns/），再用元件（components/）填內容，最後用版面 class（`ww-container`、`ww-section`、`ww-stack`、`ww-grid`、`ww-split`、`ww-cluster`）排列。
 2. 只用系統的 class。不寫 CSS、不加 `style` 屬性、不用 hex 色（DR-016）。系統缺少需要的樣式時，停下來說明缺什麼，回到本 repo 新增，而不是在輸出裡自己寫。
-3. 寫完執行驗證，兩個都要通過：
+3. 寫完執行驗證，兩個都要通過。驗證器同時檢查元件契約：alt、label、年層旁的文字、每個區塊一個 primary、數據的來源、中文標題 20 字以內等（DR-017）。
 
 ```sh
 node scripts/validate-output.mjs page.html

@@ -25,6 +25,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",
-    "validate": "node scripts/validate-output.mjs"
+    "validate": "node scripts/validate-output.mjs",
+    "site": "node scripts/site.mjs"
   }
 }

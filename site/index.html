@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>走路鯨魚設計系統</title>
+<meta name="description" content="走路鯨魚所有數位輸出的唯一源頭：tokens、元件、頁面模式與中英寫作規範。">
+<link rel="icon" href="assets/icon/walking-whale-favicon-32.png">
+<link rel="alternate" hreflang="en" href="en.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="dist/ww.css">
+</head>
+<body>
+<a class="ww-skip-link" href="#main">跳到主要內容</a>
+<header class="ww-topbar">
+  <div class="ww-container ww-topbar__inner">
+    <a class="ww-topbar__brand" href="index.html"><img class="ww-logo ww-logo--sm" src="assets/wordmark/walking-whale-wordmark-horizontal-zh-abyss.svg" alt="走路鯨魚"></a>
+    <nav class="ww-topbar__nav" aria-label="主要導覽">
+      <a class="ww-topbar__link" href="specimens/components.html">元件</a>
+      <a class="ww-topbar__link" href="specimens/index.html">色彩與字體</a>
+      <a class="ww-topbar__link" href="https://github.com/czesito/walking-whale-design-system/tree/main/decisions">決策紀錄</a>
+    </nav>
+    <div class="ww-topbar__actions">
+      <div class="ww-lang"><a href="index.html" lang="zh-Hant" aria-label="中文" aria-current="true">中</a><a href="en.html" lang="en" aria-label="English" aria-current="false">EN</a></div>
+      <a class="ww-btn ww-btn--secondary ww-btn--sm ww-topbar__cta" href="https://github.com/czesito/walking-whale-design-system">GitHub</a>
+      <button class="ww-btn ww-btn--ghost ww-btn--icon ww-topbar__menu" type="button" data-ww-open="menu" aria-expanded="false" aria-label="開啟選單"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+    </div>
+  </div>
+</header>
+<dialog class="ww-drawer" id="menu" aria-label="選單">
+  <div class="ww-drawer__head"><img class="ww-logo ww-logo--sm" src="assets/wordmark/walking-whale-wordmark-horizontal-zh-abyss.svg" alt="走路鯨魚"><button class="ww-btn ww-btn--ghost ww-btn--icon" type="button" data-ww-close aria-label="關閉選單"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+  <nav class="ww-drawer__nav" aria-label="主要導覽"><a href="specimens/components.html">元件</a><a href="specimens/index.html">色彩與字體</a><a href="https://github.com/czesito/walking-whale-design-system/tree/main/decisions">決策紀錄</a></nav>
+  <div class="ww-drawer__foot"><a class="ww-btn ww-btn--primary ww-btn--block" href="https://github.com/czesito/walking-whale-design-system">GitHub</a><div class="ww-lang"><a href="index.html" lang="zh-Hant" aria-current="true">中</a><a href="en.html" lang="en" aria-current="false">EN</a></div></div>
+</dialog>
+
+<main id="main">
+  <div class="ww-container">
+    <section class="ww-masthead ww-masthead--split">
+      <div class="ww-masthead__text">
+        <p class="ww-kicker">Walking Whale Design System</p>
+        <h1 class="ww-hero">走路鯨魚的<span class="ww-em">設計系統</span></h1>
+        <hr class="ww-rule">
+        <p class="ww-lede">我們所有數位輸出的唯一源頭：網站、產品、簡報與文件。中文與英文同等重要，每一條規則都能被機器檢查。</p>
+        <div class="ww-masthead__actions"><a class="ww-btn ww-btn--primary ww-btn--lg" href="specimens/components.html">瀏覽元件<svg class="ww-icon ww-icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><a class="ww-btn ww-btn--secondary ww-btn--lg" href="https://github.com/czesito/walking-whale-design-system#readme">閱讀規範</a></div>
+      </div>
+      <figure class="ww-plate">
+        <img src="assets/mark/walking-whale-mark-abyss.svg" alt="">
+        <figcaption class="ww-plate__caption"><span>Fig. 01</span><span>骨架標誌</span></figcaption>
+      </figure>
+    </section>
+  </div>
+
+  <section class="ww-section ww-section--wash" id="contents">
+    <div class="ww-container">
+      <header class="ww-opener">
+        <p class="ww-kicker"><span class="ww-kicker__no">No. 01</span>系統裡有什麼</p>
+        <h2>從 token 到整頁</h2>
+        <hr class="ww-rule">
+        <p class="ww-lede">數字在每次發布時從 repo 自動計算。</p>
+      </header>
+      <div class="ww-grid ww-grid--4"><div class="ww-stat"><p class="ww-stat__value">{{components}}<span class="ww-stat__unit">個</span></p><p class="ww-stat__label">元件</p><p class="ww-stat__note">來源：components/index.json</p></div><div class="ww-stat"><p class="ww-stat__value">{{patterns}}<span class="ww-stat__unit">個</span></p><p class="ww-stat__label">頁面模式</p><p class="ww-stat__note">來源：patterns/index.json</p></div><div class="ww-stat"><p class="ww-stat__value">{{pairs}}<span class="ww-stat__unit">組</span></p><p class="ww-stat__label">色彩組合通過 WCAG 2.2 AA</p><p class="ww-stat__note">來源：tokens/contrast-pairs.json</p></div><div class="ww-stat"><p class="ww-stat__value">{{decisions}}<span class="ww-stat__unit">份</span></p><p class="ww-stat__label">決策紀錄</p><p class="ww-stat__note">來源：decisions/</p></div></div>
+    </div>
+  </section>
+
+  <section class="ww-section" id="principles">
+    <div class="ww-container">
+      <header class="ww-opener">
+        <p class="ww-kicker"><span class="ww-kicker__no">No. 02</span>原則</p>
+        <h2>三條貫穿整個系統的原則</h2>
+        <hr class="ww-rule">
+      </header>
+      <ul class="ww-grid ww-grid--3"><li class="ww-card"><p class="ww-card__no">01</p><h3 class="ww-card__title">精準為先，溫度隨後</h3><p class="ww-card__body">細線、等寬字與編號建立精準；Sediment 與 Bone 帶來溫度。卡片不用陰影。</p><p class="ww-card__meta">DR-013</p></li><li class="ww-card"><p class="ww-card__no">02</p><h3 class="ww-card__title">招牌元素只在有資訊時出現</h3><p class="ww-card__body">耳塞年層用來標示步驟、頁碼、閱讀進度與時間軸，從不當裝飾。</p><p class="ww-card__meta">DR-014</p></li><li class="ww-card"><p class="ww-card__no">03</p><h3 class="ww-card__title">能檢查的規則才會被遵守</h3><p class="ww-card__body">顏色對比、中文排版、文案用字與元件契約，每次推送都由 CI 檢查。</p><p class="ww-card__meta">DR-016 · DR-017</p></li></ul>
+    </div>
+  </section>
+
+  <section class="ww-section ww-section--warm" id="layers">
+    <div class="ww-container ww-split ww-split--start ww-split--center">
+      <div class="ww-stack">
+        <header class="ww-opener">
+          <p class="ww-kicker"><span class="ww-kicker__no">No. 03</span>招牌元素</p>
+          <h2>耳塞年層</h2>
+          <hr class="ww-rule">
+          <p class="ww-lede">鯨魚的耳塞每年長一層，數層數就能知道年紀。在系統裡，一層代表一個單位：一步、一頁、一段進度。</p>
+        </header>
+      </div>
+      <div class="ww-stack ww-stack--sm">
+        <p class="ww-label">這一頁的閱讀進度</p>
+        <p class="ww-index"><span class="ww-layers ww-layers--lg" aria-hidden="true" data-ww-progress="main" data-ww-progress-label="read-pct"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ww-index__count" id="read-pct">0%</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ww-section" id="claude">
+    <div class="ww-container ww-split">
+      <header class="ww-opener">
+        <p class="ww-kicker"><span class="ww-kicker__no">No. 04</span>給 Claude 使用</p>
+        <h2>讀 SKILL.md，產出，再自我檢查</h2>
+        <hr class="ww-rule">
+        <p class="ww-lede">Claude 是這套系統的第一順位讀者。頁面只能用系統的 class 組成，寫完後由驗證器與文案 lint 檢查。</p>
+      </header>
+      <figure class="ww-code"><figcaption class="ww-code__label">終端機</figcaption><pre><code>node scripts/validate-output.mjs page.html
+node scripts/copy-lint.mjs page.html</code></pre></figure>
+    </div>
+  </section>
+
+  <section class="ww-section ww-on-dark">
+    <div class="ww-container ww-cta">
+      <div class="ww-cta__text">
+        <p class="ww-kicker"><span class="ww-kicker__no">No. 05</span>走路鯨魚</p>
+        <h2>先與人同行，再著手系統</h2>
+        <p class="ww-lede">這套設計系統，是我們做事方式的縮影。</p>
+      </div>
+      <div class="ww-cta__actions"><a class="ww-btn ww-btn--primary ww-btn--lg" href="https://walking-whales.com">認識走路鯨魚<svg class="ww-icon ww-icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="ww-footer">
+  <div class="ww-container">
+    <div class="ww-footer__grid">
+      <div class="ww-footer__brand"><img class="ww-logo ww-logo--sm" src="assets/wordmark/walking-whale-wordmark-horizontal-zh-abyss.svg" alt="走路鯨魚"><p class="ww-footer__line">理性為骨，人性為聲，生命為動</p></div>
+      <nav aria-label="系統"><p class="ww-footer__title">系統</p><ul class="ww-footer__links"><li><a href="specimens/components.html">元件與頁面模式</a></li><li><a href="specimens/index.html">色彩與字體</a></li></ul></nav>
+      <nav aria-label="原始碼"><p class="ww-footer__title">原始碼</p><ul class="ww-footer__links"><li><a href="https://github.com/czesito/walking-whale-design-system">GitHub</a></li><li><a href="https://github.com/czesito/walking-whale-design-system/blob/main/SKILL.md">SKILL.md</a></li><li><a href="https://github.com/czesito/walking-whale-design-system/tree/main/decisions">決策紀錄</a></li></ul></nav>
+      <nav aria-label="公司"><p class="ww-footer__title">公司</p><ul class="ww-footer__links"><li><a href="https://walking-whales.com">walking-whales.com</a></li></ul></nav>
+    </div>
+    <div class="ww-footer__legal"><p>© 2026 走路鯨魚數位體驗有限公司</p><p>程式碼 MIT 授權；名稱與標誌保留所有權利</p></div>
+  </div>
+</footer>
+<script src="dist/ww.js"></script>
+</body>
+</html>

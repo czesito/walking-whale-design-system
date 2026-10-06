@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walking Whale Design System</title>
+<meta name="description" content="The single source for every Walking Whale output: tokens, components, page patterns and writing rules in Chinese and English.">
+<link rel="icon" href="assets/icon/walking-whale-favicon-32.png">
+<link rel="alternate" hreflang="zh-Hant" href="index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="dist/ww.css">
+</head>
+<body>
+<a class="ww-skip-link" href="#main">Skip to content</a>
+<header class="ww-topbar">
+  <div class="ww-container ww-topbar__inner">
+    <a class="ww-topbar__brand" href="en.html"><img class="ww-logo ww-logo--sm" src="assets/wordmark/walking-whale-wordmark-horizontal-en-abyss.svg" alt="Walking Whale"></a>
+    <nav class="ww-topbar__nav" aria-label="Main">
+      <a class="ww-topbar__link" href="specimens/components.html">Components</a>
+      <a class="ww-topbar__link" href="specimens/index.html">Color and type</a>
+      <a class="ww-topbar__link" href="https://github.com/czesito/walking-whale-design-system/tree/main/decisions">Decisions</a>
+    </nav>
+    <div class="ww-topbar__actions">
+      <div class="ww-lang"><a href="index.html" lang="zh-Hant" aria-label="中文" aria-current="false">中</a><a href="en.html" lang="en" aria-label="English" aria-current="true">EN</a></div>
+      <a class="ww-btn ww-btn--secondary ww-btn--sm ww-topbar__cta" href="https://github.com/czesito/walking-whale-design-system">GitHub</a>
+      <button class="ww-btn ww-btn--ghost ww-btn--icon ww-topbar__menu" type="button" data-ww-open="menu" aria-expanded="false" aria-label="Open menu"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg></button>
+    </div>
+  </div>
+</header>
+<dialog class="ww-drawer" id="menu" aria-label="Menu">
+  <div class="ww-drawer__head"><img class="ww-logo ww-logo--sm" src="assets/wordmark/walking-whale-wordmark-horizontal-en-abyss.svg" alt="Walking Whale"><button class="ww-btn ww-btn--ghost ww-btn--icon" type="button" data-ww-close aria-label="Close menu"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+  <nav class="ww-drawer__nav" aria-label="Main"><a href="specimens/components.html">Components</a><a href="specimens/index.html">Color and type</a><a href="https://github.com/czesito/walking-whale-design-system/tree/main/decisions">Decisions</a></nav>
+  <div class="ww-drawer__foot"><a class="ww-btn ww-btn--primary ww-btn--block" href="https://github.com/czesito/walking-whale-design-system">GitHub</a><div class="ww-lang"><a href="index.html" lang="zh-Hant" aria-current="false">中</a><a href="en.html" lang="en" aria-current="true">EN</a></div></div>
+</dialog>
+
+<main id="main">
+  <div class="ww-container">
+    <section class="ww-masthead ww-masthead--split">
+      <div class="ww-masthead__text">
+        <p class="ww-kicker">Walking Whale Design System</p>
+        <h1 class="ww-hero">The Walking Whale <span class="ww-em">design system</span></h1>
+        <hr class="ww-rule">
+        <p class="ww-lede">The single source for everything we make: websites, products, slides and documents. Chinese and English are equals, and every rule can be checked by a machine.</p>
+        <div class="ww-masthead__actions"><a class="ww-btn ww-btn--primary ww-btn--lg" href="specimens/components.html">Browse components<svg class="ww-icon ww-icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><a class="ww-btn ww-btn--secondary ww-btn--lg" href="https://github.com/czesito/walking-whale-design-system#readme">Read the docs</a></div>
+      </div>
+      <figure class="ww-plate">
+        <img src="assets/mark/walking-whale-mark-abyss.svg" alt="">
+        <figcaption class="ww-plate__caption"><span>Fig. 01</span><span>The skeleton mark</span></figcaption>
+      </figure>
+    </section>
+  </div>
+
+  <section class="ww-section ww-section--wash" id="contents">
+    <div class="ww-container">
+      <header class="ww-opener">
+        <p class="ww-kicker"><span class="ww-kicker__no">No. 01</span>What is inside</p>
+        <h2>From tokens to whole pages</h2>
+        <hr class="ww-rule">
+        <p class="ww-lede">These numbers are counted from the repository on every deploy.</p>
+      </header>
+      <div class="ww-grid ww-grid--4"><div class="ww-stat"><p class="ww-stat__value">{{components}}</p><p class="ww-stat__label">components</p><p class="ww-stat__note">Source: components/index.json</p></div><div class="ww-stat"><p class="ww-stat__value">{{patterns}}</p><p class="ww-stat__label">page patterns</p><p class="ww-stat__note">Source: patterns/index.json</p></div><div class="ww-stat"><p class="ww-stat__value">{{pairs}}</p><p class="ww-stat__label">color pairings that pass WCAG 2.2 AA</p><p class="ww-stat__note">Source: tokens/contrast-pairs.json</p></div><div class="ww-stat"><p class="ww-stat__value">{{decisions}}</p><p class="ww-stat__label">decision records</p><p class="ww-stat__note">Source: decisions/</p></div></div>
+    </div>
+  </section>
+
+  <section class="ww-section" id="principles">
+    <div class="ww-container">
+      <header class="ww-opener">
+        <p class="ww-kicker"><span class="ww-kicker__no">No. 02</span>Principles</p>
+        <h2>Three principles that run through it</h2>
+        <hr class="ww-rule">
+      </header>
+      <ul class="ww-grid ww-grid--3"><li class="ww-card"><p class="ww-card__no">01</p><h3 class="ww-card__title">Precise first. Warm second.</h3><p class="ww-card__body">Hairlines, mono metadata and numbering carry the precision; Sediment and Bone carry the warmth. Cards cast no shadows.</p><p class="ww-card__meta">DR-013</p></li><li class="ww-card"><p class="ww-card__no">02</p><h3 class="ww-card__title">The signature element only appears when it informs</h3><p class="ww-card__body">Growth layers mark steps, pages, reading progress and timelines. Never decoration.</p><p class="ww-card__meta">DR-014</p></li><li class="ww-card"><p class="ww-card__no">03</p><h3 class="ww-card__title">Rules that can be checked get followed</h3><p class="ww-card__body">Contrast, Chinese typography, word choice and component contracts are checked on every push.</p><p class="ww-card__meta">DR-016 · DR-017</p></li></ul>
+    </div>
+  </section>
+
+  <section class="ww-section ww-section--warm" id="layers">
+    <div class="ww-container ww-split ww-split--start ww-split--center">
+      <div class="ww-stack">
+        <header class="ww-opener">
+          <p class="ww-kicker"><span class="ww-kicker__no">No. 03</span>Signature element</p>
+          <h2>Growth layers</h2>
+          <hr class="ww-rule">
+          <p class="ww-lede">A whale’s earplug grows one layer a year; count the layers and you know its age. In the system, each layer is one unit: a step, a page, a stretch of progress.</p>
+        </header>
+      </div>
+      <div class="ww-stack ww-stack--sm">
+        <p class="ww-label">Your progress through this page</p>
+        <p class="ww-index"><span class="ww-layers ww-layers--lg" aria-hidden="true" data-ww-progress="main" data-ww-progress-label="read-pct"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="ww-index__count" id="read-pct">0%</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ww-section" id="claude">
+    <div class="ww-container ww-split">
+      <header class="ww-opener">
+        <p class="ww-kicker"><span class="ww-kicker__no">No. 04</span>Built for Claude</p>
+        <h2>Read SKILL.md, build, then check</h2>
+        <hr class="ww-rule">
+        <p class="ww-lede">Claude is the first reader of this system. Pages are built only from system classes, then checked by the validator and the copy lint.</p>
+      </header>
+      <figure class="ww-code"><figcaption class="ww-code__label">Terminal</figcaption><pre><code>node scripts/validate-output.mjs page.html
+node scripts/copy-lint.mjs page.html</code></pre></figure>
+    </div>
+  </section>
+
+  <section class="ww-section ww-on-dark">
+    <div class="ww-container ww-cta">
+      <div class="ww-cta__text">
+        <p class="ww-kicker"><span class="ww-kicker__no">No. 05</span>Walking Whale</p>
+        <h2>We work with people before we work on systems</h2>
+        <p class="ww-lede">This design system is a small picture of how we work.</p>
+      </div>
+      <div class="ww-cta__actions"><a class="ww-btn ww-btn--primary ww-btn--lg" href="https://walking-whales.com">Meet Walking Whale<svg class="ww-icon ww-icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="ww-footer">
+  <div class="ww-container">
+    <div class="ww-footer__grid">
+      <div class="ww-footer__brand"><img class="ww-logo ww-logo--sm" src="assets/wordmark/walking-whale-wordmark-horizontal-en-abyss.svg" alt="Walking Whale"><p class="ww-footer__line">Scientific in structure. Human in voice. Alive in motion.</p></div>
+      <nav aria-label="System"><p class="ww-footer__title">System</p><ul class="ww-footer__links"><li><a href="specimens/components.html">Components and patterns</a></li><li><a href="specimens/index.html">Color and type</a></li></ul></nav>
+      <nav aria-label="Source"><p class="ww-footer__title">Source</p><ul class="ww-footer__links"><li><a href="https://github.com/czesito/walking-whale-design-system">GitHub</a></li><li><a href="https://github.com/czesito/walking-whale-design-system/blob/main/SKILL.md">SKILL.md</a></li><li><a href="https://github.com/czesito/walking-whale-design-system/tree/main/decisions">Decision records</a></li></ul></nav>
+      <nav aria-label="Company"><p class="ww-footer__title">Company</p><ul class="ww-footer__links"><li><a href="https://walking-whales.com">walking-whales.com</a></li></ul></nav>
+    </div>
+    <div class="ww-footer__legal"><p>© 2026 Walking Whale Co., Ltd.</p><p>Code under MIT. Names and logos: all rights reserved</p></div>
+  </div>
+</footer>
+<script src="dist/ww.js"></script>
+</body>
+</html>

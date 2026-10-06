@@ -9,6 +9,10 @@
 //   hex        no hex colors in any attribute
 //   paint      SVG fill/stroke/color/stop-color only as none, currentColor or transparent; color comes from classes
 //
+//   contracts  brand and accessibility rules on the parsed page (DR-017): alt text, labels, captions,
+//              growth layers with text, one primary per section, sourced stats, cited quotes,
+//              logo files, kicker numbers, Chinese headings within 20 characters, one hero
+//
 // One exception: a <style data-ww-system> block whose content is exactly dist/ww.css, for pages that
 // cannot link the stylesheet (claude.ai artifacts). Any other <style> fails.
 //
@@ -17,6 +21,7 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { contracts } from "./contracts.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HEX = /#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})\b/;
@@ -74,6 +79,7 @@ export function validate(html, classes, systemCss = null) {
       }
     }
   }
+  issues.push(...contracts(html));
   return issues;
 }
 

@@ -10,7 +10,7 @@
 //   - no CJK font size below 13px                                      (DR-005)
 //   - no literal hex colors in css/, components/, specimens/src/       (spec §5)
 //   - copy lint on specimens, components, patterns and docs            (DR-008, DR-009)
-//   - component and pattern examples pass the output validator         (DR-016)
+//   - component, pattern and site pages pass the output validator     (DR-016, DR-017)
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from "node:fs";
 import { dirname, join, relative, extname } from "node:path";
@@ -238,7 +238,7 @@ for (const file of lintTargets) {
 }
 
 // ---------------------------------------------------------------- copy lint (DR-008, DR-009)
-const copyTargets = [...walk(at("specimens/src")), ...walk(at("components")), ...walk(at("patterns"))].filter((f) => extname(f) === ".html");
+const copyTargets = [...walk(at("specimens/src")), ...walk(at("components")), ...walk(at("patterns")), ...walk(at("site"))].filter((f) => extname(f) === ".html");
 const docTargets = ["content", "foundations", "decisions", "specs", "components", "patterns"].flatMap((d) => walk(at(d)))
   .filter((f) => extname(f) === ".md").concat([at("README.md"), at("SKILL.md")]);
 for (const [files, docs] of [[copyTargets, false], [docTargets, true]]) {
@@ -249,11 +249,12 @@ for (const [files, docs] of [[copyTargets, false], [docTargets, true]]) {
 
 // ---------------------------------------------------------------- output validator (DR-016)
 const classes = definedClasses(wwCss);
-for (const { dir, list } of libs) {
-  for (const i of list) {
-    const f = at(`${dir}/${i.name}/${i.name}.html`);
-    for (const v of validate(readFileSync(f, "utf8"), classes)) problems.push(`validate: ${relative(ROOT, f)}:${v.line} ${v.msg} [${v.rule}]`);
-  }
+const validated = [
+  ...libs.flatMap(({ dir, list }) => list.map((i) => at(`${dir}/${i.name}/${i.name}.html`))),
+  ...walk(at("site")).filter((f) => extname(f) === ".html"),
+];
+for (const f of validated) {
+  for (const v of validate(readFileSync(f, "utf8"), classes, wwCss)) problems.push(`validate: ${relative(ROOT, f)}:${v.line} ${v.msg} [${v.rule}]`);
 }
 
 // ---------------------------------------------------------------- write or verify
