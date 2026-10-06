@@ -2,7 +2,7 @@
 
 走路鯨魚的設計系統，是 Walking Whale 所有數位輸出的唯一源頭：官網、數位服務與產品、簡報、文件。
 
-> 狀態：v0.1 建置中。色彩與字體已完成，元件與頁面模式進行中。
+> 狀態：v0.1 建置中。色彩、字體與 logo 已完成，編輯規範、元件與頁面模式進行中。
 
 ## 內容
 
@@ -11,7 +11,9 @@
 | [`tokens/`](tokens/) | 唯一的 token 源頭：`tokens.json`（預設）、`lang-zh.json`（中文覆寫）、`contrast-pairs.json`（允許的色彩組合） |
 | [`css/`](css/) | 手寫的基礎樣式、文字樣式、字體載入，只使用 token |
 | [`dist/`](dist/) | 產生物，不要手改：`tokens.css`、`ww.css`、`tokens.ts` |
-| [`foundations/`](foundations/) | 色彩、字體等規格說明 |
+| [`assets/`](assets/) | Logo：直式與橫式 wordmark、骨架標誌、icon，各有 currentColor、Abyss、Pearl、Bone 版本；規格見 [foundations/logo.md](foundations/logo.md) |
+| [`foundations/`](foundations/) | 色彩、字體、logo 等規格說明 |
+| [`tools/`](tools/) | 不在 CI 裡執行的產生工具，例如 logo |
 | [`specimens/`](specimens/) | 中英並排的驗證頁，直接用瀏覽器開啟 `specimens/index.html` |
 | [`decisions/`](decisions/README.md) | 決策紀錄 DR-001 起 |
 | [`specs/`](specs/) | 範圍與功能規格 |

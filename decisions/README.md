@@ -11,7 +11,7 @@
 | [DR-007](DR-007-chinese-emphasis.md) | 中文強調：字重＋顏色 | 已採納 |
 | [DR-008](DR-008-chinese-editorial-base.md) | 中文寫作基準 | 已採納 |
 | [DR-009](DR-009-english-editorial-base.md) | 英文寫作基準：Chicago、美式拼字 | 已採納 |
-| [DR-010](DR-010-wordmark-vector.md) | Wordmark 向量重建 | 已採納 |
+| [DR-010](DR-010-wordmark-vector.md) | Wordmark 向量重建：Cormorant Garamond、直式 1.40 倍、中英橫式 | 已採納 |
 | [DR-011](DR-011-accessibility-threshold.md) | 無障礙門檻：WCAG 2.2 AA | 已採納 |
 
 新增決策時沿用同一格式：狀態、日期、決策者、背景、決策、理由、影響、不採用的選項。

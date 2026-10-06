@@ -1,0 +1,69 @@
+{
+  "spec": {
+    "wordmark_text": "WALKING WHALE",
+    "wordmark_zh_text": "走路鯨魚",
+    "tracking_em": 0.0902,
+    "stacked": {
+      "text_width_to_mark_width": 1.4,
+      "gap_to_cap_height": 1.1290322580645162,
+      "text_center_offset_to_mark_width": -0.007731958762886598
+    },
+    "horizontal_en": {
+      "cap_height_to_mark_height": 0.36,
+      "gap_to_cap_height": 1.07
+    },
+    "horizontal_zh": {
+      "em_to_mark_height": 0.58,
+      "tracking_em": 0.1,
+      "gap_to_em": 0.64
+    }
+  },
+  "files": {
+    "mark/walking-whale-mark": {
+      "viewBox": [
+        0,
+        0,
+        1086.09,
+        401.78
+      ],
+      "aspect": 2.7032
+    },
+    "icon/walking-whale-icon": {
+      "viewBox": [
+        0,
+        0,
+        653.22,
+        472.47
+      ],
+      "aspect": 1.3826
+    },
+    "wordmark/walking-whale-wordmark-stacked": {
+      "viewBox": [
+        0,
+        0,
+        1520.52,
+        622.83
+      ],
+      "aspect": 2.4413,
+      "cap_height_to_mark_height": 0.255
+    },
+    "wordmark/walking-whale-wordmark-horizontal-en": {
+      "viewBox": [
+        0,
+        0,
+        3387.19,
+        401.78
+      ],
+      "aspect": 8.4304
+    },
+    "wordmark/walking-whale-wordmark-horizontal-zh": {
+      "viewBox": [
+        0,
+        0,
+        2227.91,
+        401.78
+      ],
+      "aspect": 5.5451
+    }
+  }
+}

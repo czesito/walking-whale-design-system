@@ -49,6 +49,13 @@ table.contrast { min-width: 640px; }
 table.tokens { min-width: 560px; }
 .sample { display: inline-block; padding: var(--ww-space-1) var(--ww-space-3); border-radius: var(--ww-radius-xs); border: 1px solid var(--ww-color-border-decorative-soft); font-family: var(--ww-font-family-ui); font-weight: var(--ww-font-weight-medium); white-space: nowrap; }
 
+.logos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ww-space-4); }
+@media (max-width: 760px) { .logos { grid-template-columns: minmax(0, 1fr); } }
+.logo-cell { margin: 0; display: grid; gap: var(--ww-space-2); min-width: 0; }
+.logo-stage { display: grid; place-items: center; padding: var(--ww-space-7) var(--ww-space-5); border-radius: var(--ww-radius-md); border: 1px solid var(--ww-color-border-decorative-soft); background: var(--ww-color-background-page); overflow: hidden; }
+.logo-stage img { max-width: 100%; height: auto; }
+.logo-cell.wide .logo-stage img { width: auto; }
+
 .rules { margin: 0; padding-left: 1.2em; display: grid; gap: var(--ww-space-2); max-width: 46rem; }
 
 /* Side-by-side language columns. Each column sets lang, so tokens switch. */
@@ -83,6 +90,22 @@ table.tokens { min-width: 560px; }
     <hr class="ww-rule">
     <p class="ww-lede">這一頁直接使用 dist/ww.css 渲染，所有數值都來自 tokens。中英欄位各自標上 lang，排版 token 會依語言自動切換。</p>
   </header>
+
+  <section aria-labelledby="logo">
+    <div class="section-head">
+      <p class="ww-kicker">Logo</p>
+      <h2 id="logo">Wordmark、標誌與 icon</h2>
+      <p class="ww-body">規格見 foundations/logo.md。檔案由 tools/logo/build_logo.py 產生。</p>
+    </div>
+    <div class="logos">
+      <figure class="logo-cell"><div class="logo-stage"><img src="../assets/wordmark/walking-whale-wordmark-stacked-abyss.svg" alt="Walking Whale 直式 wordmark" style="width: 320px"></div><figcaption class="ww-sm">直式，Abyss</figcaption></figure>
+      <figure class="logo-cell"><div class="logo-stage ww-on-dark"><img src="../assets/wordmark/walking-whale-wordmark-stacked-pearl.svg" alt="Walking Whale 直式 wordmark 反白" style="width: 320px"></div><figcaption class="ww-sm">直式，Pearl 反白</figcaption></figure>
+      <figure class="logo-cell wide"><div class="logo-stage"><img src="../assets/wordmark/walking-whale-wordmark-horizontal-en-abyss.svg" alt="Walking Whale 橫式英文" style="height: 40px"></div><figcaption class="ww-sm">橫式英文，標誌高 40px</figcaption></figure>
+      <figure class="logo-cell wide"><div class="logo-stage"><img src="../assets/wordmark/walking-whale-wordmark-horizontal-zh-abyss.svg" alt="走路鯨魚 橫式中文" style="height: 40px"></div><figcaption class="ww-sm">橫式中文，標誌高 40px</figcaption></figure>
+      <figure class="logo-cell"><div class="logo-stage"><img src="../assets/mark/walking-whale-mark-abyss.svg" alt="骨架標誌" style="width: 200px"></div><figcaption class="ww-sm">骨架標誌</figcaption></figure>
+      <figure class="logo-cell"><div class="logo-stage"><img src="../assets/icon/walking-whale-icon-abyss.svg" alt="curled icon" style="width: 96px"></div><figcaption class="ww-sm">Icon</figcaption></figure>
+    </div>
+  </section>
 
   <section aria-labelledby="palette">
     <div class="section-head">
