@@ -14,9 +14,9 @@
 |---|---|
 | `ww-split ww-split--start` | 左側表單、右側資訊 |
 | `ww-form` | 表單 |
-| `ww-contact__details` | `<dl>`：公司、地點、語言 |
+| `ww-contact__details` | `<dl>`：電子郵件、公司、地點、語言 |
 
 ## 規則
 
 - 不要寫出尚未確認的承諾，例如回覆時間。
-- 官方聯絡信箱尚未定案，範例不放電子郵件地址。
+- 電子郵件用官方聯絡信箱 agiblida@gmail.com（content/brand.md）。

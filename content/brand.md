@@ -80,6 +80,16 @@ Walking Whale 取自 Pakicetus，一種會走路的鯨魚祖先。學名在中�
 4. 官方網域是 walking-whales.com（DR-012）。網域是複數並加了連字號，但品牌名是單數的 Walking Whale，不要依網域改寫品牌名。
 5. 成立時間與地點寫成「2025 年 9 月，台北」或 Taipei, est. September 2025。
 
+## 聯絡方式
+
+| 項目 | 內容 |
+|---|---|
+| 電子郵件 | agiblida@gmail.com（2026-10-07 Czesio 確認） |
+| 網站 | walking-whales.com（DR-012） |
+| 地點 | 台北 |
+
+所有對外輸出只用這組聯絡方式。不承諾回覆時間，除非 Czesio 另外確認。
+
 ## 識別的使用範圍
 
 Walking Whale 的識別只在走路鯨魚代表自己說話時使用：官網、提案、簡報、案例介紹、公司自有的展示系統。客戶的系統一律使用客戶自己的識別，或為該專案另外設計的識別，不套用 Walking Whale 的視覺與語氣。

@@ -24,4 +24,4 @@
 
 - 版權列寫法定名稱：「© 年份 走路鯨魚數位體驗有限公司」或「© 年份 Walking Whale Co., Ltd.」（DR-012）。
 - 品牌簽名用 tagline 原句，不改寫（content/brand.md）。
-- 官方聯絡信箱尚未定案，範例不放電子郵件地址。
+- 官方聯絡信箱是 agiblida@gmail.com（content/brand.md）。

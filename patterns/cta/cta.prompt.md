@@ -20,4 +20,4 @@
 ## 規則
 
 - 不要製造急迫感或用驚嘆號（content/voice.md）。
-- 官方聯絡信箱與聯絡頁網址尚未定案。在定案前，按鈕連到同一頁的聯絡區（`href="#contact"`）。
+- 按鈕連到同一頁的聯絡區（`href="#contact"`）；頁面沒有聯絡區時，連到 `mailto:agiblida@gmail.com`。

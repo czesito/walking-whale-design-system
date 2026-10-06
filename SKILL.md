@@ -91,7 +91,7 @@ node scripts/copy-lint.mjs page.html
 - 英文：Chicago 加上 content/en.md 的例外、美式拼字、標題句首大寫（DR-009）。
 - 不用驚嘆號、不用 emoji、不誇大、不製造急迫感（content/voice.md）。
 - 不捏造事實：數字要有來源，案例要已公開，承諾（例如回覆時間）要已確認。示意內容標成「範例」。
-- 官方聯絡信箱與聯絡頁網址尚未定案，不要自己編一個。在定案前，行動按鈕連到同一頁的聯絡區（`#contact`）。
+- 官方聯絡信箱是 agiblida@gmail.com，不要用其他地址。行動按鈕連到同一頁的聯絡區（`#contact`），沒有聯絡區時用 `mailto:`。
 - 服務內容以 [content/services.md](content/services.md) 為準。
 
 ### 無障礙
