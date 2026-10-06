@@ -1,0 +1,14 @@
+/* Error state: what went wrong, what the reader can do, and a code for support. */
+.ww-error {
+  display: grid;
+  justify-items: start;
+  gap: var(--ww-space-3);
+  padding: var(--ww-space-6);
+  background: var(--ww-color-background-card);
+  border: 1px solid var(--ww-color-border-decorative);
+  border-top: 2px solid var(--ww-color-status-danger);
+  border-radius: var(--ww-radius-xs);
+}
+.ww-error__code { margin: 0; font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-status-danger); }
+.ww-error__title { margin: 0; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-body); font-weight: var(--ww-font-weight-semibold); line-height: var(--ww-line-height-ui); color: var(--ww-color-text-primary); }
+.ww-error__body { margin: 0; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); color: var(--ww-color-text-secondary); max-width: 34rem; }

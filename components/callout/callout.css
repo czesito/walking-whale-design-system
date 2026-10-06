@@ -1,0 +1,32 @@
+/* Callout: info, warn, danger. The top edge takes the status color (DR-013). */
+.ww-callout {
+  --_ink: var(--ww-color-status-info);
+  --_wash: var(--ww-color-status-info-wash);
+  display: grid;
+  gap: var(--ww-space-2);
+  padding: var(--ww-space-4) var(--ww-space-5);
+  background: var(--_wash);
+  border: 1px solid var(--ww-color-border-decorative-soft);
+  border-top: 2px solid var(--_ink);
+  border-radius: var(--ww-radius-xs);
+  color: var(--ww-color-text-primary);
+}
+.ww-callout--warn { --_ink: var(--ww-color-status-warning); --_wash: var(--ww-color-status-warning-wash); }
+.ww-callout--danger { --_ink: var(--ww-color-status-danger); --_wash: var(--ww-color-status-danger-wash); }
+.ww-callout__label {
+  display: flex;
+  align-items: center;
+  gap: var(--ww-space-2);
+  margin: 0;
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--_ink);
+}
+.ww-callout__body {
+  margin: 0;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  line-height: var(--ww-line-height-body);
+}
+.ww-callout__body + .ww-callout__body { margin-top: var(--ww-space-2); }

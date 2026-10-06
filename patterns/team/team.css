@@ -1,0 +1,22 @@
+/* Team: an initial on a Sediment plate (or a photo), name, role in mono, one line about the work. */
+.ww-team { display: grid; gap: var(--ww-space-6) var(--ww-space-5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); }
+.ww-person { display: grid; gap: var(--ww-space-2); align-content: start; margin: 0; }
+.ww-person__portrait {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  margin-bottom: var(--ww-space-2);
+  overflow: hidden;
+  background: var(--ww-color-background-warm);
+  border-top: 2px solid var(--ww-color-abyss);
+  border-radius: var(--ww-radius-xs);
+  font-family: var(--ww-font-family-display);
+  font-size: var(--ww-font-size-hero);
+  font-weight: var(--ww-font-weight-display);
+  line-height: 1;
+  color: var(--ww-color-tidal);
+}
+.ww-person__portrait img { width: 100%; height: 100%; object-fit: cover; }
+.ww-person__name { margin: 0; font-size: var(--ww-font-size-h4); }
+.ww-person__role { margin: 0; font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); }
+.ww-person__bio { margin: 0; font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); color: var(--ww-color-text-secondary); }

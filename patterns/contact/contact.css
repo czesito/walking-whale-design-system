@@ -1,0 +1,4 @@
+/* Contact: form beside the plain facts (email, location, response time). */
+.ww-contact__details { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--ww-space-3) var(--ww-space-5); margin: 0; padding-top: var(--ww-space-4); border-top: 1px solid var(--ww-color-abyss); }
+.ww-contact__details dt { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); padding-top: 0.15em; }
+.ww-contact__details dd { margin: 0; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); color: var(--ww-color-text-primary); }

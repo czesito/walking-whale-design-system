@@ -1,0 +1,8 @@
+/* CTA band on Abyss: one sentence, one primary action, one quiet alternative. */
+.ww-cta { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--ww-space-7); align-items: end; }
+.ww-cta__text { display: grid; gap: var(--ww-space-4); }
+.ww-cta__actions { display: flex; flex-wrap: wrap; gap: var(--ww-space-3); justify-content: flex-end; }
+@media (max-width: 860px) {
+  .ww-cta { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .ww-cta__actions { justify-content: flex-start; }
+}

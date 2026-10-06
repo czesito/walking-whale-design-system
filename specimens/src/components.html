@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WW 元件</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<!-- @ww:css -->
+<style>
+/* Gallery frame only. Every component below is rendered from its own example file. */
+.g-page { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: var(--ww-space-8); max-width: 1320px; margin: 0 auto; padding: var(--ww-space-8) clamp(var(--ww-space-4), 4vw, var(--ww-space-8)); }
+.g-nav { position: sticky; top: var(--ww-space-5); align-self: start; max-height: calc(100vh - 2 * var(--ww-space-5)); overflow: auto; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-sm); }
+.g-nav ul { list-style: none; margin: 0 0 var(--ww-space-5); padding: 0; display: grid; gap: 2px; }
+.g-nav a { color: var(--ww-color-text-secondary); text-decoration: none; }
+.g-nav a:hover { color: var(--ww-color-text-primary); text-decoration: underline; }
+.g-nav-k { font-family: var(--ww-font-family-mono); color: var(--ww-color-text-muted); margin: 0 0 var(--ww-space-2); }
+.g-main { display: grid; gap: var(--ww-space-10); min-width: 0; }
+.g-intro { display: grid; gap: var(--ww-space-4); max-width: 46rem; }
+.g-item { display: grid; gap: var(--ww-space-5); min-width: 0; scroll-margin-top: var(--ww-space-5); }
+.g-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--ww-space-4); flex-wrap: wrap; padding-bottom: var(--ww-space-3); border-bottom: 1px solid var(--ww-color-abyss); }
+.g-head h2 { font-size: var(--ww-font-size-h3); display: flex; gap: var(--ww-space-3); align-items: baseline; }
+.g-head h2 span { font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-sm); font-weight: var(--ww-font-weight-regular); color: var(--ww-color-text-muted); letter-spacing: 0; }
+.g-head code { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); color: var(--ww-color-text-muted); }
+.g-body { display: grid; gap: var(--ww-space-8); min-width: 0; }
+@media (max-width: 960px) {
+  .g-page { grid-template-columns: minmax(0, 1fr); }
+  .g-nav { position: static; max-height: none; }
+  .g-nav ul { display: flex; flex-wrap: wrap; gap: var(--ww-space-2) var(--ww-space-4); }
+}
+</style>
+</head>
+<body>
+<div class="g-page">
+  <nav class="g-nav" aria-label="元件目錄"><!-- @ww:nav --></nav>
+  <main class="g-main">
+    <header class="g-intro">
+      <p class="ww-kicker">Walking Whale Design System</p>
+      <h1 class="ww-hero">元件與頁面模式</h1>
+      <hr class="ww-rule">
+      <p class="ww-lede">每個元件都從 components 與 patterns 目錄裡的範例檔直接渲染，中英並排。範例本身通過輸出驗證器：只用系統的 class，沒有 style 屬性，也沒有自訂顏色。</p>
+    </header>
+<!-- @ww:gallery -->
+  </main>
+</div>
+<!-- @ww:js -->
+</body>
+</html>

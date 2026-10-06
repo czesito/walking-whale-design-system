@@ -59,23 +59,20 @@ function segments(file, raw) {
       .replace(/\]\([^)\n]*\)/g, (m) => "]" + " ".repeat(m.length - 1))
       .replace(/https?:\/\/\S+/g, (m) => " ".repeat(m.length))
       .replace(/<!--[\s\S]*?-->/g, blank);
-    return text.split("\n").map((t, i) => ({ line: i + 1, text: t, heading: /^\s*#{1,6}\s/.test(t) }));
+    const lines = text.split("\n").map((t, i) => ({ line: i + 1, text: t }));
+    lines.headings = lines.filter((l) => /^\s*#{1,6}\s/.test(l.text));
+    return lines;
   }
   // HTML
   text = text.replace(/<(script|style|pre|code)\b[\s\S]*?<\/\1>/gi, blank)
     .replace(/<!--[\s\S]*?-->/g, blank);
-  const headingSpans = [];
+  const plain = (s) => s.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/&[a-z]+;|&#\d+;/g, " ");
+  const headings = [];
   for (const m of text.matchAll(/<(h[1-6])\b[^>]*>([\s\S]*?)<\/\1>|<(\w+)\b[^>]*class="[^"]*\bww-(?:hero|kicker)\b[^"]*"[^>]*>([\s\S]*?)<\/\3>/gi)) {
-    headingSpans.push([m.index, m.index + m[0].length]);
+    headings.push({ line: text.slice(0, m.index).split("\n").length, text: plain(m[2] ?? m[4] ?? "") });
   }
-  const out = [];
-  let offset = 0;
-  for (const [i, rawLine] of text.split("\n").entries()) {
-    const start = offset; offset += rawLine.length + 1;
-    const heading = headingSpans.some(([a, b]) => a <= start + rawLine.length && b >= start);
-    const t = rawLine.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/&[a-z]+;|&#\d+;/g, " ");
-    out.push({ line: i + 1, text: t, heading });
-  }
+  const out = text.split("\n").map((rawLine, i) => ({ line: i + 1, text: plain(rawLine) }));
+  out.headings = headings;
   return out;
 }
 
@@ -92,7 +89,8 @@ const RULES = [
     re: new RegExp(`[${CJK}]—(?!—)|(?<!—)—[${CJK}]`, "g") },
   { id: "en-quotes", msg: "中文用「」與『』，不用 “ ”", re: /[“”]/g, onlyWithHan: true },
   { id: "exclamation", msg: "不使用驚嘆號", re: /[!！]/g },
-  { id: "emoji", msg: "不使用 emoji", re: /\p{Extended_Pictographic}/gu },
+  // © ® ™ are typographic symbols unless forced into emoji presentation with U+FE0F.
+  { id: "emoji", msg: "不使用 emoji", re: /(?![\u00A9\u00AE\u2122](?!\uFE0F))\p{Extended_Pictographic}/gu },
 ];
 
 function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
@@ -100,7 +98,11 @@ function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
 export function lintText(file, raw, { docs = false } = {}) {
   const issues = [];
   const add = (line, rule, msg, excerpt) => issues.push({ file, line, rule, msg, excerpt: Array.from(excerpt.trim()).slice(0, 40).join("") });
-  for (const seg of segments(file, raw)) {
+  const segs = segments(file, raw);
+  for (const h of segs.headings) {
+    if (HAN.test(h.text) && /。\s*$/.test(h.text.trimEnd())) add(h.line, "heading-period", "中文標題不加句號", h.text);
+  }
+  for (const seg of segs) {
     const t = seg.text;
     if (!t.trim()) continue;
     const hasHan = HAN.test(t);
@@ -108,7 +110,6 @@ export function lintText(file, raw, { docs = false } = {}) {
       if (r.onlyWithHan && !hasHan) continue;
       for (const m of t.matchAll(r.re)) add(seg.line, r.id, r.msg, t.slice(Math.max(0, m.index - 12), m.index + 14));
     }
-    if (seg.heading && hasHan && /。\s*$/.test(t.replace(/<[^>]*>/g, "").trimEnd())) add(seg.line, "heading-period", "中文標題不加句號", t);
     for (const a of avoidTerms) {
       if (docs && a.category === "brand") continue;
       const re = a.lang === "en" ? new RegExp(`\\b${escapeRe(a.term)}\\b`, "gi") : new RegExp(escapeRe(a.term), "g");

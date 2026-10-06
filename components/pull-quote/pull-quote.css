@@ -1,0 +1,27 @@
+/* Pull quote: a display-face line between an Abyss rule and a hairline. */
+.ww-pullquote {
+  display: grid;
+  gap: var(--ww-space-4);
+  max-width: 44rem;
+  margin: 0;
+  padding-block: var(--ww-space-6);
+  border-top: 1px solid var(--ww-color-abyss);
+  border-bottom: 1px solid var(--ww-color-border-decorative);
+}
+.ww-pullquote__text {
+  margin: 0;
+  font-family: var(--ww-font-family-display);
+  font-size: var(--ww-font-size-h2);
+  font-weight: var(--ww-font-weight-display);
+  line-height: var(--ww-line-height-heading);
+  letter-spacing: var(--ww-letter-spacing-heading);
+  color: var(--ww-color-text-primary);
+  text-wrap: balance;
+}
+.ww-pullquote__cite {
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  font-style: normal;
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}

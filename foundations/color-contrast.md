@@ -33,6 +33,14 @@
 | `color.status.danger` #A8352A | `color.background.card` #FFFFFF | 文字 | 6.54:1 | 4.5:1 | 通過 |
 | `color.status.danger` #A8352A | `color.background.wash` #F7F4EE | 文字 | 5.96:1 | 4.5:1 | 通過 |
 | `color.status.danger` #A8352A | `color.background.warm` #E8E0D0 | 文字 | 4.98:1 | 4.5:1 | 通過 |
+| `color.status.success` #2F7A60 | `color.status.success-wash` #6DBFA01F | 文字 | 4.54:1 | 4.5:1 | 通過 |
+| `color.status.warning` #A05138 | `color.status.warning-wash` #B06A4F1F | 文字 | 4.67:1 | 4.5:1 | 通過 |
+| `color.status.danger` #A8352A | `color.status.danger-wash` #A8352A1A | 文字 | 5.36:1 | 4.5:1 | 通過 |
+| `color.status.info` #2E5F7A | `color.status.info-wash` #A8C5D633 | 文字 | 5.96:1 | 4.5:1 | 通過 |
+| `color.text.primary` #0D1F3C | `color.status.success-wash` #6DBFA01F | 文字 | 14.49:1 | 4.5:1 | 通過 |
+| `color.text.primary` #0D1F3C | `color.status.warning-wash` #B06A4F1F | 文字 | 13.62:1 | 4.5:1 | 通過 |
+| `color.text.primary` #0D1F3C | `color.status.danger-wash` #A8352A1A | 文字 | 13.46:1 | 4.5:1 | 通過 |
+| `color.text.primary` #0D1F3C | `color.status.info-wash` #A8C5D633 | 文字 | 14.16:1 | 4.5:1 | 通過 |
 | `color.text.on-dark` #FBFAF6 | `color.background.deep` #0D1F3C | 文字 | 15.72:1 | 4.5:1 | 通過 |
 | `color.text.on-dark` #FBFAF6 | `color.background.deep-raised` #12345C | 文字 | 12.02:1 | 4.5:1 | 通過 |
 | `color.text.on-dark-secondary` #A8C5D6 | `color.background.deep` #0D1F3C | 文字 | 9.09:1 | 4.5:1 | 通過 |
@@ -62,3 +70,11 @@
 | `color.chart.label` #546174 | `color.background.page` #FBFAF6 | 文字 | 6.02:1 | 4.5:1 | 通過 |
 | `color.chart.label` #546174 | `color.background.card` #FFFFFF | 文字 | 6.28:1 | 4.5:1 | 通過 |
 | `color.chart.label` #546174 | `color.background.wash` #F7F4EE | 文字 | 5.72:1 | 4.5:1 | 通過 |
+| `color.index.done` #2E5F7A | `color.background.page` #FBFAF6 | 介面元件 | 6.62:1 | 3:1 | 通過 |
+| `color.index.done` #2E5F7A | `color.background.card` #FFFFFF | 介面元件 | 6.92:1 | 3:1 | 通過 |
+| `color.index.done` #2E5F7A | `color.background.wash` #F7F4EE | 介面元件 | 6.30:1 | 3:1 | 通過 |
+| `color.index.current` #0D1F3C | `color.background.page` #FBFAF6 | 介面元件 | 15.72:1 | 3:1 | 通過 |
+| `color.index.current` #0D1F3C | `color.background.card` #FFFFFF | 介面元件 | 16.42:1 | 3:1 | 通過 |
+| `color.index.current` #0D1F3C | `color.background.wash` #F7F4EE | 介面元件 | 14.96:1 | 3:1 | 通過 |
+| `color.index.on-dark-done` #6DBFA0 | `color.background.deep` #0D1F3C | 介面元件 | 7.51:1 | 3:1 | 通過 |
+| `color.index.on-dark-current` #FBFAF6 | `color.background.deep` #0D1F3C | 介面元件 | 15.72:1 | 3:1 | 通過 |

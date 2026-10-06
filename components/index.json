@@ -1,0 +1,145 @@
+{
+  "$description": "Order of components in dist/ww.css, the gallery and SKILL.md: primitives first, page frame last, so composites can override primitives. Every directory under components/ must be listed.",
+  "items": [
+    {
+      "name": "layout",
+      "zh": "版面",
+      "en": "Layout"
+    },
+    {
+      "name": "logo",
+      "zh": "標誌",
+      "en": "Logo"
+    },
+    {
+      "name": "kicker",
+      "zh": "區塊標籤",
+      "en": "Kicker"
+    },
+    {
+      "name": "rule-accent",
+      "zh": "標題短線",
+      "en": "Rule accent"
+    },
+    {
+      "name": "layers",
+      "zh": "耳塞年層",
+      "en": "Growth layers"
+    },
+    {
+      "name": "button",
+      "zh": "按鈕與連結",
+      "en": "Button and link"
+    },
+    {
+      "name": "card",
+      "zh": "卡片",
+      "en": "Card"
+    },
+    {
+      "name": "chip",
+      "zh": "標籤",
+      "en": "Chip"
+    },
+    {
+      "name": "status-badge",
+      "zh": "狀態標記",
+      "en": "Status badge"
+    },
+    {
+      "name": "pull-quote",
+      "zh": "引言",
+      "en": "Pull quote"
+    },
+    {
+      "name": "callout",
+      "zh": "提示框",
+      "en": "Callout"
+    },
+    {
+      "name": "tldr",
+      "zh": "重點摘要",
+      "en": "TL;DR"
+    },
+    {
+      "name": "stat",
+      "zh": "數據",
+      "en": "Stat"
+    },
+    {
+      "name": "table",
+      "zh": "表格",
+      "en": "Table"
+    },
+    {
+      "name": "code",
+      "zh": "程式碼",
+      "en": "Code"
+    },
+    {
+      "name": "figure",
+      "zh": "圖與引線標註",
+      "en": "Figure and annotation"
+    },
+    {
+      "name": "prose",
+      "zh": "文章排版",
+      "en": "Article typography"
+    },
+    {
+      "name": "toc",
+      "zh": "目錄",
+      "en": "Table of contents"
+    },
+    {
+      "name": "article-list",
+      "zh": "文章列表",
+      "en": "Article list"
+    },
+    {
+      "name": "filter",
+      "zh": "標籤篩選",
+      "en": "Tag filter"
+    },
+    {
+      "name": "form",
+      "zh": "表單",
+      "en": "Form controls"
+    },
+    {
+      "name": "loading",
+      "zh": "載入中",
+      "en": "Loading"
+    },
+    {
+      "name": "empty",
+      "zh": "空狀態",
+      "en": "Empty state"
+    },
+    {
+      "name": "error",
+      "zh": "錯誤",
+      "en": "Error state"
+    },
+    {
+      "name": "toast",
+      "zh": "通知",
+      "en": "Toast"
+    },
+    {
+      "name": "topbar",
+      "zh": "頂部導覽",
+      "en": "Topbar"
+    },
+    {
+      "name": "drawer",
+      "zh": "行動版選單",
+      "en": "Drawer"
+    },
+    {
+      "name": "footer",
+      "zh": "頁尾",
+      "en": "Footer"
+    }
+  ]
+}

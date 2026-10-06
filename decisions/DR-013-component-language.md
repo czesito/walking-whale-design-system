@@ -36,6 +36,7 @@ B2 的引線標註另外採用，見 [DR-015](DR-015-leader-line-annotation.md)�
 
 - 所有元件 CSS 依這五條規則撰寫。
 - `shadow.*` token 只用於浮層（Drawer、Toast、Select 的選單），不用於卡片。
+- `radius.*` 改為 2／4／8／12px 加 pill，刪除 `radius.xl`。舊的 6 至 26px 圓角屬於上一版的柔和風格，不再使用。
 
 ## 不採用的選項
 

@@ -1,0 +1,35 @@
+/* Hero (masthead): kicker, headline, rule, lede, actions. The split variant adds a specimen plate. */
+.ww-masthead { display: grid; gap: var(--ww-space-5); padding-block: var(--ww-space-10) var(--ww-space-9); }
+.ww-masthead__text { display: grid; gap: var(--ww-space-5); align-content: center; max-width: 44rem; }
+.ww-masthead__actions { display: flex; flex-wrap: wrap; gap: var(--ww-space-3); margin-top: var(--ww-space-2); }
+.ww-masthead--split { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--ww-space-8); align-items: center; }
+@media (max-width: 860px) {
+  .ww-masthead { padding-block: var(--ww-space-8) var(--ww-space-7); }
+  .ww-masthead--split { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Specimen plate: Sediment ground, the mark, a mono caption. Also used by case cards. */
+.ww-plate {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: var(--ww-space-3);
+  min-height: 12rem;
+  margin: 0;
+  padding: var(--ww-space-7) var(--ww-space-5) var(--ww-space-4);
+  background: var(--ww-color-background-warm);
+  border-radius: var(--ww-radius-xs);
+}
+.ww-plate > img { width: min(80%, 26rem); height: auto; }
+.ww-plate__caption {
+  justify-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--ww-space-3);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-plate__caption > :first-child { flex: none; }
+.ww-plate__caption > :last-child { text-align: right; }

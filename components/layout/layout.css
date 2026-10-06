@@ -1,0 +1,84 @@
+/* Layout primitives. Claude composes pages from these instead of writing CSS (DR-016). */
+
+.ww-container {
+  width: 100%;
+  max-width: var(--ww-layout-container);
+  margin-inline: auto;
+  padding-inline: clamp(var(--ww-space-4), 4vw, var(--ww-space-8));
+}
+.ww-container--narrow { max-width: var(--ww-layout-container-narrow); }
+
+.ww-section { padding-block: var(--ww-layout-section-gap); }
+.ww-section--lg { padding-block: calc(var(--ww-layout-section-gap) * 1.5); }
+.ww-section--wash { background: var(--ww-color-background-wash); }
+.ww-section--warm { background: var(--ww-color-background-warm); }
+
+.ww-stack { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--ww-space-5); }
+.ww-stack--xs { gap: var(--ww-space-2); }
+.ww-stack--sm { gap: var(--ww-space-3); }
+.ww-stack--lg { gap: var(--ww-space-7); }
+.ww-stack--xl { gap: var(--ww-space-9); }
+
+.ww-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ww-space-3); }
+.ww-cluster--sm { gap: var(--ww-space-2); }
+.ww-cluster--lg { gap: var(--ww-space-5); }
+.ww-cluster--between { justify-content: space-between; }
+.ww-cluster--end { justify-content: flex-end; }
+
+.ww-grid { display: grid; gap: var(--ww-space-5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); }
+.ww-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ww-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ww-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 960px) {
+  .ww-grid--3, .ww-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .ww-grid--2, .ww-grid--3, .ww-grid--4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+.ww-split { display: grid; gap: var(--ww-space-8); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+.ww-split--start { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.ww-split--aside { grid-template-columns: minmax(12rem, 1fr) minmax(0, 3fr); }
+.ww-split--center { align-items: center; }
+@media (max-width: 860px) {
+  .ww-split, .ww-split--start, .ww-split--aside { grid-template-columns: minmax(0, 1fr); gap: var(--ww-space-6); }
+}
+
+.ww-measure { max-width: var(--ww-layout-measure-body); }
+
+.ww-divider { border: 0; border-top: 1px solid var(--ww-color-border-decorative); margin: 0; }
+.ww-divider--strong { border-top-color: var(--ww-color-abyss); }
+
+.ww-visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ww-skip-link {
+  position: absolute;
+  left: var(--ww-space-4);
+  top: var(--ww-space-3);
+  z-index: 100;
+  padding: var(--ww-space-2) var(--ww-space-4);
+  background: var(--ww-color-abyss);
+  color: var(--ww-color-text-on-dark);
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  border-radius: var(--ww-radius-xs);
+  transform: translateY(-200%);
+}
+.ww-skip-link:focus { transform: none; }
+
+/* Demo label used in examples to mark the language of a block. */
+.ww-lang-label {
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+  margin: 0;
+}

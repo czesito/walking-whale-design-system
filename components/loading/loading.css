@@ -1,0 +1,33 @@
+/* Loading: spinner plus text, and skeleton blocks. Indeterminate, so it never uses growth layers (DR-014). */
+.ww-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ww-space-2);
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-sm);
+  color: var(--ww-color-text-muted);
+}
+.ww-spinner {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid var(--ww-color-border-decorative);
+  border-top-color: var(--ww-color-abyss);
+  animation: ww-spin 0.8s linear infinite;
+}
+.ww-on-dark .ww-spinner { border-color: var(--ww-color-tidal); border-top-color: var(--ww-color-pearl); }
+@keyframes ww-spin { to { transform: rotate(360deg); } }
+
+.ww-skeleton {
+  display: block;
+  height: 1em;
+  border-radius: var(--ww-radius-xs);
+  background: var(--ww-color-sediment);
+  animation: ww-pulse 1.6s var(--ww-motion-ease) infinite;
+}
+.ww-skeleton--title { height: 1.6em; width: 60%; }
+.ww-skeleton--text { width: 100%; }
+.ww-skeleton--short { width: 40%; }
+.ww-skeleton--block { height: 8rem; }
+@keyframes ww-pulse { 50% { opacity: 0.55; } }

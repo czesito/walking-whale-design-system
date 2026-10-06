@@ -1,0 +1,123 @@
+/* Form controls. 16px input text avoids iOS zoom; borders use border.control for 3:1 (DR-011). */
+
+.ww-form { display: grid; gap: var(--ww-space-5); max-width: 36rem; }
+.ww-field { display: grid; gap: var(--ww-space-2); min-width: 0; }
+.ww-field__label {
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-sm);
+  font-weight: var(--ww-font-weight-medium);
+  line-height: var(--ww-line-height-ui);
+  color: var(--ww-color-text-primary);
+}
+.ww-field__optional { font-weight: var(--ww-font-weight-regular); color: var(--ww-color-text-muted); margin-left: var(--ww-space-1); }
+.ww-field__hint,
+.ww-field__error {
+  margin: 0;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-sm);
+  line-height: var(--ww-line-height-ui);
+  color: var(--ww-color-text-muted);
+}
+.ww-field__error { color: var(--ww-color-status-danger); display: flex; gap: var(--ww-space-1); align-items: baseline; }
+
+.ww-input,
+.ww-textarea,
+.ww-select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5625rem 0.75rem;
+  font-family: var(--ww-font-family-ui);
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--ww-color-text-primary);
+  background: var(--ww-color-background-card);
+  border: 1px solid var(--ww-color-border-control);
+  border-radius: var(--ww-radius-xs);
+  transition: border-color var(--ww-motion-duration-instant) var(--ww-motion-ease);
+}
+.ww-input:hover, .ww-textarea:hover, .ww-select:hover { border-color: var(--ww-color-text-muted); }
+.ww-input:focus, .ww-textarea:focus, .ww-select:focus { border-color: var(--ww-color-abyss); }
+.ww-input::placeholder, .ww-textarea::placeholder { color: var(--ww-color-text-muted); }
+.ww-input[aria-invalid="true"], .ww-textarea[aria-invalid="true"], .ww-select[aria-invalid="true"] { border-color: var(--ww-color-status-danger); }
+.ww-input:disabled, .ww-textarea:disabled, .ww-select:disabled { background: var(--ww-color-background-wash); color: var(--ww-color-text-muted); cursor: not-allowed; }
+.ww-textarea { min-height: 7.5rem; resize: vertical; line-height: var(--ww-line-height-body); }
+
+.ww-select-wrap { position: relative; }
+.ww-select { appearance: none; padding-right: 2.5rem; cursor: pointer; }
+.ww-select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 0.875rem;
+  top: 50%;
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(-50%);
+  background: var(--ww-color-text-secondary);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.ww-fieldset { display: grid; gap: var(--ww-space-3); margin: 0; padding: 0; border: 0; min-width: 0; }
+.ww-fieldset > legend {
+  padding: 0;
+  margin-bottom: var(--ww-space-2);
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-sm);
+  font-weight: var(--ww-font-weight-medium);
+  color: var(--ww-color-text-primary);
+}
+
+/* Checkbox and radio: native inputs, tinted. The label wraps the input. */
+.ww-check {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--ww-space-2);
+  min-height: 24px;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  line-height: var(--ww-line-height-ui);
+  color: var(--ww-color-text-primary);
+  cursor: pointer;
+}
+.ww-check input { width: 18px; height: 18px; margin: 0.1em 0 0; flex: none; accent-color: var(--ww-color-abyss); cursor: pointer; }
+.ww-check input:disabled + span { color: var(--ww-color-text-muted); }
+
+/* Switch: <label class="ww-switch"><input type="checkbox" role="switch" class="ww-switch__input"><span class="ww-switch__track"></span>Label</label> */
+.ww-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ww-space-3);
+  min-height: 24px;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  color: var(--ww-color-text-primary);
+  cursor: pointer;
+}
+.ww-switch__input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.ww-switch__track {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  flex: none;
+  border-radius: var(--ww-radius-pill);
+  background: var(--ww-color-background-card);
+  border: 1px solid var(--ww-color-border-control);
+  transition: background-color var(--ww-motion-duration-base) var(--ww-motion-ease), border-color var(--ww-motion-duration-base) var(--ww-motion-ease);
+}
+.ww-switch__track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ww-color-steel);
+  transition: transform var(--ww-motion-duration-base) var(--ww-motion-ease), background-color var(--ww-motion-duration-base) var(--ww-motion-ease);
+}
+.ww-switch__input:checked + .ww-switch__track { background: var(--ww-color-abyss); border-color: var(--ww-color-abyss); }
+.ww-switch__input:checked + .ww-switch__track::after { transform: translateX(18px); background: var(--ww-color-pearl); }
+.ww-switch__input:focus-visible + .ww-switch__track { outline: 2px solid var(--ww-color-focus); outline-offset: 2px; }
+.ww-switch__input:disabled + .ww-switch__track { opacity: 0.45; }

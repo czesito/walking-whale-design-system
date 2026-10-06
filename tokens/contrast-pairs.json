@@ -8,6 +8,11 @@
     { "fg": "color.text.emphasis", "bg": ["color.background.page", "color.background.card", "color.background.wash", "color.background.warm"], "level": "text" },
     { "fg": "color.status.warning", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "text" },
     { "fg": "color.status.danger", "bg": ["color.background.page", "color.background.card", "color.background.wash", "color.background.warm"], "level": "text" },
+    { "fg": "color.status.success", "bg": ["color.status.success-wash"], "level": "text" },
+    { "fg": "color.status.warning", "bg": ["color.status.warning-wash"], "level": "text" },
+    { "fg": "color.status.danger", "bg": ["color.status.danger-wash"], "level": "text" },
+    { "fg": "color.status.info", "bg": ["color.status.info-wash"], "level": "text" },
+    { "fg": "color.text.primary", "bg": ["color.status.success-wash", "color.status.warning-wash", "color.status.danger-wash", "color.status.info-wash"], "level": "text" },
     { "fg": "color.text.on-dark", "bg": ["color.background.deep", "color.background.deep-raised"], "level": "text" },
     { "fg": "color.text.on-dark-secondary", "bg": ["color.background.deep"], "level": "text" },
     { "fg": "color.text.on-dark-label", "bg": ["color.background.deep"], "level": "text" },
@@ -19,6 +24,10 @@
     { "fg": "color.chart.3", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
     { "fg": "color.chart.4", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
     { "fg": "color.chart.other", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
-    { "fg": "color.chart.label", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "text" }
+    { "fg": "color.chart.label", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "text" },
+    { "fg": "color.index.done", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
+    { "fg": "color.index.current", "bg": ["color.background.page", "color.background.card", "color.background.wash"], "level": "ui" },
+    { "fg": "color.index.on-dark-done", "bg": ["color.background.deep"], "level": "ui" },
+    { "fg": "color.index.on-dark-current", "bg": ["color.background.deep"], "level": "ui" }
   ]
 }

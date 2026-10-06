@@ -1,0 +1,7 @@
+/* Logo files are used as <img>. Height drives the size; minimums follow foundations/logo.md. */
+.ww-logo { display: block; height: var(--_h, 32px); width: auto; max-width: 100%; flex: none; }
+.ww-logo--sm { --_h: 28px; }  /* horizontal minimum: mark 28px tall */
+.ww-logo--md { --_h: 36px; }
+.ww-logo--lg { --_h: 56px; }
+.ww-logo--xl { --_h: 96px; }
+.ww-logo--stacked { height: auto; width: 220px; min-width: 160px; }  /* stacked minimum: 160px wide */

@@ -1,0 +1,23 @@
+/* Status badge: dot plus label on a wash. Text color always passes 4.5:1 on its wash. */
+.ww-badge {
+  --_ink: var(--ww-color-status-info);
+  --_wash: var(--ww-color-status-info-wash);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.125rem 0.625rem 0.125rem 0.5rem;
+  border-radius: var(--ww-radius-pill);
+  background: var(--_wash);
+  color: var(--_ink);
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-sm);
+  font-weight: var(--ww-font-weight-medium);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.ww-badge::before { content: ""; width: 0.45em; height: 0.45em; border-radius: 50%; background: currentColor; flex: none; }
+.ww-badge--success { --_ink: var(--ww-color-status-success); --_wash: var(--ww-color-status-success-wash); }
+.ww-badge--warning { --_ink: var(--ww-color-status-warning); --_wash: var(--ww-color-status-warning-wash); }
+.ww-badge--danger { --_ink: var(--ww-color-status-danger); --_wash: var(--ww-color-status-danger-wash); }
+.ww-badge--info { --_ink: var(--ww-color-status-info); --_wash: var(--ww-color-status-info-wash); }
+.ww-badge--neutral { --_ink: var(--ww-color-text-muted); --_wash: var(--ww-color-background-wash); box-shadow: inset 0 0 0 1px var(--ww-color-border-decorative-soft); }

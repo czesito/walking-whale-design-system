@@ -1,0 +1,9 @@
+/* 38 × 4 Bone rule under a title. A typographic mark, not the signature element (DR-014). */
+.ww-rule {
+  width: 38px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ww-color-bone);
+  border: 0;
+  margin: 0;
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>通知 · Walking Whale Design System</title>
+<link rel="stylesheet" href="../../css/fonts.css">
+<link rel="stylesheet" href="../../dist/ww.css">
+</head>
+<body>
+<main class="ww-container ww-section ww-stack ww-stack--xl">
+<section class="ww-stack" lang="zh-Hant">
+<p class="ww-lang-label">zh-Hant</p>
+<div class="ww-toast ww-toast--static" role="status"><span class="ww-toast__icon"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><p class="ww-toast__text">已送出。我們讀完後會回覆您。</p><button class="ww-btn ww-btn--ghost ww-btn--sm" type="button">關閉</button></div>
+<div class="ww-cluster"><button class="ww-btn ww-btn--secondary" type="button" data-ww-toast="toast-zh">顯示通知</button></div>
+<div class="ww-toast" id="toast-zh" role="status" hidden><span class="ww-toast__icon"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><p class="ww-toast__text">已儲存</p></div>
+</section>
+<section class="ww-stack" lang="en">
+<p class="ww-lang-label">en</p>
+<div class="ww-toast ww-toast--static" role="status"><span class="ww-toast__icon"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><p class="ww-toast__text">Sent. We will reply once we have read it.</p><button class="ww-btn ww-btn--ghost ww-btn--sm" type="button">Dismiss</button></div>
+<div class="ww-cluster"><button class="ww-btn ww-btn--secondary" type="button" data-ww-toast="toast-en">Show toast</button></div>
+<div class="ww-toast" id="toast-en" role="status" hidden><span class="ww-toast__icon"><svg class="ww-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><p class="ww-toast__text">Saved</p></div>
+</section>
+</main>
+<script src="../../dist/ww.js"></script>
+</body>
+</html>

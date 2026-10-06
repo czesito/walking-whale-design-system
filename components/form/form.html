@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>表單 · Walking Whale Design System</title>
+<link rel="stylesheet" href="../../css/fonts.css">
+<link rel="stylesheet" href="../../dist/ww.css">
+</head>
+<body>
+<main class="ww-container ww-section ww-stack ww-stack--xl">
+<section class="ww-stack" lang="zh-Hant">
+<p class="ww-lang-label">zh-Hant</p>
+<form class="ww-form" action="#" novalidate>
+  <div class="ww-field">
+    <label class="ww-field__label" for="f-name-zh">您的名字</label>
+    <input class="ww-input" id="f-name-zh" name="name" autocomplete="name">
+  </div>
+  <div class="ww-field">
+    <label class="ww-field__label" for="f-mail-zh">電子郵件</label>
+    <input class="ww-input" id="f-mail-zh" name="email" type="email" autocomplete="email" aria-invalid="true" aria-describedby="f-mail-err-zh" value="czesio@">
+    <p class="ww-field__error" id="f-mail-err-zh">請輸入完整的電子郵件，例如 name@example.com。</p>
+  </div>
+  <div class="ww-field">
+    <label class="ww-field__label" for="f-type-zh">想做的系統</label>
+    <div class="ww-select-wrap">
+      <select class="ww-select" id="f-type-zh" name="type">
+        <option>網站與內容管理</option>
+        <option>營運與內部系統</option>
+        <option>AI 與資料</option>
+      </select>
+    </div>
+  </div>
+  <div class="ww-field">
+    <label class="ww-field__label" for="f-msg-zh">想解決的問題<span class="ww-field__optional">選填</span></label>
+    <textarea class="ww-textarea" id="f-msg-zh" name="message" aria-describedby="f-msg-hint-zh"></textarea>
+    <p class="ww-field__hint" id="f-msg-hint-zh">不必寫成規格，用您平常的說法就好。</p>
+  </div>
+  <fieldset class="ww-fieldset">
+    <legend>預計的時程</legend>
+    <label class="ww-check"><input type="radio" name="when-zh" checked><span>三個月內</span></label>
+    <label class="ww-check"><input type="radio" name="when-zh"><span>半年內</span></label>
+    <label class="ww-check"><input type="radio" name="when-zh" disabled><span>一年以上（目前不開放）</span></label>
+  </fieldset>
+  <label class="ww-check"><input type="checkbox" name="agree"><span>我同意走路鯨魚以電子郵件回覆我。</span></label>
+  <label class="ww-switch"><input class="ww-switch__input" type="checkbox" role="switch" checked><span class="ww-switch__track" aria-hidden="true"></span>訂閱每月筆記</label>
+  <div class="ww-cluster"><button class="ww-btn ww-btn--primary" type="submit">送出</button><input class="ww-input" type="text" value="停用的欄位" disabled aria-label="停用的欄位"></div>
+</form>
+</section>
+<section class="ww-stack" lang="en">
+<p class="ww-lang-label">en</p>
+<form class="ww-form" action="#" novalidate>
+  <div class="ww-field">
+    <label class="ww-field__label" for="f-name-en">Your name</label>
+    <input class="ww-input" id="f-name-en" name="name" autocomplete="name">
+  </div>
+  <div class="ww-field">
+    <label class="ww-field__label" for="f-mail-en">Email</label>
+    <input class="ww-input" id="f-mail-en" name="email" type="email" autocomplete="email" aria-invalid="true" aria-describedby="f-mail-err-en" value="czesio@">
+    <p class="ww-field__error" id="f-mail-err-en">Enter a full email address, such as name@example.com.</p>
+  </div>
+  <div class="ww-field">
+    <label class="ww-field__label" for="f-type-en">What you want to build</label>
+    <div class="ww-select-wrap">
+      <select class="ww-select" id="f-type-en" name="type">
+        <option>Website and content</option>
+        <option>Operations and internal systems</option>
+        <option>AI and data</option>
+      </select>
+    </div>
+  </div>
+  <div class="ww-field">
+    <label class="ww-field__label" for="f-msg-en">The problem to solve<span class="ww-field__optional">Optional</span></label>
+    <textarea class="ww-textarea" id="f-msg-en" name="message" aria-describedby="f-msg-hint-en"></textarea>
+    <p class="ww-field__hint" id="f-msg-hint-en">No need for a spec. Describe it the way you would to a colleague.</p>
+  </div>
+  <fieldset class="ww-fieldset">
+    <legend>Expected timeline</legend>
+    <label class="ww-check"><input type="radio" name="when-en" checked><span>Within 3 months</span></label>
+    <label class="ww-check"><input type="radio" name="when-en"><span>Within 6 months</span></label>
+    <label class="ww-check"><input type="radio" name="when-en" disabled><span>More than a year (not available)</span></label>
+  </fieldset>
+  <label class="ww-check"><input type="checkbox" name="agree"><span>Walking Whale may reply to me by email.</span></label>
+  <label class="ww-switch"><input class="ww-switch__input" type="checkbox" role="switch" checked><span class="ww-switch__track" aria-hidden="true"></span>Subscribe to monthly notes</label>
+  <div class="ww-cluster"><button class="ww-btn ww-btn--primary" type="submit">Send</button><input class="ww-input" type="text" value="Disabled field" disabled aria-label="Disabled field"></div>
+</form>
+</section>
+</main>
+<script src="../../dist/ww.js"></script>
+</body>
+</html>

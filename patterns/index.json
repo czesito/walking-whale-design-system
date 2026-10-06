@@ -1,0 +1,40 @@
+{
+  "$description": "Order of page patterns. Every directory under patterns/ must be listed.",
+  "items": [
+    {
+      "name": "hero",
+      "zh": "主視覺",
+      "en": "Hero"
+    },
+    {
+      "name": "section-opener",
+      "zh": "區塊開頭",
+      "en": "Section opener"
+    },
+    {
+      "name": "services",
+      "zh": "服務卡片區",
+      "en": "Services"
+    },
+    {
+      "name": "case-list",
+      "zh": "案例列表",
+      "en": "Case list"
+    },
+    {
+      "name": "team",
+      "zh": "團隊",
+      "en": "Team"
+    },
+    {
+      "name": "cta",
+      "zh": "行動呼籲",
+      "en": "Call to action"
+    },
+    {
+      "name": "contact",
+      "zh": "聯絡",
+      "en": "Contact"
+    }
+  ]
+}

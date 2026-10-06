@@ -1,0 +1,11 @@
+/* .ww-kicker itself lives in css/type.css. This adds the B1 number (DR-013). */
+.ww-kicker__no {
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  font-weight: var(--ww-font-weight-regular);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ww-color-text-muted);
+  margin-right: var(--ww-space-3);
+}
+.ww-on-dark .ww-kicker__no { color: var(--ww-color-text-on-dark-secondary); }

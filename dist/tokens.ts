@@ -42,9 +42,17 @@ export const tokens = {
       "control": "#868F9E"
     },
     "focus": "#2F7A60",
+    "index": {
+      "done": "#2E5F7A",
+      "current": "#0D1F3C",
+      "todo": "#C8B99A",
+      "on-dark-done": "#6DBFA0",
+      "on-dark-current": "#FBFAF6",
+      "on-dark-todo": "#2E5F7A"
+    },
     "status": {
       "success": "#2F7A60",
-      "success-wash": "rgba(109, 191, 160, 0.161)",
+      "success-wash": "rgba(109, 191, 160, 0.122)",
       "warning": "#A05138",
       "warning-wash": "rgba(176, 106, 79, 0.122)",
       "danger": "#A8352A",
@@ -132,11 +140,10 @@ export const tokens = {
     "10": "88px"
   },
   "radius": {
-    "xs": "6px",
-    "sm": "12px",
-    "md": "16px",
-    "lg": "20px",
-    "xl": "26px",
+    "xs": "2px",
+    "sm": "4px",
+    "md": "8px",
+    "lg": "12px",
     "pill": "999px"
   },
   "shadow": {

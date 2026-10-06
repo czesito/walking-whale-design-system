@@ -1,0 +1,26 @@
+/* TL;DR: the points a reader must leave with, on Sediment. */
+.ww-tldr {
+  display: grid;
+  gap: var(--ww-space-3);
+  padding: var(--ww-space-5);
+  background: var(--ww-color-background-warm);
+  border-top: 2px solid var(--ww-color-abyss);
+  border-radius: var(--ww-radius-xs);
+  color: var(--ww-color-text-primary);
+}
+.ww-tldr__label {
+  margin: 0;
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-secondary);
+}
+.ww-tldr__list {
+  margin: 0;
+  padding-left: 1.25em;
+  display: grid;
+  gap: var(--ww-space-2);
+  font-family: var(--ww-font-family-body);
+  font-size: var(--ww-font-size-body);
+  line-height: var(--ww-line-height-body);
+}

@@ -1,0 +1,37 @@
+/* Code block with an optional file label, and inline code. */
+.ww-code {
+  display: grid;
+  margin: 0;
+  min-width: 0;
+  background: var(--ww-color-background-wash);
+  border: 1px solid var(--ww-color-border-decorative);
+  border-top: 2px solid var(--ww-color-abyss);
+  border-radius: var(--ww-radius-xs);
+}
+.ww-code__label {
+  margin: 0;
+  padding: var(--ww-space-2) var(--ww-space-4);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+  background: var(--ww-color-background-card);
+  border-bottom: 1px solid var(--ww-color-border-decorative-soft);
+}
+.ww-code pre {
+  margin: 0;
+  padding: var(--ww-space-4);
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  tab-size: 2;
+  color: var(--ww-color-text-primary);
+}
+.ww-code code { font-family: var(--ww-font-family-mono); }
+:not(pre) > code {
+  padding: 0.05em 0.35em;
+  font-size: 0.9em;
+  background: var(--ww-color-background-wash);
+  border: 1px solid var(--ww-color-border-decorative-soft);
+  border-radius: var(--ww-radius-xs);
+}

@@ -1,0 +1,44 @@
+/* Stat: one number, its unit, what it measures, and where it comes from. */
+.ww-stat {
+  display: grid;
+  gap: var(--ww-space-1);
+  align-content: start;
+  margin: 0;
+  padding-top: var(--ww-space-3);
+  border-top: 1px solid var(--ww-color-abyss);
+}
+.ww-stat__value {
+  margin: 0;
+  font-family: var(--ww-font-family-display);
+  font-size: var(--ww-font-size-h1);
+  font-weight: var(--ww-font-weight-display);
+  line-height: 1;
+  letter-spacing: var(--ww-letter-spacing-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ww-color-text-primary);
+}
+.ww-stat__unit {
+  margin-left: 0.2em;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  font-weight: var(--ww-font-weight-medium);
+  letter-spacing: 0;
+  color: var(--ww-color-text-secondary);
+}
+.ww-stat__label {
+  margin: 0;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  font-weight: var(--ww-font-weight-medium);
+  color: var(--ww-color-text-primary);
+}
+.ww-stat__note {
+  margin: 0;
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-on-dark .ww-stat { border-top-color: var(--ww-color-text-on-dark-label); }
+.ww-on-dark .ww-stat__value, .ww-on-dark .ww-stat__label { color: var(--ww-color-text-on-dark); }
+.ww-on-dark .ww-stat__unit, .ww-on-dark .ww-stat__note { color: var(--ww-color-text-on-dark-secondary); }

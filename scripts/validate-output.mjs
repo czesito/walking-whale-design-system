@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+// Validate HTML produced with the system (DR-016).
+//
+//   node scripts/validate-output.mjs page.html [more.html ...]
+//
+// Rules:
+//   class      every class must be defined in dist/ww.css
+//   style      no style attributes and no <style> blocks
+//   hex        no hex colors in any attribute
+//   paint      SVG fill/stroke/color/stop-color only as none, currentColor or transparent; color comes from classes
+//
+// Exit code 1 when any rule fails. Use validate() from other scripts.
+
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const HEX = /#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})\b/;
+const PAINT = new Set(["fill", "stroke", "color", "stop-color", "flood-color", "lighting-color", "bgcolor"]);
+const PAINT_OK = new Set(["none", "currentcolor", "transparent", "inherit"]);
+const SKIP_HEX = new Set(["href", "src", "srcset", "id", "for", "action", "xlink:href", "content"]);
+
+/** Every class selector defined in a stylesheet. */
+export function definedClasses(css) {
+  const clean = css
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/url\((?:"[^"]*"|'[^']*'|[^)]*)\)/g, "url()")
+    .replace(/"[^"]*"|'[^']*'/g, '""');
+  const out = new Set();
+  for (const m of clean.matchAll(/\.(-?[_a-zA-Z][_a-zA-Z0-9-]*)/g)) out.add(m[1]);
+  return out;
+}
+
+const lineOf = (text, index) => text.slice(0, index).split("\n").length;
+
+/** Returns a list of { line, rule, msg }. */
+export function validate(html, classes) {
+  const issues = [];
+  const body = html.replace(/<!--[\s\S]*?-->/g, (c) => c.replace(/[^\n]/g, " "));
+  const scriptless = body.replace(/<script\b[\s\S]*?<\/script>/gi, (c) => c.replace(/[^\n]/g, " "));
+
+  for (const m of scriptless.matchAll(/<style\b/gi)) {
+    issues.push({ line: lineOf(scriptless, m.index), rule: "style", msg: "<style> block; use system classes" });
+  }
+  for (const tag of scriptless.matchAll(/<([a-zA-Z][\w:-]*)\b([^>]*)>/g)) {
+    const attrs = tag[2];
+    const line = lineOf(scriptless, tag.index);
+    for (const a of attrs.matchAll(/([\w:-]+)\s*=\s*("([^"]*)"|'([^']*)')/g)) {
+      const name = a[1].toLowerCase();
+      const value = a[3] ?? a[4] ?? "";
+      if (name === "style") issues.push({ line, rule: "style", msg: `style attribute on <${tag[1]}>` });
+      if (name === "class") {
+        for (const c of value.split(/\s+/).filter(Boolean)) {
+          if (!classes.has(c)) issues.push({ line, rule: "class", msg: `unknown class "${c}" on <${tag[1]}>` });
+        }
+      }
+      if (PAINT.has(name) && !PAINT_OK.has(value.trim().toLowerCase())) {
+        issues.push({ line, rule: "paint", msg: `${name}="${value}" on <${tag[1]}>; color SVG with a class` });
+      } else if (!SKIP_HEX.has(name) && !name.startsWith("aria-") && !name.startsWith("data-") && HEX.test(value)) {
+        issues.push({ line, rule: "hex", msg: `hex color in ${name} on <${tag[1]}>` });
+      }
+    }
+  }
+  return issues;
+}
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const files = process.argv.slice(2);
+  if (!files.length) {
+    console.error("usage: node scripts/validate-output.mjs file.html [...]");
+    process.exit(2);
+  }
+  const classes = definedClasses(readFileSync(join(ROOT, "dist/ww.css"), "utf8"));
+  let n = 0;
+  for (const f of files) {
+    for (const i of validate(readFileSync(f, "utf8"), classes)) {
+      console.log(`${f}:${i.line}  ${i.msg}  [${i.rule}]`);
+      n++;
+    }
+  }
+  console.log(n ? `${n} issue(s)` : "validate-output: no issues");
+  process.exit(n ? 1 : 0);
+}

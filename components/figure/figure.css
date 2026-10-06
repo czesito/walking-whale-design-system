@@ -1,0 +1,89 @@
+/* Figure with caption, and the annotated variant with leader lines (DR-015).
+   Annotated figures are one SVG with viewBox width 1200. Label sizes are fixed in viewBox units,
+   so below 640px of figure width the labels would fall under 13px: there the leader lines give way
+   to numbered markers and the legend list. */
+
+.ww-figure { display: grid; gap: var(--ww-space-3); min-width: 0; margin: 0; }
+.ww-figure__media {
+  overflow: hidden;
+  background: var(--ww-color-background-warm);
+  border: 1px solid var(--ww-color-border-decorative-soft);
+  border-radius: var(--ww-radius-sm);
+}
+.ww-figure__media > img, .ww-figure__media > svg { display: block; width: 100%; height: auto; }
+.ww-figure__media--plain { background: var(--ww-color-background-card); }
+.ww-figure__media--contain { display: grid; place-items: center; padding: var(--ww-space-7) var(--ww-space-5); }
+.ww-figure__media--contain > img { width: auto; max-width: min(100%, 24rem); }
+.ww-figure__caption {
+  display: flex;
+  gap: var(--ww-space-3);
+  align-items: baseline;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-sm);
+  line-height: var(--ww-line-height-ui);
+  color: var(--ww-color-text-muted);
+}
+.ww-figure__no {
+  flex: none;
+  font-family: var(--ww-font-family-mono);
+  letter-spacing: 0;
+  color: var(--ww-color-text-secondary);
+}
+
+/* ---- annotated ---- */
+.ww-figure--annotated { container-type: inline-size; }
+.ww-annot { display: block; width: 100%; height: auto; }
+.ww-annot__line { fill: none; stroke: var(--ww-color-abyss); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.ww-annot__dot { fill: var(--ww-color-abyss); stroke: var(--ww-color-pearl); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ww-annot__title {
+  fill: var(--ww-color-text-primary);
+  font-family: var(--ww-font-family-ui);
+  font-size: 30px;
+  font-weight: var(--ww-font-weight-bold);
+}
+.ww-annot__sub {
+  fill: var(--ww-color-text-secondary);
+  font-family: var(--ww-font-family-ui);
+  font-size: 25px;
+}
+.ww-annot__item { pointer-events: none; }
+.ww-annot__item--end text { text-anchor: end; }
+.ww-annot__marker { display: none; }
+.ww-annot__marker circle { fill: var(--ww-color-abyss); stroke: var(--ww-color-pearl); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ww-annot__marker text {
+  fill: var(--ww-color-pearl);
+  font-family: var(--ww-font-family-mono);
+  font-size: 40px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.ww-annot__legend { display: none; margin: 0; padding: 0; list-style: none; gap: var(--ww-space-2); counter-reset: ww-annot; }
+.ww-annot__legend li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--ww-space-1) var(--ww-space-3);
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  counter-increment: ww-annot;
+}
+.ww-annot__legend li::before {
+  content: counter(ww-annot);
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--ww-color-abyss);
+  color: var(--ww-color-pearl);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  flex: none;
+}
+.ww-annot__legend strong { font-weight: var(--ww-font-weight-bold); }
+.ww-annot__legend span { color: var(--ww-color-text-secondary); font-size: var(--ww-font-size-sm); }
+@container (max-width: 639px) {
+  .ww-annot__line, .ww-annot__dot, .ww-annot__title, .ww-annot__sub { display: none; }
+  .ww-annot__marker { display: inline; }
+  .ww-annot__legend { display: grid; }
+}

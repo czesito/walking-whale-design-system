@@ -1,0 +1,22 @@
+/* Chip: a mono tag. Pill shape is reserved for chips and badges (DR-013). */
+.ww-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ww-space-1);
+  padding: 0.125rem 0.625rem;
+  border: 1px solid var(--ww-color-border-decorative);
+  border-radius: var(--ww-radius-pill);
+  background: transparent;
+  color: var(--ww-color-text-secondary);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  line-height: 1.5;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+button.ww-chip, a.ww-chip { min-height: 32px; cursor: pointer; }
+button.ww-chip:hover, a.ww-chip:hover { border-color: var(--ww-color-border-control); color: var(--ww-color-text-primary); }
+.ww-chip[aria-pressed="true"] { background: var(--ww-color-abyss); border-color: var(--ww-color-abyss); color: var(--ww-color-text-on-dark); }
+.ww-chip__count { color: var(--ww-color-text-muted); }
+.ww-chip[aria-pressed="true"] .ww-chip__count { color: var(--ww-color-text-on-dark-secondary); }

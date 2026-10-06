@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>標籤篩選 · Walking Whale Design System</title>
+<link rel="stylesheet" href="../../css/fonts.css">
+<link rel="stylesheet" href="../../dist/ww.css">
+</head>
+<body>
+<main class="ww-container ww-section ww-stack ww-stack--xl">
+<section class="ww-stack" lang="zh-Hant">
+<p class="ww-lang-label">zh-Hant</p>
+<div class="ww-filter" role="group" aria-label="依主題篩選">
+  <p class="ww-filter__label">主題</p>
+  <div class="ww-filter__chips" data-ww-single>
+    <button class="ww-chip" type="button" aria-pressed="true" data-ww-toggle>全部</button>
+    <button class="ww-chip" type="button" aria-pressed="false" data-ww-toggle>筆記</button>
+    <button class="ww-chip" type="button" aria-pressed="false" data-ww-toggle>工程</button>
+    <button class="ww-chip" type="button" aria-pressed="false" data-ww-toggle>AI</button>
+  </div>
+  <p class="ww-filter__count" aria-live="polite">顯示 12 / 12</p>
+</div>
+</section>
+<section class="ww-stack" lang="en">
+<p class="ww-lang-label">en</p>
+<div class="ww-filter" role="group" aria-label="Filter by topic">
+  <p class="ww-filter__label">Topic</p>
+  <div class="ww-filter__chips" data-ww-single>
+    <button class="ww-chip" type="button" aria-pressed="true" data-ww-toggle>All</button>
+    <button class="ww-chip" type="button" aria-pressed="false" data-ww-toggle>Notes</button>
+    <button class="ww-chip" type="button" aria-pressed="false" data-ww-toggle>Engineering</button>
+    <button class="ww-chip" type="button" aria-pressed="false" data-ww-toggle>AI</button>
+  </div>
+  <p class="ww-filter__count" aria-live="polite">Showing 12 of 12</p>
+</div>
+</section>
+</main>
+<script src="../../dist/ww.js"></script>
+</body>
+</html>

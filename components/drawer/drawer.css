@@ -1,0 +1,51 @@
+/* Drawer: a modal <dialog> sliding in from the right. Open with data-ww-open (js/ww.js) or dialog.showModal(). */
+.ww-drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(22rem, calc(100vw - 3rem));
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--ww-color-abyss);
+  background: var(--ww-color-background-page);
+  color: var(--ww-color-text-primary);
+  box-shadow: var(--ww-shadow-lg);
+}
+.ww-drawer[open] { display: grid; grid-template-rows: auto 1fr auto; animation: ww-drawer-in var(--ww-motion-duration-base) var(--ww-motion-ease) both; }
+.ww-drawer::backdrop { background: color-mix(in srgb, var(--ww-color-abyss) 35%, transparent); }
+@keyframes ww-drawer-in { from { transform: translateX(var(--ww-space-6)); opacity: 0; } }
+.ww-drawer--preview { position: relative; inset: auto; height: auto; min-height: 28rem; width: min(100%, 22rem); box-shadow: none; border: 1px solid var(--ww-color-border-decorative); animation: none; }
+
+.ww-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ww-space-3);
+  padding: var(--ww-space-3) var(--ww-space-3) var(--ww-space-3) var(--ww-space-5);
+  border-bottom: 1px solid var(--ww-color-border-decorative);
+}
+.ww-drawer__nav { display: grid; align-content: start; padding: var(--ww-space-3) var(--ww-space-5); }
+.ww-drawer__nav a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: var(--ww-space-3);
+  border-bottom: 1px solid var(--ww-color-border-decorative-soft);
+  font-family: var(--ww-font-family-display);
+  font-size: var(--ww-font-size-h4);
+  font-weight: var(--ww-font-weight-heading);
+  color: var(--ww-color-text-primary);
+  text-decoration: none;
+}
+.ww-drawer__nav a[aria-current="page"]::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ww-color-abyss);
+  align-self: center;
+}
+.ww-drawer__foot { display: grid; gap: var(--ww-space-3); padding: var(--ww-space-5); border-top: 1px solid var(--ww-color-border-decorative); }

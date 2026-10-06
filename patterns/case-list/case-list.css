@@ -1,0 +1,20 @@
+/* Case card: specimen plate on the left, facts on the right. */
+.ww-case {
+  display: grid;
+  grid-template-columns: minmax(12rem, 2fr) minmax(0, 3fr);
+  gap: var(--ww-space-6);
+  padding: var(--ww-space-5);
+  background: var(--ww-color-background-card);
+  border: 1px solid var(--ww-color-border-decorative);
+  border-top: 2px solid var(--ww-color-abyss);
+  border-radius: var(--ww-radius-xs);
+}
+.ww-case__body { display: grid; gap: var(--ww-space-3); align-content: start; min-width: 0; }
+.ww-case__body .ww-chip { justify-self: start; }
+.ww-case__title { margin: 0; font-size: var(--ww-font-size-h3); }
+.ww-case__text { margin: 0; font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); }
+.ww-case__facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--ww-space-1) var(--ww-space-4); margin: 0; font-size: var(--ww-font-size-sm); }
+.ww-case__facts dt { font-family: var(--ww-font-family-mono); letter-spacing: 0; color: var(--ww-color-text-muted); }
+.ww-case__facts dd { margin: 0; font-family: var(--ww-font-family-ui); color: var(--ww-color-text-primary); }
+.ww-case .ww-plate { min-height: 10rem; }
+@media (max-width: 760px) { .ww-case { grid-template-columns: minmax(0, 1fr); } }

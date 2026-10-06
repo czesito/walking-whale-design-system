@@ -1,0 +1,13 @@
+/* Empty state: what is missing, why, and the one next step. */
+.ww-empty {
+  display: grid;
+  justify-items: start;
+  gap: var(--ww-space-3);
+  padding: var(--ww-space-7) var(--ww-space-6);
+  border: 1px dashed var(--ww-color-border-decorative);
+  border-radius: var(--ww-radius-xs);
+  background: var(--ww-color-background-page);
+}
+.ww-empty__icon { width: 1.75rem; height: 1.75rem; color: var(--ww-color-text-muted); }
+.ww-empty__title { margin: 0; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-body); font-weight: var(--ww-font-weight-semibold); line-height: var(--ww-line-height-ui); color: var(--ww-color-text-primary); }
+.ww-empty__body { margin: 0; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-body); color: var(--ww-color-text-secondary); max-width: 34rem; }

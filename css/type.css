@@ -99,16 +99,6 @@
   letter-spacing: 0;
 }
 
-/* 38 × 4 Bone rule that opens and closes sections. */
-.ww-rule {
-  width: 38px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--ww-color-bone);
-  border: 0;
-  margin: 0;
-}
-
 /* Surfaces that flip text to the on-dark set. */
 .ww-on-dark {
   background: var(--ww-color-background-deep);

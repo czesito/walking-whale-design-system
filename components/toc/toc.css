@@ -1,0 +1,30 @@
+/* Table of contents: mono section numbers, current section marked with an Abyss bar. */
+.ww-toc { display: grid; gap: var(--ww-space-3); font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); }
+.ww-toc__title {
+  margin: 0;
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-toc ol { list-style: none; margin: 0; padding: 0; display: grid; counter-reset: ww-toc; border-left: 1px solid var(--ww-color-border-decorative); }
+.ww-toc li { counter-increment: ww-toc; }
+.ww-toc a {
+  display: flex;
+  gap: var(--ww-space-3);
+  padding: var(--ww-space-2) 0 var(--ww-space-2) var(--ww-space-4);
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  color: var(--ww-color-text-secondary);
+  text-decoration: none;
+  line-height: var(--ww-line-height-ui);
+}
+.ww-toc a::before {
+  content: counter(ww-toc, decimal-leading-zero);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  color: var(--ww-color-text-muted);
+  padding-top: 0.1em;
+}
+.ww-toc a:hover { color: var(--ww-color-text-primary); }
+.ww-toc a[aria-current="true"] { border-left-color: var(--ww-color-abyss); color: var(--ww-color-text-primary); font-weight: var(--ww-font-weight-medium); }

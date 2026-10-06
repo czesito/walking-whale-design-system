@@ -1,0 +1,24 @@
+/* Tag filter bar: toggle chips (aria-pressed) and a result count. */
+.ww-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ww-space-2) var(--ww-space-3);
+  padding-block: var(--ww-space-3);
+  border-block: 1px solid var(--ww-color-border-decorative);
+}
+.ww-filter__label {
+  margin: 0 var(--ww-space-2) 0 0;
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-filter__chips { display: flex; flex-wrap: wrap; gap: var(--ww-space-2); }
+.ww-filter__count {
+  margin: 0 0 0 auto;
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
