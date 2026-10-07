@@ -2,7 +2,7 @@
 
 格式依 [Keep a Changelog](https://keepachangelog.com/)，版本依 [Semantic Versioning](https://semver.org/)。
 
-## v0.2.0（未發布）
+## v0.2.0（2026-10-07）
 
 3:2 簡報系統，所有設計決定見 [DR-019](decisions/DR-019-slides.md)。
 
@@ -25,6 +25,18 @@
 ### 公開網站
 
 - 導覽加上範例簡報。
+
+### 發布管道
+
+- claude.ai 的 Design System artifact 加上「簡報」一節，指向範例簡報。
+- walking-whale-slides skill 改寫成以本 repo 為準，鎖定 3:2，鼓勵在適當時發揮創意並主動建議互動（在 claude.ai 由 Czesio 存檔後生效）。
+
+### 已知事項
+
+- GitHub Pages 仍需在 repo 設定中把來源設為 GitHub Actions 後才會部署。
+- walking-whale-slides skill 資料夾裡舊版 16:9 的 `references/` 與 `assets/` 仍在，新版 SKILL.md 已註明不使用，可以刪除。
+- 驗證器的 HTML 解析器不處理省略結束標籤的 `<li>`。
+- 附講稿 PDF 的講稿欄大約容得下 400 字，超過的部分會被裁掉。
 
 ## v0.1.0（2026-10-07）
 

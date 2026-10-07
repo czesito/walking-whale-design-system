@@ -78,6 +78,11 @@
 - 介面圖示用 Lucide，直接寫成 inline SVG：`viewBox="0 0 24 24"`、`class="ww-icon"`、`aria-hidden="true"`，不加 fill 與 stroke 屬性，顏色跟著 currentColor，線寬 1.75。
 - 不用 emoji 當圖示。標誌檔案見 Logos 資產群組。
 
+## 簡報
+
+- 簡報是固定 1500 × 1000（3:2）的舞台，頁面不捲動，一頁一個主張、一個證據（DR-019）。樣式在 repo 的 `dist/ww-deck.css`，不在 `components/bundle.css` 裡。
+- 從 repo 的 `dist/deck-zh.html` 或 `dist/deck-en.html` 複製，只換 `slides:start` 與 `slides:end` 之間的頁面。用途、文字預算、版型與互動見「簡報」一節。
+
 ## 未同步的內容
 
 - 字體沒有上傳檔案：全部使用 Google Fonts 託管的版本，在 `type.families` 中列出。

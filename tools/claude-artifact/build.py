@@ -12,6 +12,7 @@ R = os.path.normpath(os.path.join(HERE, "..", ".."))
 OUT = os.path.join(sys.argv[1], "project")
 GH = "https://github.com/czesito/walking-whale-design-system/blob/main/"
 SHA = os.popen(f"git -C {R} rev-parse --short HEAD").read().strip()
+VERSION = json.load(open(os.path.join(R, "package.json"), encoding="utf-8"))["version"]
 NOW = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 FONTS = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
 
@@ -109,7 +110,7 @@ groups = [
    {"name": "kicker-zh", "family": "ui-zh", "fontSize": "0.8125rem", "lineHeight": 1.6, "letterSpacing": "0.12em", "fontWeight": 500, "sample": "我們做什麼", "usage": "ww-kicker under :lang(zh): UI face, no case change, 13px minimum."}]},
 ]
 tokens = {"name": "Walking Whale", "version": 1,
-  "meta": {"source": "github", "repo": "czesito/walking-whale-design-system", "ref": f"main@{SHA}", "paths": {"tokens": ["tokens/tokens.json", "tokens/lang-zh.json"], "assets": ["assets/"], "docs": ["SKILL.md", "content/", "foundations/", "components/", "patterns/"]}, "synced": NOW[:10]},
+  "meta": {"source": "github", "repo": "czesito/walking-whale-design-system", "ref": f"main@{SHA}", "paths": {"tokens": ["tokens/tokens.json", "tokens/lang-zh.json"], "assets": ["assets/"], "docs": ["SKILL.md", "content/", "foundations/", "components/", "patterns/", "slides/"]}, "synced": NOW[:10]},
   "color": {"themes": [{"id": "light", "name": "Light"}], "tokens": colors},
   "type": {"fonts": [], "families": families, "groups": groups},
   "spacing": {"tokens": spacing}, "radius": {"tokens": radius},
@@ -184,6 +185,24 @@ for dst, src in SECTIONS:
     md = re.sub(r"^<!--.*?-->\s*", "", md, flags=re.S)
     w(dst, relink(md, src))
 
+# Slides (DR-019): not in bundle.css. The section points at the self-contained sample decks in the repo.
+RAW = "https://raw.githubusercontent.com/czesito/walking-whale-design-system/main/"
+deck_doc = open(f"{R}/slides/deck/deck.prompt.md", encoding="utf-8").read().split("\n", 1)[1].lstrip()
+rows = "\n".join(f"| `{i['name']}` | {i['zh']} {i['en']} | {i['use']} |" for i in json.load(open(f"{R}/slides/index.json", encoding="utf-8"))["items"])
+w("14-slides.md", relink(f"""# 簡報
+
+3:2 簡報是另一套版型與執行時（[DR-019]({GH}decisions/DR-019-slides.md)），樣式在 repo 的 `dist/ww-deck.css`，不在 `components/bundle.css` 裡。
+
+做簡報時，從範例簡報複製：[中文]({RAW}dist/deck-zh.html)、[英文]({RAW}dist/deck-en.html)。樣式、程式與標誌都已內嵌，只換 `slides:start` 與 `slides:end` 之間的頁面。
+
+| 名稱 | 版型 | 何時用 |
+|---|---|---|
+{rows}
+
+## 引擎
+
+{deck_doc}""", "slides/deck/deck.prompt.md"))
+
 # ---------------- assets README
 w("assets/Logos/README.md", """# Logos
 
@@ -224,6 +243,6 @@ for rel, (bid, size) in BLOBS.items():
 index = {"v": 3, "layout": "files", "createdOnFiles": {"v": 1, "at": NOW}, "title": "Walking Whale", "namespace": "WW", "libraries": [],
   "sections": {}, "groups": ["Logos"], "assetGroups": {"Logos": {"name": "Logos", "tile": "l", "order": order, "files": files}},
   "blobs": {}, "docs": {"sections": []},
-  "lastChange": {"by": "Czesio", "at": NOW, "via": f"GitHub · czesito/walking-whale-design-system@{SHA}", "note": "v0.1.0 synced from the repository"}}
+  "lastChange": {"by": "Czesio", "at": NOW, "via": f"GitHub · czesito/walking-whale-design-system@{SHA}", "note": f"v{VERSION} synced from the repository"}}
 w("design-system.json", json.dumps(index, ensure_ascii=False, indent=2) + "\n")
 print("ds files:", sum(len(f) for _, _, f in os.walk(OUT)), "sha", SHA)

@@ -50,7 +50,7 @@ node scripts/validate-output.mjs page.html
 專案中安裝：
 
 ```sh
-npm i github:czesito/walking-whale-design-system#v0.1.0
+npm i github:czesito/walking-whale-design-system#v0.2.0
 ```
 
 ```css
