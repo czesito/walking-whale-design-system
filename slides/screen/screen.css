@@ -1,0 +1,57 @@
+/* Screen tour: a product screen with numbered spots and their captions. With builds, each spot
+   and its caption appear in turn; ww-build--focus on the list steps earlier captions back. */
+.ww-device {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  background: var(--ww-color-background-card);
+  border: 1px solid var(--ww-color-border-decorative);
+  border-top: 2px solid var(--ww-color-abyss);
+  border-radius: var(--ww-radius-xs);
+  overflow: hidden;
+}
+.ww-device__bar {
+  margin: 0;
+  padding: var(--ww-space-2) var(--ww-space-4);
+  border-bottom: 1px solid var(--ww-color-border-decorative);
+  font-family: var(--ww-font-family-mono);
+  font-size: 18px;
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ww-device__view { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: var(--ww-color-background-wash); }
+.ww-device__view--16x9 { aspect-ratio: 16 / 9; }
+.ww-device__view--4x3 { aspect-ratio: 4 / 3; }
+.ww-device__view--phone { aspect-ratio: 390 / 844; }
+.ww-device--phone { justify-self: center; height: 100%; border-radius: var(--ww-radius-lg); border-top-width: 1px; }
+.ww-device__view > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.ww-device__ui { position: absolute; inset: 0; font-family: var(--ww-font-family-ui); font-size: 18px; line-height: 1.4; }
+
+.ww-tour { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--ww-space-7); align-items: center; margin: 0; min-height: 0; }
+.ww-tour__overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ww-tour__ring { fill: none; stroke: var(--ww-color-abyss); stroke-width: 3; }
+.ww-tour__pin { fill: var(--ww-color-abyss); }
+.ww-tour__pin-no { fill: var(--ww-color-pearl); font-family: var(--ww-font-family-mono); font-size: 22px; font-weight: var(--ww-font-weight-semibold); text-anchor: middle; dominant-baseline: central; }
+.ww-tour__list { display: grid; gap: var(--ww-space-5); margin: 0; padding: 0; list-style: none; counter-reset: none; }
+.ww-tour__item { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: var(--ww-space-4); align-items: start; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-ui); color: var(--ww-color-text-primary); }
+.ww-tour__item strong { display: block; font-weight: var(--ww-font-weight-semibold); }
+.ww-tour__no {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ww-radius-pill);
+  background: var(--ww-color-abyss);
+  color: var(--ww-color-pearl);
+  font-family: var(--ww-font-family-mono);
+  font-size: 20px;
+  font-weight: var(--ww-font-weight-semibold);
+}
+
+.ww-slide--screen > .ww-slide__body { align-content: center; }
+
+.ww-tour__spot { pointer-events: none; }

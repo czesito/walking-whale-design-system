@@ -1,0 +1,15 @@
+/* Section opener: a large numeral and the section's one-line promise. Abyss by default. */
+.ww-slide--section { grid-template-rows: minmax(0, 1fr) auto; }
+.ww-slide--section > .ww-slide__head { align-content: end; gap: var(--ww-space-5); }
+.ww-slide__numeral {
+  margin: 0;
+  align-self: start;
+  font-family: var(--ww-font-family-display);
+  font-size: 280px;
+  font-weight: var(--ww-font-weight-display);
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums;
+  color: var(--ww-color-text-secondary);
+}
+.ww-on-dark .ww-slide__numeral { color: var(--ww-color-text-on-dark-label); }

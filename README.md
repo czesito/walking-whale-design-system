@@ -10,9 +10,10 @@
 |---|---|
 | [`tokens/`](tokens/) | 唯一的 token 源頭：`tokens.json`（預設）、`lang-zh.json`（中文覆寫）、`contrast-pairs.json`（允許的色彩組合） |
 | [`css/`](css/) | 手寫的基礎樣式、文字樣式、字體載入，只使用 token |
-| [`dist/`](dist/) | 產生物，不要手改：`tokens.css`、`ww.css`（tokens、基礎樣式、所有元件與模式）、`tokens.ts`、`ww.js` |
+| [`dist/`](dist/) | 產生物，不要手改：`tokens.css`、`ww.css`（tokens、基礎樣式、所有元件與模式）、`tokens.ts`、`ww.js`；簡報用的 `ww-deck.css`、`ww-deck.js`，以及自帶樣式的範例簡報 `deck-zh.html`、`deck-en.html` |
 | [`components/`](components/) | 元件：每個目錄有 `.css`、中英範例 `.html`、給 Claude 的 `.prompt.md`；順序見 `index.json` |
 | [`patterns/`](patterns/) | 頁面模式：Hero、區塊開頭、服務、流程步驟、案例、團隊、CTA、聯絡 |
+| [`slides/`](slides/) | 3:2 簡報：引擎、16 種版型與頁內互動，各有 `.css` 與 `.prompt.md`；`src/` 是中英範例簡報的原始檔（DR-019） |
 | [`js/`](js/) | 選用的小型互動：浮現動畫、Drawer、篩選、閱讀進度、通知。沒有它頁面也能正常使用 |
 | [`assets/`](assets/) | Logo：直式與橫式 wordmark、骨架標誌、icon，各有 currentColor、Abyss、Pearl、Bone 版本；規格見 [foundations/logo.md](foundations/logo.md) |
 | [`foundations/`](foundations/) | 色彩、字體、logo 等規格說明 |
@@ -44,6 +45,8 @@
 node scripts/validate-output.mjs page.html
 ```
 
+簡報從 `dist/deck-zh.html` 或 `dist/deck-en.html` 複製，換掉 `slides:start` 與 `slides:end` 之間的頁面；或在頁面上載入 `dist/ww-deck.css` 與 `dist/ww-deck.js`。用法見 [slides/deck/deck.prompt.md](slides/deck/deck.prompt.md)。
+
 專案中安裝：
 
 ```sh
@@ -56,13 +59,13 @@ npm i github:czesito/walking-whale-design-system#v0.1.0
 
 ## 修改
 
-1. 只改 `tokens/*.json`、`css/*.css`、`components/`、`patterns/` 或 `js/ww.js`。新增元件時同時更新 `index.json`。
+1. 只改 `tokens/*.json`、`css/*.css`、`components/`、`patterns/`、`slides/` 或 `js/ww.js`。新增元件或版型時同時更新 `index.json`。
 2. 執行 `npm run build`，重新產生 `dist/`、`specimens/` 與 `foundations/color-contrast.md`。
 3. 執行 `npm run check`。CI 會跑同一個檢查：
    - 色彩組合對比是否符合 WCAG 2.2 AA
    - 中文字級是否都在 13px 以上
-   - `css/`、`components/`、`patterns/`、`specimens/src/` 裡有沒有寫死的 hex 色或不存在的 token
-   - 元件與模式的範例是否通過輸出驗證器（DR-016）
+   - `css/`、`components/`、`patterns/`、`slides/`、`specimens/src/` 裡有沒有寫死的 hex 色或不存在的 token
+   - 元件與模式的範例、範例簡報是否通過輸出驗證器（DR-016、DR-019）
    - 文案 lint：中英空格、全形標點、中文標題句號、用字表的避用詞
    - 產生物是否已更新
 4. 推進 `main`（DR-003）。需要負責人判斷的設計決定，先提案、決定後再推送。

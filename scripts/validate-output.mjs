@@ -4,7 +4,7 @@
 //   node scripts/validate-output.mjs page.html [more.html ...]
 //
 // Rules:
-//   class      every class must be defined in dist/ww.css
+//   class      every class must be defined in dist/ww.css (dist/ww-deck.css for a page with a ww-deck)
 //   style      no style attributes and no <style> blocks
 //   hex        no hex colors in any attribute
 //   paint      SVG fill/stroke/color/stop-color only as none, currentColor or transparent; color comes from classes
@@ -14,8 +14,11 @@
 //              logo files, kicker numbers, Chinese headings within 20 characters, one hero,
 //              no entrance motion on errors, warnings, toasts and alerts
 //
-// One exception: a <style data-ww-system> block whose content is exactly dist/ww.css, for pages that
-// cannot link the stylesheet (claude.ai artifacts). Any other <style> fails.
+//   deck       for slides (DR-019): data-ww-use, one claim per slide, title length, the text budget,
+//              list, grid, table and flow sizes, dial assumptions, chart titles
+//
+// One exception: a <style data-ww-system> block whose content is exactly dist/ww.css (or, for a deck,
+// dist/ww-deck.css), for pages that cannot link the stylesheet (claude.ai artifacts). Any other <style> fails.
 //
 // Exit code 1 when any rule fails. Use validate() from other scripts.
 
@@ -52,7 +55,7 @@ export function validate(html, classes, systemCss = null) {
   let body = html.replace(/<!--[\s\S]*?-->/g, blank);
   body = body.replace(/<style\b[^>]*\bdata-ww-system\b[^>]*>([\s\S]*?)<\/style>/gi, (m, css, offset) => {
     if (systemCss === null || norm(css) !== norm(systemCss)) {
-      issues.push({ line: lineOf(body, offset), rule: "style", msg: "<style data-ww-system> must contain dist/ww.css exactly, unchanged" });
+      issues.push({ line: lineOf(body, offset), rule: "style", msg: "<style data-ww-system> must contain dist/ww.css (dist/ww-deck.css for a deck) exactly, unchanged" });
     }
     return blank(m);
   });
@@ -91,10 +94,14 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     process.exit(2);
   }
   const css = readFileSync(join(ROOT, "dist/ww.css"), "utf8");
+  const deckCss = readFileSync(join(ROOT, "dist/ww-deck.css"), "utf8");
   const classes = definedClasses(css);
+  const deckClasses = definedClasses(deckCss);
   let n = 0;
   for (const f of files) {
-    for (const i of validate(readFileSync(f, "utf8"), classes, css)) {
+    const html = readFileSync(f, "utf8");
+    const deck = /class="[^"]*\bww-deck\b/.test(html);
+    for (const i of validate(html, deck ? deckClasses : classes, deck ? deckCss : css)) {
       console.log(`${f}:${i.line}  ${i.msg}  [${i.rule}]`);
       n++;
     }

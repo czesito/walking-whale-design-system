@@ -1,0 +1,24 @@
+/* Assertion and evidence: the default slide. The head states the claim as a sentence; the body
+   proves it with one picture: a screen, a diagram, a chart, a photo, a table. */
+/* A figure in the body shrinks to the space the body has, never past it. */
+.ww-slide__body > .ww-figure { height: 100%; min-height: 0; grid-template-rows: minmax(0, 1fr) auto; }
+.ww-slide__body > .ww-figure > .ww-figure__media { min-height: 0; display: grid; place-items: center; }
+.ww-slide__body > .ww-figure > .ww-figure__media > :is(svg, img) { max-width: 100%; max-height: 100%; }
+.ww-slide__media { margin: 0; display: grid; place-items: center; min-height: 0; height: 100%; }
+.ww-slide__media img, .ww-slide__media svg:not(.ww-icon) { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.ww-slide__media--frame { padding: var(--ww-space-5); background: var(--ww-color-background-card); border: 1px solid var(--ww-color-border-decorative); border-top: 2px solid var(--ww-color-abyss); border-radius: var(--ww-radius-xs); }
+.ww-slide__explain { display: grid; gap: var(--ww-space-4); align-content: center; max-width: 30em; }
+.ww-slide__explain p { margin: 0; }
+.ww-slide__point {
+  margin: 0;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  line-height: var(--ww-line-height-ui);
+  color: var(--ww-color-text-secondary);
+}
+.ww-on-dark .ww-slide__point { color: var(--ww-color-text-on-dark-secondary); }
+.ww-slide__point strong { color: var(--ww-color-text-primary); font-weight: var(--ww-font-weight-semibold); }
+.ww-on-dark .ww-slide__point strong { color: var(--ww-color-text-on-dark); }
+
+/* .ww-slide--evidence is the same as a plain .ww-slide; use it when you want the layout named. */
+.ww-slide--evidence > .ww-slide__body { align-content: center; }

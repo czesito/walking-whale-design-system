@@ -1,0 +1,464 @@
+/* Deck engine (DR-019). A fixed 1500 × 1000 (3:2) stage. ww-deck.js scales it to the window and
+   adds the modes: stage, overview and read. Without the script every slide shows at full
+   size, one under another, and printing still gives one slide per page. */
+
+/* ---------------------------------------------------------------- stage type scale
+   Fixed pixels: the window size never reflows a slide. Declared on every element so the :lang(zh)
+   block in tokens.css (which also sets these on every element) cannot win them back. */
+.ww-deck, .ww-deck * {
+  --ww-font-size-hero: 124px;
+  --ww-font-size-h1: 84px;
+  --ww-font-size-h2: 58px;
+  --ww-font-size-h3: 36px;
+  --ww-font-size-h4: 30px;
+  --ww-font-size-lede: 32px;
+  --ww-font-size-body: 27px;
+  --ww-font-size-ui: 26px;
+  --ww-font-size-sm: 20px;
+  --ww-font-size-kicker: 19px;
+  --ww-line-height-display: 1;
+  --ww-line-height-heading: 1.1;
+  --ww-line-height-lede: 1.32;
+  --ww-line-height-body: 1.45;
+  --ww-line-height-ui: 1.4;
+  --ww-layout-measure-body: 34em;
+}
+.ww-deck :lang(zh) {
+  --ww-font-size-hero: 100px;
+  --ww-font-size-h1: 72px;
+  --ww-font-size-h2: 50px;
+  --ww-font-size-h3: 32px;
+  --ww-font-size-h4: 28px;
+  --ww-font-size-lede: 30px;
+  --ww-font-size-body: 26px;
+  --ww-font-size-kicker: 20px;
+  --ww-line-height-display: 1.22;
+  --ww-line-height-heading: 1.3;
+  --ww-line-height-lede: 1.55;
+  --ww-line-height-body: 1.65;
+  --ww-line-height-ui: 1.5;
+  --ww-layout-measure-body: 24em;
+}
+.ww-deck :lang(en) {
+  --ww-font-size-hero: 124px;
+  --ww-font-size-h1: 84px;
+  --ww-font-size-h2: 58px;
+  --ww-font-size-h3: 36px;
+  --ww-font-size-h4: 30px;
+  --ww-font-size-lede: 32px;
+  --ww-font-size-body: 27px;
+  --ww-font-size-kicker: 19px;
+  --ww-line-height-display: 1;
+  --ww-line-height-heading: 1.1;
+  --ww-line-height-lede: 1.32;
+  --ww-line-height-body: 1.45;
+  --ww-line-height-ui: 1.4;
+  --ww-layout-measure-body: 34em;
+}
+
+/* ---------------------------------------------------------------- the slide */
+.ww-deck {
+  --_k: 1;
+  display: grid;
+  justify-content: center;
+  gap: var(--ww-space-8);
+  padding: var(--ww-space-8) 0;
+  background: var(--ww-color-background-wash);
+}
+.ww-slide {
+  --_pad-x: 96px;
+  --_pad-top: 84px;
+  --_pad-bottom: 112px;
+  position: relative;
+  box-sizing: border-box;
+  width: 1500px;
+  height: 1000px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  row-gap: var(--ww-space-8);
+  padding: var(--_pad-top) var(--_pad-x) var(--_pad-bottom);
+  background: var(--ww-color-background-page);
+  color: var(--ww-color-text-primary);
+  font-family: var(--ww-font-family-body);
+  font-size: var(--ww-font-size-body);
+  line-height: var(--ww-line-height-body);
+  text-wrap: pretty;
+}
+.ww-slide.ww-on-dark { background: var(--ww-color-background-deep); color: var(--ww-color-text-on-dark); }
+.ww-slide--warm { background: var(--ww-color-background-warm); }
+.ww-slide--wash { background: var(--ww-color-background-wash); }
+.ww-slide--card { background: var(--ww-color-background-card); }
+
+/* Head: kicker, one assertion (a full sentence, two lines at most), an optional lede. */
+.ww-slide__head { display: grid; gap: var(--ww-space-4); align-content: start; max-width: 1180px; }
+.ww-slide__title { margin: 0; text-wrap: balance; }
+.ww-slide__lede {
+  margin: 0;
+  max-width: var(--ww-layout-measure-body);
+  font-family: var(--ww-font-family-body);
+  font-size: var(--ww-font-size-lede);
+  line-height: var(--ww-line-height-lede);
+  color: var(--ww-color-text-secondary);
+}
+.ww-on-dark .ww-slide__lede { color: var(--ww-color-text-on-dark-secondary); }
+
+/* Big type for covers, statements and endings. */
+.ww-slide__display {
+  margin: 0;
+  font-family: var(--ww-font-family-display);
+  font-size: var(--ww-font-size-hero);
+  font-weight: var(--ww-font-weight-display);
+  line-height: var(--ww-line-height-display);
+  letter-spacing: var(--ww-letter-spacing-display);
+  color: var(--ww-color-text-primary);
+  text-wrap: balance;
+}
+.ww-on-dark .ww-slide__display { color: var(--ww-color-text-on-dark); }
+
+/* Body: the evidence. It gets every pixel the head and foot leave. */
+.ww-slide__body { display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; gap: var(--ww-space-6); min-height: 0; }
+.ww-slide__body--top { align-content: start; }
+.ww-slide__body--fill { align-content: stretch; }
+/* A chart, figure, picture or diagram as the evidence takes the whole body and scales to fit it. */
+.ww-slide__body:has(> :is(.ww-chart, .ww-figure, .ww-slide__media, .ww-dia)) { grid-template-rows: minmax(0, 1fr); align-content: stretch; }
+.ww-slide__body > :is(.ww-chart, .ww-dia) { width: 100%; height: 100%; min-height: 0; }
+
+/* Foot: the takeaway sentence, the source line, or both. */
+.ww-slide__foot { display: grid; gap: var(--ww-space-3); align-content: end; }
+.ww-slide__takeaway {
+  margin: 0;
+  max-width: 1180px;
+  padding-top: var(--ww-space-4);
+  border-top: 1px solid var(--ww-color-abyss);
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  font-weight: var(--ww-font-weight-semibold);
+  line-height: var(--ww-line-height-ui);
+  color: var(--ww-color-text-primary);
+}
+.ww-on-dark .ww-slide__takeaway { border-top-color: var(--ww-color-text-on-dark); color: var(--ww-color-text-on-dark); }
+.ww-slide__source {
+  margin: 0;
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  line-height: var(--ww-line-height-ui);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-on-dark .ww-slide__source { color: var(--ww-color-text-on-dark-secondary); }
+
+/* Notes: never on the stage. Read mode shows them beside each slide and prints them as a handout. */
+.ww-slide__notes { display: none; }
+
+/* Honest labels for planned or sample content: a dashed frame, never a solid one. */
+.ww-slide__flag {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ww-space-2);
+  padding: var(--ww-space-1) var(--ww-space-3);
+  border: 1px dashed var(--ww-color-border-control);
+  border-radius: var(--ww-radius-xs);
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-on-dark .ww-slide__flag { border-color: var(--ww-color-text-on-dark-secondary); color: var(--ww-color-text-on-dark-secondary); }
+
+/* Chrome: the wordmark and the page index, added to each slide by ww-deck.js. */
+.ww-slide__chrome {
+  position: absolute;
+  left: var(--_pad-x);
+  right: var(--_pad-x);
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ww-space-5);
+  color: var(--ww-color-text-primary);
+  pointer-events: none;
+}
+.ww-on-dark .ww-slide__chrome { color: var(--ww-color-text-on-dark); }
+.ww-slide__brand { display: block; height: 26px; width: auto; flex: none; }
+.ww-slide__chrome .ww-index { font-size: var(--ww-font-size-sm); flex-wrap: nowrap; }
+.ww-slide__chrome .ww-index__count { font-size: var(--ww-font-size-sm); }
+.ww-slide__chrome .ww-index__label { font-size: var(--ww-font-size-sm); white-space: nowrap; }
+
+/* Layout and component sizes for the stage. Media queries in ww.css read the window, not the
+   stage, so the deck pins every multi-column layout to its wide form. */
+.ww-deck .ww-grid { gap: var(--ww-space-6); }
+.ww-deck .ww-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ww-deck .ww-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ww-deck .ww-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ww-deck .ww-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--ww-space-9); }
+.ww-deck .ww-split--start { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.ww-deck .ww-split--aside { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+.ww-deck .ww-split--center { align-items: center; }
+.ww-deck .ww-card { padding: var(--ww-space-6); gap: var(--ww-space-3); }
+.ww-deck .ww-card__media { margin: calc(-1 * var(--ww-space-6)) calc(-1 * var(--ww-space-6)) var(--ww-space-3); }
+.ww-deck .ww-stat__value { font-size: 104px; }
+.ww-deck .ww-stat__value:lang(zh) { font-size: 96px; }
+.ww-deck .ww-pullquote__text { font-size: var(--ww-font-size-h2); }
+.ww-deck .ww-table { font-size: var(--ww-font-size-ui); }
+.ww-deck .ww-icon { stroke-width: 1.5; }
+
+/* ---------------------------------------------------------------- builds
+   [data-ww-step] appears on the next key press. Order follows the number, then the page.
+   .ww-build--focus steps earlier items back to muted text once a later one appears. */
+.ww-deck.is-live [data-ww-step]:not(.is-shown) { opacity: 0; visibility: hidden; }
+.ww-deck.is-live [data-ww-step].is-shown { animation: ww-step-in var(--ww-motion-duration-base) var(--ww-motion-ease); }
+@keyframes ww-step-in {
+  from { opacity: 0; translate: 0 var(--ww-motion-distance-rise); }
+  to { opacity: 1; translate: 0 0; }
+}
+.ww-deck.is-live .ww-build--focus:has(.is-current) .is-past {
+  --ww-color-text-primary: var(--ww-color-slate);
+  --ww-color-text-secondary: var(--ww-color-slate);
+  color: var(--ww-color-text-muted);
+}
+.ww-deck.is-live .ww-on-dark .ww-build--focus:has(.is-current) .is-past,
+.ww-deck.is-live .ww-on-dark.ww-build--focus:has(.is-current) .is-past {
+  --ww-color-text-on-dark: var(--ww-color-surface);
+  color: var(--ww-color-text-on-dark-secondary);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ww-deck.is-live [data-ww-step].is-shown { animation: none; }
+}
+
+/* Content that does not fit is cut, never scrolled. ww-deck.js marks it so it cannot ship. */
+.ww-slide.is-overflowing { outline: 6px dashed var(--ww-color-rust-ink); outline-offset: -6px; }
+
+/* ---------------------------------------------------------------- runtime frame
+   ww-deck.js wraps each slide: .ww-deck__group > .ww-deck__sheet > .ww-deck__frame > .ww-slide,
+   plus .ww-deck__notes. --_k is the scale for the current mode. */
+.ww-deck__defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ww-deck__track { display: contents; }
+.ww-deck__group, .ww-deck__sheets { display: contents; }
+.ww-deck__group-label { display: none; }
+.ww-deck__frame {
+  position: relative;
+  width: calc(1500px * var(--_k));
+  height: calc(1000px * var(--_k));
+  overflow: hidden;
+  flex: none;
+}
+.ww-deck__frame > .ww-slide { position: absolute; top: 0; left: 0; transform: scale(var(--_k)); transform-origin: 0 0; }
+.ww-deck__notes { display: none; }
+.ww-deck__ui, .ww-deck__help, .ww-deck__status { display: none; }
+
+/* Stage: one slide, as large as the window allows, centered on Abyss. */
+.ww-deck[data-ww-mode="stage"] {
+  --_k: var(--deck-k, 1);
+  position: fixed;
+  inset: 0;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  background: var(--ww-color-abyss);
+}
+.ww-deck[data-ww-mode="stage"] .ww-deck__sheet { display: none; position: absolute; left: 50%; top: 50%; translate: -50% -50%; }
+.ww-deck[data-ww-mode="stage"] .ww-deck__sheet[data-active],
+.ww-deck[data-ww-mode="stage"] .ww-deck__sheet.is-leaving { display: block; }
+.ww-deck[data-ww-mode="stage"] .ww-deck__sheet.is-leaving { z-index: 0; }
+.ww-deck[data-ww-mode="stage"] .ww-deck__sheet[data-active] { z-index: 1; }
+.ww-deck.is-blank .ww-deck__track { visibility: hidden; }
+
+/* Overview: sections as rows of thumbnails, like layers of growth. */
+.ww-deck[data-ww-mode="overview"] {
+  --_k: var(--deck-k-thumb, 0.16);
+  position: fixed;
+  inset: 0;
+  display: block;
+  overflow-y: auto;
+  padding: var(--ww-space-8) var(--ww-space-8) var(--ww-space-10);
+  background: var(--ww-color-background-wash);
+}
+.ww-deck[data-ww-mode="overview"] .ww-deck__track { display: grid; gap: var(--ww-space-7); }
+.ww-deck[data-ww-mode="overview"] .ww-deck__group {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: var(--ww-space-5);
+  align-items: start;
+  padding-top: var(--ww-space-4);
+  border-top: 1px solid var(--ww-color-border-decorative);
+}
+.ww-deck[data-ww-mode="overview"] .ww-deck__group-label,
+.ww-deck[data-ww-mode="read"] .ww-deck__group-label {
+  display: grid;
+  gap: var(--ww-space-1);
+  margin: 0;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  font-weight: var(--ww-font-weight-semibold);
+  line-height: var(--ww-line-height-ui);
+  color: var(--ww-color-text-primary);
+}
+.ww-deck__group-no {
+  font-family: var(--ww-font-family-mono);
+  font-size: var(--ww-font-size-sm);
+  font-weight: var(--ww-font-weight-regular);
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-deck[data-ww-mode="overview"] .ww-deck__group > .ww-deck__group-label + * { grid-column: 2; }
+.ww-deck[data-ww-mode="overview"] .ww-deck__group { grid-auto-flow: row; }
+.ww-deck[data-ww-mode="overview"] .ww-deck__sheets { display: flex; flex-wrap: wrap; gap: var(--ww-space-4); }
+.ww-deck[data-ww-mode="overview"] .ww-deck__sheet {
+  cursor: pointer;
+  outline: 1px solid var(--ww-color-border-decorative);
+  border-radius: var(--ww-radius-xs);
+}
+.ww-deck[data-ww-mode="overview"] .ww-deck__sheet:hover { outline-color: var(--ww-color-border-control); }
+.ww-deck[data-ww-mode="overview"] .ww-deck__sheet[data-active] { outline: 3px solid var(--ww-color-abyss); outline-offset: 2px; }
+.ww-deck[data-ww-mode="overview"] .ww-deck__sheet:focus-visible { outline: 3px solid var(--ww-color-focus); outline-offset: 2px; }
+.ww-deck[data-ww-mode="overview"] .ww-slide { pointer-events: none; }
+
+/* Read: every slide with its notes, scrolling. The leave-behind version of a talk. */
+.ww-deck[data-ww-mode="read"] {
+  --_k: var(--deck-k-read, 0.6);
+  display: block;
+  padding: var(--ww-space-8) var(--ww-space-6) var(--ww-space-10);
+  background: var(--ww-color-background-wash);
+}
+.ww-deck[data-ww-mode="read"] .ww-deck__track { display: grid; gap: var(--ww-space-9); max-width: 1440px; margin: 0 auto; }
+.ww-deck[data-ww-mode="read"] .ww-deck__group { display: grid; gap: var(--ww-space-8); }
+.ww-deck[data-ww-mode="read"] .ww-deck__group-label { padding-top: var(--ww-space-4); border-top: 1px solid var(--ww-color-abyss); }
+.ww-deck[data-ww-mode="read"] .ww-deck__sheets { display: grid; gap: var(--ww-space-8); }
+.ww-deck[data-ww-mode="read"] .ww-deck__sheet { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--ww-space-7); align-items: start; }
+.ww-deck[data-ww-mode="read"] .ww-deck__frame { outline: 1px solid var(--ww-color-border-decorative); border-radius: var(--ww-radius-xs); }
+.ww-deck[data-ww-mode="read"] .ww-deck__notes { display: block; }
+.ww-deck__notes {
+  font-family: var(--ww-font-family-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--ww-color-text-primary);
+  max-width: 38em;
+}
+.ww-deck__notes > * { margin: 0; }
+.ww-deck__notes > * + * { margin-top: 0.85em; }
+.ww-deck__notes-no {
+  display: block;
+  margin-bottom: var(--ww-space-3);
+  font-family: var(--ww-font-family-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0;
+  color: var(--ww-color-text-muted);
+}
+.ww-deck__notes ul, .ww-deck__notes ol { padding-left: 1.2em; }
+.ww-deck.is-narrow[data-ww-mode="read"] { padding: var(--ww-space-7) var(--ww-space-4) var(--ww-space-10); }
+.ww-deck.is-narrow[data-ww-mode="read"] .ww-deck__sheet { grid-template-columns: minmax(0, 1fr); gap: var(--ww-space-4); }
+.ww-deck.is-narrow[data-ww-mode="overview"] { padding: var(--ww-space-6) var(--ww-space-4) var(--ww-space-10); }
+.ww-deck.is-narrow[data-ww-mode="overview"] .ww-deck__group { grid-template-columns: minmax(0, 1fr); }
+.ww-deck.is-narrow[data-ww-mode="overview"] .ww-deck__group > .ww-deck__group-label + * { grid-column: 1; }
+
+/* Controls: a quiet bar that appears when the pointer moves. */
+.ww-deck[data-ww-mode] .ww-deck__ui {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background: var(--ww-color-abyss-raised);
+  color: var(--ww-color-text-on-dark);
+  border-radius: var(--ww-radius-xs);
+  font-family: var(--ww-font-family-mono);
+  font-size: 0.8125rem;
+  transition: opacity var(--ww-motion-duration-base) var(--ww-motion-ease);
+}
+.ww-deck.is-idle .ww-deck__ui { opacity: 0; pointer-events: none; }
+.ww-deck__ui-count { padding: 0 8px; font-variant-numeric: tabular-nums; letter-spacing: 0; white-space: nowrap; }
+.ww-deck__btn {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ww-radius-xs);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.ww-deck__btn:hover { background: var(--ww-color-tidal); }
+.ww-deck__btn[aria-pressed="true"] { background: var(--ww-color-tidal); }
+.ww-deck__btn:focus-visible { outline: 2px solid var(--ww-color-biolum); outline-offset: 1px; }
+.ww-deck__btn .ww-icon { width: 20px; height: 20px; stroke-width: 1.75; }
+.ww-deck__status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ww-deck[data-ww-mode] .ww-deck__status { display: block; }
+
+/* Help: the keys, on Abyss. */
+.ww-deck[data-ww-mode] .ww-deck__help:not([hidden]) {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: var(--ww-color-abyss);
+  color: var(--ww-color-text-on-dark);
+  font-family: var(--ww-font-family-ui);
+}
+.ww-deck__help-card { display: grid; gap: var(--ww-space-5); min-width: min(560px, 90vw); }
+.ww-deck__help-title { margin: 0; font-family: var(--ww-font-family-display); font-size: 2rem; font-weight: var(--ww-font-weight-display); color: var(--ww-color-text-on-dark); }
+.ww-deck__keys { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--ww-space-3) var(--ww-space-6); margin: 0; font-size: 1rem; }
+.ww-deck__keys dt { font-family: var(--ww-font-family-mono); color: var(--ww-color-text-on-dark-label); letter-spacing: 0; }
+.ww-deck__keys dd { margin: 0; }
+
+/* ---------------------------------------------------------------- print
+   One slide per 1500 × 1000 page with every build shown. In read mode each page carries the
+   slide at 0.62 and its notes beside it: the handout. */
+@page { size: 1500px 1000px; margin: 0; }
+@media print {
+  html, body { margin: 0; background: none; }
+  :is(.ww-deck, .ww-deck[data-ww-mode]) {
+    --_k: 1;
+    position: static;
+    display: block;
+    padding: 0;
+    overflow: visible;
+    background: none;
+  }
+  :is(.ww-deck, .ww-deck[data-ww-mode]) :is(.ww-deck__track, .ww-deck__group, .ww-deck__sheets) { display: block; padding: 0; border: 0; }
+  :is(.ww-deck, .ww-deck[data-ww-mode]) :is(.ww-deck__group-label, .ww-deck__ui, .ww-deck__help, .ww-deck__notes, .ww-deck__status) { display: none; }
+  :is(.ww-deck, .ww-deck[data-ww-mode]) .ww-deck__sheet {
+    display: block;
+    position: relative;
+    left: auto;
+    top: auto;
+    translate: none;
+    width: 1500px;
+    height: 1000px;
+    overflow: hidden;
+    break-after: page;
+    outline: none;
+  }
+  .ww-deck > .ww-slide { break-after: page; }
+  .ww-deck__group:last-child .ww-deck__sheet:last-child, .ww-deck > .ww-slide:last-of-type { break-after: auto; }
+  .ww-deck[data-ww-mode="read"] .ww-deck__sheet, .ww-deck.is-narrow[data-ww-mode="read"] .ww-deck__sheet {
+    --_k: 0.62;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 48px;
+    box-sizing: border-box;
+    padding: 56px;
+    background: var(--ww-color-background-page);
+  }
+  .ww-deck[data-ww-mode="read"] .ww-deck__track { max-width: none; margin: 0; }
+  .ww-deck[data-ww-mode="read"] .ww-deck__frame { outline: 1px solid var(--ww-color-border-decorative); }
+  .ww-deck[data-ww-mode="read"] .ww-deck__frame > .ww-slide { transform: none; zoom: 0.62; }
+  .ww-deck[data-ww-mode="read"] .ww-deck__sheet .ww-deck__notes { display: block; font-size: 20px; max-width: none; }
+  .ww-deck[data-ww-mode="read"] .ww-deck__notes-no { font-size: 16px; }
+  .ww-deck [data-ww-step] { opacity: 1 !important; visibility: visible !important; translate: none !important; animation: none !important; }
+  .ww-deck.is-live .ww-build--focus:has(.is-current) .is-past, .ww-deck.is-live .ww-on-dark .ww-build--focus:has(.is-current) .is-past { --ww-color-text-primary: inherit; --ww-color-text-secondary: inherit; --ww-color-text-on-dark: inherit; color: inherit; }
+  .ww-deck .ww-views__tabs ~ .ww-views__panel { display: none; }
+  .ww-deck .ww-views__tabs + .ww-views__panel { display: block; }
+  .ww-deck .ww-views__tab[aria-selected="true"] { color: var(--ww-color-text-muted); border-bottom-color: transparent; }
+  .ww-deck .ww-views__tab:first-child { color: var(--ww-color-text-primary); border-bottom-color: var(--ww-color-abyss); }
+  .ww-slide.is-overflowing { outline: none; }
+  .ww-deck.is-blank .ww-deck__track { visibility: visible; }
+}

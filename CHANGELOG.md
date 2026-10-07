@@ -2,6 +2,30 @@
 
 格式依 [Keep a Changelog](https://keepachangelog.com/)，版本依 [Semantic Versioning](https://semver.org/)。
 
+## v0.2.0（未發布）
+
+3:2 簡報系統，所有設計決定見 [DR-019](decisions/DR-019-slides.md)。
+
+### 簡報
+
+- 固定 1500 × 1000 的舞台，依視窗縮放；頁面不捲動，放不下時在頁面畫出紅色虛線框。
+- 依用途分兩種密度：`data-ww-use="talk"`（現場講）與 `"send"`（寄出去讀）。
+- 16 種版型：封面、議程、章節開頭、一句話、主張與證據、左主張右證據、大數字、卡片格、對照、流程與圖解、畫面導覽、圖表、引言、滿版圖片、下一步、結尾。
+- 頁內互動：逐步揭示（可讓前面的項目退成次要色）、情境切換、可調數字。
+- 總覽、閱讀模式（每頁加講稿，手機直式自動進入）、全螢幕、黑畫面、深連結。
+- 頁碼用耳塞年層，每頁一層。
+- 列印成 3:2 PDF，所有逐步揭示都顯示；在閱讀模式列印就是附講稿的 PDF。
+- 中英範例簡報 `dist/deck-zh.html`、`dist/deck-en.html`，樣式、程式與標誌都已內嵌，可以直接複製。
+
+### 給 Claude
+
+- 驗證器檢查簡報契約：用途宣告、一頁一個主張、標題長度、文字預算（talk 中文 120 字、英文 60 words，send 加倍）、清單、卡片格、流程與表格的大小、可調數字的假設、圖表的標題。
+- `SKILL.md` 加上「做簡報」。
+
+### 公開網站
+
+- 導覽加上範例簡報。
+
 ## v0.1.0（2026-10-07）
 
 第一個版本。範圍見 [v0.1 規格](specs/2026-10-07-v0.1-scope-spec.md)，所有設計決定見 [decisions/](decisions/README.md) 的 DR-001 至 DR-018。
@@ -52,4 +76,4 @@
 - Design System artifact 需要在 claude.ai 設為預設。
 - secret scanning 與 push protection 需要在 GitHub 設定頁確認。
 - 舊的 walking-whale-html、walking-whale-slides skill 暫時不動。
-- 尚未涵蓋：深色模式、簡報與文件模板、產品介面元件、Modal、AI agent 對話語氣。
+- 尚未涵蓋：深色模式、簡報與文件模板、產品介面元件、Modal、AI agent 對話語氣（簡報已在 v0.2.0 加入）。

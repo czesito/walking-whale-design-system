@@ -1,0 +1,12 @@
+/* Side: the claim on the left, the evidence filling the right. Editorial, for tall evidence. */
+.ww-slide--side {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  column-gap: var(--ww-space-9);
+}
+.ww-slide--side > .ww-slide__head { grid-column: 1; grid-row: 1; align-content: center; }
+.ww-slide--side > .ww-slide__body { grid-column: 2; grid-row: 1 / span 2; }
+.ww-slide--side > .ww-slide__foot { grid-column: 1; grid-row: 2; }
+.ww-slide--side .ww-slide__title { font-size: 50px; }
+.ww-slide--side .ww-slide__title:lang(zh) { font-size: 44px; }
+.ww-slide--side .ww-slide__lede { font-size: var(--ww-font-size-body); }

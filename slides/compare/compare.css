@@ -1,0 +1,12 @@
+/* Compare: two states side by side, usually now and after. The after side is the card. */
+.ww-compare { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: var(--ww-space-6); align-items: stretch; }
+.ww-compare__side { display: grid; gap: var(--ww-space-4); align-content: start; padding: var(--ww-space-7); border: 1px solid var(--ww-color-border-decorative); border-radius: var(--ww-radius-xs); background: var(--ww-color-background-wash); }
+.ww-compare__side--after { background: var(--ww-color-background-card); border-top: 2px solid var(--ww-color-abyss); }
+.ww-compare__label { margin: 0; font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); }
+.ww-compare__title { margin: 0; font-family: var(--ww-font-family-display); font-size: var(--ww-font-size-h3); font-weight: var(--ww-font-weight-heading); line-height: var(--ww-line-height-heading); }
+.ww-compare__list { display: grid; gap: var(--ww-space-3); margin: 0; padding: 0; list-style: none; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-ui); }
+.ww-compare__list li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: var(--ww-space-3); }
+.ww-compare__list li::before { content: ""; width: 12px; height: 1.5px; margin-top: 0.7em; background: var(--ww-color-abyss); }
+.ww-compare__arrow { align-self: center; width: 48px; height: 48px; color: var(--ww-color-text-secondary); stroke-width: 1.25; }
+
+.ww-slide--compare > .ww-slide__body { align-content: center; }

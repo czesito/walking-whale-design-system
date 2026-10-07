@@ -1,0 +1,10 @@
+/* Next steps: what we do and what we need from you, side by side, each with a date or owner. */
+.ww-next { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ww-space-8); }
+.ww-next__col { display: grid; gap: var(--ww-space-4); align-content: start; padding-top: var(--ww-space-4); border-top: 2px solid var(--ww-color-abyss); }
+.ww-next__col--you { border-top-style: dashed; }
+.ww-next__label { margin: 0; font-family: var(--ww-font-family-display); font-size: var(--ww-font-size-h3); font-weight: var(--ww-font-weight-heading); line-height: var(--ww-line-height-heading); }
+.ww-next__list { display: grid; gap: var(--ww-space-4); margin: 0; padding: 0; list-style: none; }
+.ww-next__item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--ww-space-5); align-items: baseline; padding-bottom: var(--ww-space-4); border-bottom: 1px solid var(--ww-color-border-decorative); font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); line-height: var(--ww-line-height-ui); }
+.ww-next__when { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); white-space: nowrap; }
+
+.ww-slide--next > .ww-slide__body { align-content: center; }

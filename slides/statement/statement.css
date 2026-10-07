@@ -1,0 +1,5 @@
+/* Statement: one sentence, set large. For the line the audience should repeat afterwards. */
+.ww-slide--statement > .ww-slide__body { align-content: center; gap: var(--ww-space-6); max-width: 1240px; }
+.ww-slide--statement .ww-slide__display { font-size: 96px; line-height: 1.08; }
+.ww-slide--statement .ww-slide__display:lang(zh) { font-size: 80px; line-height: 1.3; }
+.ww-slide--statement .ww-em { font-style: var(--ww-font-style-emphasis); }

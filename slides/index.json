@@ -1,0 +1,23 @@
+{
+  "$description": "Slides (DR-019): the deck engine first, then the layouts, then the kits. Concatenated in this order after dist/ww.css into dist/ww-deck.css. 'use' says when to reach for each one. Every directory under slides/ except src/ must be listed.",
+  "items": [
+    { "name": "deck", "kind": "engine", "zh": "簡報引擎", "en": "Deck engine", "use": "1500 × 1000 舞台、頁面結構、逐步揭示、講稿、總覽、閱讀與講者模式、列印。每份簡報都會用到" },
+    { "name": "cover", "kind": "layout", "zh": "封面", "en": "Cover", "use": "第一頁：wordmark、一行大標、短線、導言、對象與日期" },
+    { "name": "agenda", "kind": "layout", "zh": "議程", "en": "Agenda", "use": "列出這場簡報的段落；之後再出現一次並標出目前段落，變成「我們在這裡」" },
+    { "name": "section", "kind": "layout", "zh": "章節開頭", "en": "Section opener", "use": "新段落的第一頁：大編號與這一段要證明的事" },
+    { "name": "statement", "kind": "layout", "zh": "一句話", "en": "Statement", "use": "整頁只有一句話，用在希望聽眾帶走、會轉述給別人的那一句" },
+    { "name": "evidence", "kind": "layout", "zh": "主張與證據", "en": "Assertion and evidence", "use": "預設的內容頁：標題是一句完整的主張，下面用一個證據（畫面、圖、表、照片）證明它" },
+    { "name": "side", "kind": "layout", "zh": "左主張右證據", "en": "Side", "use": "證據是直的或很大時，主張放左欄，證據佔右邊整欄" },
+    { "name": "stats", "kind": "layout", "zh": "大數字", "en": "Stats", "use": "兩到四個撐起論點的數字，每個都要有來源" },
+    { "name": "grid", "kind": "layout", "zh": "卡片格", "en": "Grid", "use": "兩到六張同一類的卡片：原則、選項、案例。每張只說一件事" },
+    { "name": "compare", "kind": "layout", "zh": "對照", "en": "Compare", "use": "兩種狀態並排，通常是現在與導入後" },
+    { "name": "flow", "kind": "layout", "zh": "流程與圖解", "en": "Flow and diagram", "use": "由左到右的流程，虛線是機器、實線是人、實心是成果；分支的圖用 SVG 圖解元件" },
+    { "name": "screen", "kind": "layout", "zh": "畫面導覽", "en": "Screen tour", "use": "產品畫面加上編號標註與說明；搭配逐步揭示時，一次亮一個位置，其他變暗" },
+    { "name": "chart", "kind": "layout", "zh": "圖表", "en": "Chart", "use": "SVG 圖表：一條數列用 Abyss 承載重點，其他用安靜的圖表色，數值直接標在圖上" },
+    { "name": "quote", "kind": "layout", "zh": "引言", "en": "Quote", "use": "真實的人說過的一句話與出處，Sediment 底" },
+    { "name": "image", "kind": "layout", "zh": "滿版圖片", "en": "Image", "use": "一張照片佔滿整頁，主張放在角落的卡片上" },
+    { "name": "next", "kind": "layout", "zh": "下一步", "en": "Next steps", "use": "我們會做的事與需要您提供的事並排，各附日期或負責人" },
+    { "name": "end", "kind": "layout", "zh": "結尾", "en": "End", "use": "最後一頁：謝謝、一個聯絡方式、wordmark" },
+    { "name": "interact", "kind": "kit", "zh": "頁內互動", "en": "Interactions", "use": "情境切換（同一頁切換狀態）與可調數字（拉桿帶動數字與圖）" }
+  ]
+}

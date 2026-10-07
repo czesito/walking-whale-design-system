@@ -1,0 +1,22 @@
+/* Cover: the wordmark, one display line, the rule, a lede, and who and when. */
+.ww-slide--cover { grid-template-rows: auto minmax(0, 1fr) auto; row-gap: var(--ww-space-7); padding-bottom: 84px; }
+.ww-slide--cover > .ww-slide__head { align-content: end; gap: var(--ww-space-5); max-width: 1240px; }
+.ww-cover__brand { display: block; height: 40px; width: auto; color: var(--ww-color-text-primary); }
+.ww-on-dark .ww-cover__brand { color: var(--ww-color-text-on-dark); }
+.ww-cover__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ww-space-4) var(--ww-space-9);
+  margin: 0;
+  padding-top: var(--ww-space-4);
+  border-top: 1px solid var(--ww-color-border-decorative);
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  line-height: var(--ww-line-height-ui);
+}
+.ww-cover__meta div { display: grid; gap: var(--ww-space-1); }
+.ww-cover__meta dt { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); }
+.ww-cover__meta dd { margin: 0; color: var(--ww-color-text-primary); }
+.ww-on-dark .ww-cover__meta { border-top-color: var(--ww-color-tidal); }
+.ww-on-dark .ww-cover__meta dt { color: var(--ww-color-text-on-dark-label); }
+.ww-on-dark .ww-cover__meta dd { color: var(--ww-color-text-on-dark); }

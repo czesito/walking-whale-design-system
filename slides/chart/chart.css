@@ -1,0 +1,28 @@
+/* Chart: SVG with geometry in attributes and color from classes. One series carries the point
+   in Abyss; the rest stay in the quiet chart color. Label the data directly; add a legend only
+   when there are two or more colored series. Charts sit on light slides. */
+.ww-chart { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--ww-font-family-ui); }
+.ww-chart__bar { fill: var(--ww-color-chart-other); }
+.ww-chart__bar--accent { fill: var(--ww-color-abyss); }
+.ww-chart__bar--1 { fill: var(--ww-color-chart-1); }
+.ww-chart__bar--2 { fill: var(--ww-color-chart-2); }
+.ww-chart__bar--3 { fill: var(--ww-color-chart-3); }
+.ww-chart__bar--4 { fill: var(--ww-color-chart-4); }
+.ww-chart__line { fill: none; stroke: var(--ww-color-chart-other); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.ww-chart__line--accent { stroke: var(--ww-color-abyss); stroke-width: 4; }
+.ww-chart__line--1 { stroke: var(--ww-color-chart-1); }
+.ww-chart__line--2 { stroke: var(--ww-color-chart-2); }
+.ww-chart__line--3 { stroke: var(--ww-color-chart-3); }
+.ww-chart__line--4 { stroke: var(--ww-color-chart-4); }
+.ww-chart__line--dashed { stroke-dasharray: 8 6; }
+.ww-chart__dot { fill: var(--ww-color-abyss); }
+.ww-chart__dot--hollow { fill: var(--ww-color-background-page); stroke: var(--ww-color-abyss); stroke-width: 3; }
+.ww-chart__grid { stroke: var(--ww-color-chart-grid); stroke-width: 1; }
+.ww-chart__axis { stroke: var(--ww-color-abyss); stroke-width: 1.5; }
+.ww-chart__band { fill: var(--ww-color-background-warm); }
+.ww-chart__label { fill: var(--ww-color-chart-label); font-family: var(--ww-font-family-mono); font-size: 19px; letter-spacing: 0; }
+.ww-chart__value { fill: var(--ww-color-text-primary); font-size: 24px; font-weight: var(--ww-font-weight-semibold); font-variant-numeric: tabular-nums; }
+.ww-chart__note { fill: var(--ww-color-text-primary); font-size: 22px; }
+.ww-chart__note--muted { fill: var(--ww-color-text-muted); }
+
+.ww-slide--chart > .ww-slide__body { align-content: center; }

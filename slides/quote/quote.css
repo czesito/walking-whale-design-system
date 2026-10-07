@@ -1,0 +1,6 @@
+/* Quote: a sentence from a real person, with who said it. Sediment ground. */
+.ww-slide--quote > .ww-slide__body { align-content: center; }
+.ww-slide--quote .ww-pullquote { max-width: 1180px; gap: var(--ww-space-6); padding-block: var(--ww-space-8); }
+.ww-slide--quote .ww-pullquote__text { font-size: 68px; line-height: 1.15; }
+.ww-slide--quote .ww-pullquote__text:lang(zh) { font-size: 56px; line-height: 1.4; }
+.ww-slide--quote .ww-pullquote__cite { font-size: var(--ww-font-size-ui); }

@@ -1,0 +1,10 @@
+/* End: thanks, one way to reach us, the wordmark. */
+.ww-slide--end { grid-template-rows: minmax(0, 1fr) auto; }
+.ww-slide--end > .ww-slide__head { align-content: center; gap: var(--ww-space-5); }
+.ww-end__contact { display: flex; flex-wrap: wrap; gap: var(--ww-space-4) var(--ww-space-9); margin: 0; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); }
+.ww-end__contact div { display: grid; gap: var(--ww-space-1); }
+.ww-end__contact dt { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); }
+.ww-end__contact dd { margin: 0; }
+.ww-on-dark .ww-end__contact dt { color: var(--ww-color-text-on-dark-label); }
+.ww-end__brand { display: block; height: 44px; width: auto; color: var(--ww-color-text-primary); }
+.ww-on-dark .ww-end__brand { color: var(--ww-color-text-on-dark); }

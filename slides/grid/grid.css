@@ -1,0 +1,7 @@
+/* Grid: two to six cards of the same kind: principles, options, examples. Each says one thing. */
+.ww-slide--grid > .ww-slide__body { align-content: center; }
+.ww-slide--grid .ww-card { align-content: start; }
+.ww-slide--grid .ww-card__title { font-size: var(--ww-font-size-h3); }
+.ww-slide--grid .ww-card__body { font-size: var(--ww-font-size-body); line-height: var(--ww-line-height-ui); }
+.ww-card__icon { width: 44px; height: 44px; margin-bottom: var(--ww-space-2); color: var(--ww-color-text-primary); stroke-width: 1.25; }
+.ww-slide--grid .ww-grid--2 .ww-card { padding: var(--ww-space-7); }

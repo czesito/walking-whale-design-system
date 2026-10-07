@@ -1,6 +1,6 @@
 ---
 name: walking-whale-design-system
-description: Walking Whale design system. Use for any Walking Whale output — web pages, artifacts, slides, documents, product UI, copy in zh-TW or English. Covers tokens, 30 components, 8 page patterns, the growth-layer signature element, logo use, voice and writing rules, and a validator for generated HTML. 走路鯨魚設計系統
+description: Walking Whale design system. Use for any Walking Whale output — web pages, artifacts, 3:2 slide decks, documents, product UI, copy in zh-TW or English. Covers tokens, 30 components, 8 page patterns, 16 slide layouts with a deck runtime, the growth-layer signature element, logo use, voice and writing rules, and a validator for generated HTML. 走路鯨魚設計系統
 ---
 
 # Walking Whale Design System
@@ -15,6 +15,7 @@ description: Walking Whale design system. Use for any Walking Whale output — w
 
 | 任務 | 讀這些 |
 |---|---|
+| 做簡報 | 本檔「做簡報」→ [slides/index.json](slides/index.json) → [slides/deck/deck.prompt.md](slides/deck/deck.prompt.md) → 用到的版型 `*.prompt.md` → 範例 `dist/deck-zh.html` 或 `dist/deck-en.html` |
 | 做頁面或 artifact | 本檔 → [components/index.json](components/index.json) 與 [patterns/index.json](patterns/index.json)（`use` 欄說明何時用）→ 用到的元件 `*.prompt.md` → 需要時看同目錄的 `*.html` 範例 |
 | 寫文案 | [content/brand.md](content/brand.md) → [content/voice.md](content/voice.md) → [content/zh-tw.md](content/zh-tw.md) 或 [content/en.md](content/en.md) → [content/glossary.csv](content/glossary.csv) |
 | 放 logo | [foundations/logo.md](foundations/logo.md) |
@@ -71,6 +72,17 @@ node scripts/validate-output.mjs page.html
 node scripts/copy-lint.mjs page.html
 ```
 
+## 做簡報
+
+簡報是固定 1500 × 1000（3:2）的舞台，頁面不捲動，放不下就是錯（DR-019）。
+
+1. 先確定用途：現場講（`data-ww-use="talk"`）還是寄出去讀（`data-ww-use="send"`）。這決定文字預算：talk 每頁內文中文 120 字、英文 60 words，send 加倍。目標寫預算的一半。
+2. 先寫標題串：每頁一句完整的主張。只讀標題，故事要通。十頁以上的簡報先給 Czesio 確認標題串。
+3. 每頁選一個證據：畫面、流程、圖表、照片、表格、數字。細節放 `<aside class="ww-slide__notes">`，閱讀模式與附講稿的 PDF 會顯示。
+4. 從 `dist/deck-zh.html` 或 `dist/deck-en.html` 複製（樣式、程式與標誌都已內嵌），只換 `slides:start` 與 `slides:end` 之間的頁面。
+5. 版型是起點，不是規定。能讓內容更好懂、更好看時，用系統的 class 自己組頁面；HTML 簡報可以用逐步揭示、情境切換、可調數字，主動提出。
+6. 驗證：`node scripts/validate-output.mjs deck.html` 檢查 class、預算、標題長度、清單大小；再打開簡報按 R 進閱讀模式，確認沒有任何一頁出現紅色虛線框（溢出）。
+
 ## 不能違反的規則
 
 ### 視覺
@@ -118,9 +130,10 @@ node scripts/copy-lint.mjs page.html
 | 狀態 | `loading`、`empty`、`error`、`toast` |
 | 頁框 | `topbar`、`drawer`、`footer` |
 | 頁面模式 | `hero`、`section-opener`、`services`、`steps`、`case-list`、`team`、`cta`、`contact` |
+| 簡報（slides/） | `deck`（引擎）、`cover`、`agenda`、`section`、`statement`、`evidence`、`side`、`stats`、`grid`、`compare`、`flow`、`screen`、`chart`、`quote`、`image`、`next`、`end`、`interact` |
 
-所有元件與模式的中英渲染：`specimens/components.html`。
+所有元件與模式的中英渲染：`specimens/components.html`。範例簡報：`dist/deck-zh.html`、`dist/deck-en.html`。
 
 ## 還沒有的東西
 
-v0.1 不涵蓋：深色模式、簡報與文件模板、產品介面元件（資料表格、儀表板、圖表元件）、Modal、AI agent 的對話語氣。遇到這些需求時，說明系統尚未涵蓋，用最接近的元件做，並列出缺口。範圍見 [specs/2026-10-07-v0.1-scope-spec.md](specs/2026-10-07-v0.1-scope-spec.md)。
+目前不涵蓋：深色模式、文件模板、產品介面元件（資料表格、儀表板）、Modal、AI agent 的對話語氣。簡報裡的 SVG 圖表見 slides/chart，網頁上還沒有圖表元件。遇到這些需求時，說明系統尚未涵蓋，用最接近的元件做，並列出缺口。範圍見 [specs/2026-10-07-v0.1-scope-spec.md](specs/2026-10-07-v0.1-scope-spec.md)。

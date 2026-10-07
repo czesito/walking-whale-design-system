@@ -1,0 +1,75 @@
+/* Flow: a process left to right. Dashed nodes are done by the machine, solid ones by a person,
+   the filled one is the result. Always add the legend. For branching diagrams use ww-dia in SVG. */
+.ww-slide--flow > .ww-slide__body { align-content: center; gap: var(--ww-space-8); }
+.ww-flow { display: flex; align-items: stretch; gap: 56px; margin: 0; padding: 0; list-style: none; }
+.ww-flow__node {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: grid;
+  gap: var(--ww-space-2);
+  align-content: start;
+  padding: var(--ww-space-6);
+  background: var(--ww-color-background-card);
+  border: 1.5px solid var(--ww-color-abyss);
+  border-radius: var(--ww-radius-xs);
+}
+.ww-flow__node--machine { background: transparent; border-style: dashed; }
+.ww-flow__node--end { background: var(--ww-color-abyss); color: var(--ww-color-text-on-dark); }
+.ww-flow__node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -46px;
+  width: 34px;
+  height: 1.5px;
+  background: var(--ww-color-abyss);
+}
+.ww-flow__node:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: calc(50% - 6px);
+  right: -46px;
+  width: 11px;
+  height: 11px;
+  border-top: 1.5px solid var(--ww-color-abyss);
+  border-right: 1.5px solid var(--ww-color-abyss);
+  transform: translate(-1px, 0.5px) rotate(45deg);
+}
+.ww-flow__no { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); }
+.ww-flow__name { font-family: var(--ww-font-family-ui); font-size: 28px; font-weight: var(--ww-font-weight-semibold); line-height: var(--ww-line-height-ui); }
+.ww-flow__note { font-family: var(--ww-font-family-ui); font-size: 22px; line-height: var(--ww-line-height-ui); color: var(--ww-color-text-secondary); }
+.ww-flow__node--end .ww-flow__no, .ww-flow__node--end .ww-flow__note { color: var(--ww-color-text-on-dark-secondary); }
+
+/* Legend: what a line style or a color means. */
+.ww-legend { display: flex; flex-wrap: wrap; gap: var(--ww-space-3) var(--ww-space-7); margin: 0; padding: 0; list-style: none; font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-sm); line-height: var(--ww-line-height-ui); color: var(--ww-color-text-secondary); }
+.ww-legend__item { display: inline-flex; align-items: center; gap: var(--ww-space-3); }
+.ww-legend__key { width: 36px; height: 22px; flex: none; border: 1.5px solid var(--ww-color-abyss); border-radius: var(--ww-radius-xs); background: var(--ww-color-background-card); }
+.ww-legend__key--machine { border-style: dashed; background: transparent; }
+.ww-legend__key--end { background: var(--ww-color-abyss); }
+.ww-legend__key--line { height: 0; border-width: 2px 0 0; border-radius: 0; background: none; }
+.ww-legend__key--dashed { height: 0; border-width: 2px 0 0; border-style: dashed; border-radius: 0; background: none; }
+.ww-legend__key--1, .ww-legend__key--2, .ww-legend__key--3, .ww-legend__key--4, .ww-legend__key--other, .ww-legend__key--accent { width: 22px; border: 0; }
+.ww-legend__key--1 { background: var(--ww-color-chart-1); }
+.ww-legend__key--2 { background: var(--ww-color-chart-2); }
+.ww-legend__key--3 { background: var(--ww-color-chart-3); }
+.ww-legend__key--4 { background: var(--ww-color-chart-4); }
+.ww-legend__key--other { background: var(--ww-color-chart-other); }
+.ww-legend__key--accent { background: var(--ww-color-abyss); }
+.ww-on-dark .ww-legend { color: var(--ww-color-text-on-dark-secondary); }
+
+/* Diagram kit for SVG: boxes, lines and labels with geometry in attributes, color from classes. */
+.ww-dia { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--ww-font-family-ui); }
+.ww-dia__box { fill: var(--ww-color-background-card); stroke: var(--ww-color-abyss); stroke-width: 1.5; }
+.ww-dia__box--machine { fill: none; stroke-dasharray: 7 5; }
+.ww-dia__box--end { fill: var(--ww-color-abyss); }
+.ww-dia__box--soft { fill: var(--ww-color-background-wash); stroke: var(--ww-color-border-decorative); stroke-width: 1; }
+.ww-dia__line { fill: none; stroke: var(--ww-color-abyss); stroke-width: 1.5; }
+.ww-dia__line--dashed { stroke-dasharray: 7 5; }
+.ww-dia__line--soft { stroke: var(--ww-color-steel); }
+.ww-dia__band { fill: var(--ww-color-surface); }
+.ww-dia__head { fill: var(--ww-color-abyss); }
+.ww-dia__text { fill: var(--ww-color-text-primary); font-size: 24px; font-weight: var(--ww-font-weight-semibold); }
+.ww-dia__text--on-end { fill: var(--ww-color-text-on-dark); }
+.ww-dia__sub { fill: var(--ww-color-text-secondary); font-size: 20px; }
+.ww-dia__no { fill: var(--ww-color-text-muted); font-family: var(--ww-font-family-mono); font-size: 18px; }

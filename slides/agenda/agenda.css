@@ -1,0 +1,24 @@
+/* Agenda: the sections of the talk. Shown again later with aria-current on one item, it becomes
+   the "we are here" slide: the current item stays, the rest step back. */
+.ww-agenda { display: grid; margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--ww-color-border-decorative); }
+.ww-agenda__item {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--ww-space-6);
+  padding: var(--ww-space-5) 0;
+  border-top: 1px solid var(--ww-color-border-decorative);
+}
+.ww-agenda__no { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); }
+.ww-agenda__name { font-family: var(--ww-font-family-display); font-size: var(--ww-font-size-h3); font-weight: var(--ww-font-weight-heading); line-height: var(--ww-line-height-heading); color: var(--ww-color-text-primary); }
+.ww-agenda__meta { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); }
+.ww-agenda__item[aria-current] { border-top: 2px solid var(--ww-color-abyss); }
+.ww-agenda__item[aria-current] .ww-agenda__no { color: var(--ww-color-text-primary); }
+.ww-agenda:has([aria-current]) .ww-agenda__item:not([aria-current]) .ww-agenda__name { color: var(--ww-color-text-muted); }
+.ww-on-dark .ww-agenda, .ww-on-dark .ww-agenda__item { border-color: var(--ww-color-tidal); }
+.ww-on-dark .ww-agenda__name, .ww-on-dark .ww-agenda__item[aria-current] .ww-agenda__no { color: var(--ww-color-text-on-dark); }
+.ww-on-dark .ww-agenda__no, .ww-on-dark .ww-agenda__meta { color: var(--ww-color-text-on-dark-secondary); }
+.ww-on-dark .ww-agenda__item[aria-current] { border-top-color: var(--ww-color-pearl); }
+.ww-on-dark .ww-agenda:has([aria-current]) .ww-agenda__item:not([aria-current]) .ww-agenda__name { color: var(--ww-color-text-on-dark-secondary); }
+
+.ww-slide--agenda > .ww-slide__body, .ww-slide--agenda > .ww-agenda { align-self: center; }

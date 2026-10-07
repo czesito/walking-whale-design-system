@@ -1,0 +1,8 @@
+/* Stats: two to four numbers that carry the argument, each with its source. */
+.ww-slide--stats > .ww-slide__body { align-content: center; }
+.ww-slide--stats .ww-stat { gap: var(--ww-space-3); padding-top: var(--ww-space-5); border-top-width: 2px; }
+.ww-slide--stats .ww-stat__value { font-size: 136px; }
+.ww-slide--stats .ww-stat__value:lang(zh) { font-size: 120px; }
+.ww-slide--stats .ww-stat__unit { font-size: var(--ww-font-size-h4); }
+.ww-slide--stats .ww-stat__label { font-size: var(--ww-font-size-h4); line-height: var(--ww-line-height-heading); }
+.ww-on-dark .ww-stat { border-top-color: var(--ww-color-text-on-dark); }

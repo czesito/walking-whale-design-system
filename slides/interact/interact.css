@@ -1,0 +1,33 @@
+/* Interactions inside a slide: views (switch between states in place) and dials (a slider that
+   drives the numbers). Both work with a mouse, a keyboard and in print (the first view prints). */
+.ww-views { display: grid; gap: var(--ww-space-5); min-height: 0; }
+.ww-views__tabs { display: flex; gap: var(--ww-space-2); border-bottom: 1px solid var(--ww-color-border-decorative); }
+.ww-views__tab {
+  margin-bottom: -1px;
+  padding: var(--ww-space-3) var(--ww-space-5);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: var(--ww-font-family-ui);
+  font-size: var(--ww-font-size-ui);
+  font-weight: var(--ww-font-weight-medium);
+  color: var(--ww-color-text-muted);
+  cursor: pointer;
+  transition: color var(--ww-motion-duration-instant) var(--ww-motion-ease), border-color var(--ww-motion-duration-instant) var(--ww-motion-ease);
+}
+.ww-views__tab:hover { color: var(--ww-color-text-primary); }
+.ww-views__tab[aria-selected="true"] { color: var(--ww-color-text-primary); border-bottom-color: var(--ww-color-abyss); }
+.ww-views__tab:focus-visible { outline: 2px solid var(--ww-color-focus); outline-offset: 2px; }
+.ww-views__panel { min-height: 0; }
+.ww-views__panel[hidden] { display: none; }
+
+.ww-dial { display: grid; gap: var(--ww-space-5); align-content: start; }
+.ww-dial__row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--ww-space-2) var(--ww-space-5); align-items: baseline; }
+.ww-dial__label { font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-ui); color: var(--ww-color-text-primary); }
+.ww-dial__value { font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-ui); letter-spacing: 0; font-variant-numeric: tabular-nums; color: var(--ww-color-text-primary); }
+.ww-dial__input { grid-column: 1 / -1; width: 100%; height: 32px; margin: 0; accent-color: var(--ww-color-abyss); cursor: pointer; }
+.ww-dial__input:focus-visible { outline: 2px solid var(--ww-color-focus); outline-offset: 4px; }
+.ww-dial__result { display: grid; gap: var(--ww-space-2); padding-top: var(--ww-space-4); border-top: 2px solid var(--ww-color-abyss); }
+.ww-dial__big { font-family: var(--ww-font-family-display); font-size: 120px; font-weight: var(--ww-font-weight-display); line-height: 1; letter-spacing: var(--ww-letter-spacing-display); font-variant-numeric: lining-nums tabular-nums; color: var(--ww-color-text-primary); }
+.ww-dial__unit { font-family: var(--ww-font-family-ui); font-size: var(--ww-font-size-h4); color: var(--ww-color-text-secondary); }
+.ww-dial__note { margin: 0; font-family: var(--ww-font-family-mono); font-size: var(--ww-font-size-sm); letter-spacing: 0; color: var(--ww-color-text-muted); }

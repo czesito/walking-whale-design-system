@@ -20,5 +20,6 @@
 | [DR-016](DR-016-output-validator.md) | Claude 輸出驗證器 | 已採納（預設） |
 | [DR-017](DR-017-component-contracts.md) | 元件契約：品牌與無障礙規則改為機器檢查 | 已採納 |
 | [DR-018](DR-018-public-site.md) | 公開的設計系統網站：GitHub Pages | 已採納 |
+| [DR-019](DR-019-slides.md) | 3:2 簡報系統：固定舞台、依用途分兩種密度、文字預算 | 已採納 |
 
 新增決策時沿用同一格式：狀態、日期、決策者、背景、決策、理由、影響、不採用的選項。

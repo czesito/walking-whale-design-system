@@ -127,7 +127,7 @@ export function contracts(html) {
       const items = find(n, (c) => has(c, "ww-annot__item")).length;
       if (items > 5) add(n, "brand", `${items} annotations in one figure; split above 5 (DR-015)`);
     }
-    if (/^h[1-3]$/.test(n.tag) || has(n, "ww-hero")) {
+    if ((/^h[1-3]$/.test(n.tag) || has(n, "ww-hero")) && !has(n, "ww-slide__title") && !has(n, "ww-slide__display")) {
       const t = clean(text(n));
       const han = (t.match(/[㐀-鿿豈-﫿]/g) ?? []).length;
       if (langOf(n).startsWith("zh") && han && [...t.replace(/\s/g, "")].length > 20) add(n, "brand", `Chinese heading is ${[...t.replace(/\s/g, "")].length} characters; keep it within 20`);
@@ -135,9 +135,11 @@ export function contracts(html) {
   }
   // ---------- motion: errors, warnings, toasts and alerts never animate in
   const STILL = (p) => ["ww-error", "ww-callout--warn", "ww-callout--danger", "ww-toast"].some((c) => has(p, c)) || p.attrs?.get("role") === "alert";
-  for (const n of all.filter((x) => ["ww-rise", "ww-reveal", "ww-stagger"].some((c) => has(x, c)))) {
+  for (const n of all.filter((x) => ["ww-rise", "ww-reveal", "ww-stagger"].some((c) => has(x, c)) || x.attrs.has("data-ww-step"))) {
     if (STILL(n) || closest(n, STILL)) add(n, "motion", "errors, warnings, toasts and alerts appear without motion");
   }
+
+  deckContracts(all, add);
 
   const heroes = new Map();
   for (const n of all.filter((x) => has(x, "ww-hero"))) {
@@ -146,4 +148,121 @@ export function contracts(html) {
     if (heroes.get(scope) === 2) add(n, "brand", "more than one ww-hero on the page");
   }
   return out;
+}
+
+// ---------------------------------------------------------------- decks (DR-019)
+// Text budget per slide, by what the deck is for: "talk" is presented by a speaker, "send" is read alone.
+export const BUDGET = { talk: { zh: 120, en: 60 }, send: { zh: 240, en: 120 } };
+const HAN_G = /[㐀-䶿一-鿿豈-﫿]/g;
+const WORD_G = /[A-Za-z0-9]+(?:['’.-][A-Za-z0-9]+)*/g;
+// Not counted: the claim itself, labels and numbering, sources and assumptions, notes, the text inside
+// a recreated product screen (it is a picture), chart ticks, and the legend that repeats an annotated figure.
+const UNCOUNTED = ["ww-slide__notes", "ww-slide__title", "ww-slide__display", "ww-kicker", "ww-slide__source", "ww-slide__flag",
+  "ww-stat__note", "ww-dial__note", "ww-device", "ww-chart__label", "ww-annot__legend", "ww-deck__defs"];
+const uncounted = (n) => n.tag === "title" || n.tag === "desc" || n.tag === "script" || n.tag === "style" ||
+  [...cls(n)].some((c) => UNCOUNTED.includes(c) || /__no$/.test(c));
+
+/** Visible reading text of a node: views count their tabs plus the longest panel. */
+function readingText(n) {
+  if (n.tag === "#text") return n.text;
+  if (uncounted(n)) return " ";
+  if (has(n, "ww-views") || n.attrs?.has("data-ww-views")) {
+    const isViews = (p) => has(p, "ww-views") || p.attrs?.has("data-ww-views");
+    const panels = find(n, (c) => c.attrs.get("role") === "tabpanel" && closest(c, isViews) === n);
+    const tabs = find(n, (c) => c.attrs.get("role") === "tab").map(readingText).join(" ");
+    const longest = panels.map(readingText).sort((a, b) => units(b, "zh") - units(a, "zh"))[0] ?? "";
+    return ` ${tabs} ${longest} `;
+  }
+  return (n.children ?? []).map(readingText).join(n.tag === "text" || /^(p|li|h\d|dd|dt|td|th|div|span)$/.test(n.tag) ? "" : " ") + " ";
+}
+/** zh: Han characters plus Latin or numeric words. en: words. */
+export function units(s, lang) {
+  const t = s.replace(/&nbsp;/g, " ").replace(/&[a-z]+;|&#\d+;/g, " ");
+  const words = (t.match(WORD_G) ?? []).length;
+  return lang === "zh" ? (t.match(HAN_G) ?? []).length + words : words;
+}
+
+const findAll = find;
+const CALC_FN = new Set(["min", "max", "round", "floor", "ceil", "abs"]);
+/** Same grammar as the runtime: numbers, declared variables, + - * / ( ) , and a few functions. */
+function calcError(src, names) {
+  const re = /\s*(\d+(?:\.\d+)?|\.\d+|[A-Za-z_]\w*|[-+*/(),])/y;
+  let at = 0, m, depth = 0;
+  while (at < src.length && (m = re.exec(src))) {
+    const t = m[1];
+    if (/^[A-Za-z_]/.test(t) && !CALC_FN.has(t) && !names.has(t)) return `unknown name "${t}"; declare it with data-ww-var`;
+    if (t === "(") depth++;
+    if (t === ")" && --depth < 0) return "unbalanced brackets";
+    at = re.lastIndex;
+  }
+  if (src.slice(at).trim()) return `unexpected "${src.slice(at).trim().charAt(0)}"`;
+  if (depth) return "unbalanced brackets";
+  return "";
+}
+
+function deckContracts(all, add) {
+  const decks = all.filter((x) => has(x, "ww-deck"));
+  if (!decks.length) return;
+  for (const d of decks) {
+    const use = d.attrs.get("data-ww-use");
+    if (!["talk", "send"].includes(use)) add(d, "deck", "ww-deck needs data-ww-use=\"talk\" (presented) or \"send\" (read alone); it sets the text budget");
+    for (const c of d.children) {
+      if (c.tag[0] === "#") continue;
+      if (!has(c, "ww-slide") && !has(c, "ww-deck__defs")) add(c, "deck", `<${c.tag}> directly in ww-deck; everything goes inside a ww-slide`);
+    }
+    const budget = BUDGET[use] ?? BUDGET.talk;
+    for (const s of find(d, (x) => has(x, "ww-slide"))) {
+      const lang = langOf(s).startsWith("zh") ? "zh" : "en";
+      // Notes are not on the slide: nothing inside them counts toward the slide's rules.
+      const onSlide = (c) => !closest(c, (p) => has(p, "ww-slide__notes"));
+      const find = (n, pred) => findAll(n, (c) => pred(c) && onSlide(c));
+      const id = s.attrs.get("id") ? `#${s.attrs.get("id")}` : "slide";
+      if (s.parent !== d) add(s, "deck", `${id} is not a direct child of ww-deck`);
+      const heads = find(s, (c) => has(c, "ww-slide__title") || has(c, "ww-slide__display"));
+      if (heads.length > 1) add(heads[1], "deck", `${id} has ${heads.length} titles; one slide, one claim`);
+      if (!heads.length && !find(s, (c) => has(c, "ww-pullquote")).length) add(s, "deck", `${id} needs a ww-slide__title that states its claim as a sentence (or a ww-slide__display)`);
+      for (const h of heads) {
+        const t = clean(text(h));
+        const len = [...t.replace(/\s/g, "")].length;
+        const hl = langOf(h).startsWith("zh") ? "zh" : "en";
+        const display = has(h, "ww-slide__display");
+        if (hl === "zh" && len > (display ? 30 : 20)) add(h, "deck", `${id} title is ${len} characters; keep it within ${display ? 30 : 20}`);
+        if (hl === "en" && units(t, "en") > (display ? 16 : 14)) add(h, "deck", `${id} title is ${units(t, "en")} words; keep it within ${display ? 16 : 14}`);
+      }
+      const n = units(readingText(s), lang);
+      const cap = budget[lang];
+      if (n > cap) add(s, "deck", `${id} carries ${n} ${lang === "zh" ? "characters" : "words"} of text; the ${use ?? "talk"} budget is ${cap}. Move detail to the notes or split the slide`);
+      for (const l of find(s, (c) => c.tag === "ul" || c.tag === "ol")) {
+        const items = l.children.filter((c) => c.tag === "li").length;
+        const max = has(l, "ww-agenda") ? 7 : 6;
+        if (items > max) add(l, "deck", `${id}: a list of ${items}; keep it to ${max} or split the slide`);
+        if (closest(l, (p) => p.tag === "li" && closest(p, (q) => q === s))) add(l, "deck", `${id}: nested list; a slide is not an outline`);
+      }
+      for (const g of find(s, (c) => has(c, "ww-grid") || has(c, "ww-flow"))) {
+        const items = g.children.filter((c) => c.tag[0] !== "#").length;
+        if (items > 6) add(g, "deck", `${id}: ${items} items in one grid or flow; keep it to 6`);
+      }
+      for (const t of find(s, (c) => c.tag === "table")) {
+        const rows = find(t, (c) => c.tag === "tr" && closest(c, (p) => p.tag === "tbody" || p.tag === "table") && !closest(c, (p) => p.tag === "thead"));
+        const cols = Math.max(0, ...find(t, (c) => c.tag === "tr").map((r) => r.children.filter((c) => c.tag === "td" || c.tag === "th").length));
+        if (rows.length > 6) add(t, "deck", `${id}: ${rows.length} table rows; keep it to 6 on a slide`);
+        if (cols > 5) add(t, "deck", `${id}: ${cols} table columns; keep it to 5 on a slide`);
+      }
+      const vars = find(s, (c) => c.tag === "input" && c.attrs.has("data-ww-var"));
+      if (vars.length && !find(s, (c) => has(c, "ww-dial__note")).some((c) => clean(text(c)))) {
+        add(s, "deck", `${id}: a dial needs a ww-dial__note stating the assumptions behind the numbers`);
+      }
+      const names = new Set(vars.map((v) => v.attrs.get("data-ww-var")));
+      for (const o of find(s, (c) => c.attrs.has("data-ww-calc"))) {
+        const err = calcError(o.attrs.get("data-ww-calc"), names);
+        if (err) add(o, "deck", `${id}: data-ww-calc "${o.attrs.get("data-ww-calc")}": ${err}`);
+        const r = o.attrs.get("data-ww-round");
+        if (r !== undefined && !/^(1?\d|20)$/.test(r)) add(o, "deck", `${id}: data-ww-round must be a whole number from 0 to 20`);
+      }
+      for (const c of find(s, (x) => x.tag === "svg" && has(x, "ww-chart"))) {
+        if (c.attrs.get("role") !== "img" || !c.children.some((k) => k.tag === "title")) add(c, "a11y", `${id}: ww-chart needs role="img" and a <title> that states the data`);
+      }
+      for (const nt of find(s, (x) => has(x, "ww-slide__notes"))) if (nt.tag !== "aside") add(nt, "deck", `${id}: ww-slide__notes must be an <aside>`);
+    }
+  }
 }
